@@ -11,55 +11,49 @@ import UIKit
 class ViewController: UIViewController {
     
     let logManager = AnaliticLog(needForLogs: true)
+    var viewState = StateSingleton.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         logManager.log {
             print("View is loaded into memory: \(#function)")
         }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        logManager.log {
-            print("View moved from 'Disappeared' to 'Appearing': '\(#function)'")
-        }
+        logManager.logState(form: "Disappeared", to: "Appearing", funcName: #function)
+        viewState.viewState = "Appearing"
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        logManager.log {
-        print("View moved from 'Appearing' to 'Appear': '\(#function)'")
-        }
+        logManager.logState(form: viewState.viewState!, to: "Appear", funcName: #function)
+        viewState.viewState = "Appear"
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        logManager.log {
-            print("View moved from 'Appearing' to 'Appearing': '\(#function)'")
-        }
+        logManager.logState(form: viewState.viewState!, to: "Appearing", funcName: #function)
+        viewState.viewState = "Appearing"
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        logManager.log {
-            print("View moved from 'Appearing' to 'Appearing': '\(#function)'")
-        }
+        logManager.logState(form: viewState.viewState!, to: "Appearing", funcName: #function)
+        viewState.viewState = "Appearing"
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        logManager.log {
-            print("View moved from 'Appear' to 'Disappearing': '\(#function)'")
-        }
+        logManager.logState(form: viewState.viewState!, to: "Disappearing", funcName: #function)
+        viewState.viewState = "Disappearing"
         
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        logManager.log {
-            print("View moved from 'Disappearing' to 'Disappeared': '\(#function)'")
-        }
+        logManager.logState(form: viewState.viewState!, to: "Disappeared", funcName: #function)
+        viewState.viewState = "Disappeared"
     }
 }
 

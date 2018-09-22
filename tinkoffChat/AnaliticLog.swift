@@ -17,8 +17,14 @@ class AnaliticLog {
     }
     
     func log(logCode: ()->()) {
-        if isNeedLog{
+        if isNeedLog {
             logCode()
+        }
+    }
+    
+    func logState(form: String, to: String, funcName: Any) {
+        if isNeedLog {
+            print("Application moved from '\(form)' to '\(to)': '\(funcName)'")
         }
     }
 }
