@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A0BAF492155639300A2D876 /* UIApplicationState + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0BAF482155639300A2D876 /* UIApplicationState + String.swift */; };
-		3A0BAF4B2155656700A2D876 /* StateSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0BAF4A2155656700A2D876 /* StateSingleton.swift */; };
+		3A2686BF215EC1250058D4DC /* UIViewController + Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2686BE215EC1250058D4DC /* UIViewController + Alerts.swift */; };
 		3A4070C32153ADAE00AA9583 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C22153ADAE00AA9583 /* AppDelegate.swift */; };
-		3A4070C52153ADAE00AA9583 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C42153ADAE00AA9583 /* ViewController.swift */; };
+		3A4070C52153ADAE00AA9583 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C42153ADAE00AA9583 /* ProfileViewController.swift */; };
 		3A4070C82153ADAE00AA9583 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070C62153ADAE00AA9583 /* Main.storyboard */; };
 		3A4070CA2153ADB000AA9583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070C92153ADB000AA9583 /* Assets.xcassets */; };
 		3A4070CD2153ADB000AA9583 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070CB2153ADB000AA9583 /* LaunchScreen.storyboard */; };
 		3A4070D82153ADB000AA9583 /* tinkoffChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */; };
-		3A4070E321541FD000AA9583 /* AnaliticLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070E221541FD000AA9583 /* AnaliticLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,11 +27,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3A0BAF482155639300A2D876 /* UIApplicationState + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplicationState + String.swift"; sourceTree = "<group>"; };
-		3A0BAF4A2155656700A2D876 /* StateSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateSingleton.swift; sourceTree = "<group>"; };
+		3A2686BE215EC1250058D4DC /* UIViewController + Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Alerts.swift"; sourceTree = "<group>"; };
 		3A4070BF2153ADAE00AA9583 /* tinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4070C22153ADAE00AA9583 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3A4070C42153ADAE00AA9583 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3A4070C42153ADAE00AA9583 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3A4070C72153ADAE00AA9583 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A4070C92153ADB000AA9583 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A4070CC2153ADB000AA9583 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -41,7 +38,6 @@
 		3A4070D32153ADB000AA9583 /* tinkoffChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tinkoffChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tinkoffChatTests.swift; sourceTree = "<group>"; };
 		3A4070D92153ADB000AA9583 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A4070E221541FD000AA9583 /* AnaliticLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnaliticLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +61,7 @@
 		3A0BAF472155635400A2D876 /* extension */ = {
 			isa = PBXGroup;
 			children = (
-				3A0BAF482155639300A2D876 /* UIApplicationState + String.swift */,
+				3A2686BE215EC1250058D4DC /* UIViewController + Alerts.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -93,13 +89,11 @@
 			children = (
 				3A0BAF472155635400A2D876 /* extension */,
 				3A4070C22153ADAE00AA9583 /* AppDelegate.swift */,
-				3A4070C42153ADAE00AA9583 /* ViewController.swift */,
+				3A4070C42153ADAE00AA9583 /* ProfileViewController.swift */,
 				3A4070C62153ADAE00AA9583 /* Main.storyboard */,
 				3A4070C92153ADB000AA9583 /* Assets.xcassets */,
 				3A4070CB2153ADB000AA9583 /* LaunchScreen.storyboard */,
 				3A4070CE2153ADB000AA9583 /* Info.plist */,
-				3A4070E221541FD000AA9583 /* AnaliticLog.swift */,
-				3A0BAF4A2155656700A2D876 /* StateSingleton.swift */,
 			);
 			path = tinkoffChat;
 			sourceTree = "<group>";
@@ -214,11 +208,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A4070E321541FD000AA9583 /* AnaliticLog.swift in Sources */,
-				3A4070C52153ADAE00AA9583 /* ViewController.swift in Sources */,
+				3A4070C52153ADAE00AA9583 /* ProfileViewController.swift in Sources */,
 				3A4070C32153ADAE00AA9583 /* AppDelegate.swift in Sources */,
-				3A0BAF4B2155656700A2D876 /* StateSingleton.swift in Sources */,
-				3A0BAF492155639300A2D876 /* UIApplicationState + String.swift in Sources */,
+				3A2686BF215EC1250058D4DC /* UIViewController + Alerts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
