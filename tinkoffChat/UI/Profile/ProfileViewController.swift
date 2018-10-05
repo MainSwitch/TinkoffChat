@@ -41,6 +41,10 @@ class ProfileViewController: UIViewController {
         setupUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        selectImageButton.layer.cornerRadius = selectImageButton.frame.height / 2
+    }
     //MARK: viewDidAppear
     /*
     Во viewDidAppear представление контроллера было добавлено в иерархию представлений и в данном делегате мы работаем с фреймами того устройства, на котором запущено приложение, метод вызывается после завершения работы autolayout
@@ -59,8 +63,6 @@ class ProfileViewController: UIViewController {
         editButton.layer.borderColor = UIColor.black.cgColor
         editButton.layer.cornerRadius = 10
         editButton.setTitleColor(.black, for: .normal)
-        
-        selectImageButton.layer.cornerRadius = selectImageButton.frame.height / 2
         
         profileImage.clipsToBounds = true
         profileImage.layer.cornerRadius = selectImageButton.layer.cornerRadius
