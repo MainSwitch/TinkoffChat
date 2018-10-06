@@ -72,6 +72,7 @@
                                                 <constraint firstItem="jFe-o2-gpH" firstAttribute="bottom" secondItem="WcN-GE-Ra8" secondAttribute="bottomMargin" id="8l5-go-Qys"/>
                                                 <constraint firstItem="jFe-o2-gpH" firstAttribute="leading" secondItem="WcN-GE-Ra8" secondAttribute="leadingMargin" constant="53" id="F7Q-Dg-a5t"/>
                                                 <constraint firstItem="94H-Z5-AgE" firstAttribute="top" secondItem="WcN-GE-Ra8" secondAttribute="top" id="IIP-RK-xtY"/>
+                                                <constraint firstItem="jFe-o2-gpH" firstAttribute="top" secondItem="ceq-jk-0jO" secondAttribute="bottom" constant="4" id="QJO-qc-gY5"/>
                                                 <constraint firstItem="jFe-o2-gpH" firstAttribute="top" secondItem="94H-Z5-AgE" secondAttribute="bottom" constant="3.5" id="RLX-4V-lu4"/>
                                                 <constraint firstAttribute="trailing" secondItem="94H-Z5-AgE" secondAttribute="trailing" constant="3" id="VKh-ri-TxZ"/>
                                                 <constraint firstItem="94H-Z5-AgE" firstAttribute="leading" relation="lessThanOrEqual" secondItem="ceq-jk-0jO" secondAttribute="trailing" constant="129" id="aKg-9a-KMn"/>
@@ -99,12 +100,19 @@
                             <constraint firstItem="Dp9-fF-KVQ" firstAttribute="trailing" secondItem="ktQ-z3-chP" secondAttribute="trailing" id="7mV-T5-ujT"/>
                             <constraint firstItem="Dp9-fF-KVQ" firstAttribute="top" secondItem="ktQ-z3-chP" secondAttribute="top" id="Cmv-5p-7G3"/>
                             <constraint firstItem="Dp9-fF-KVQ" firstAttribute="leading" secondItem="ktQ-z3-chP" secondAttribute="leading" id="OlK-WA-VTh"/>
-                            <constraint firstItem="Dp9-fF-KVQ" firstAttribute="bottom" secondItem="ktQ-z3-chP" secondAttribute="bottom" id="V4U-8R-wqq"/>
+                            <constraint firstItem="Dp9-fF-KVQ" firstAttribute="bottom" secondItem="9Xp-Ui-i1Y" secondAttribute="bottom" id="V4U-8R-wqq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ktQ-z3-chP"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Tinkoff Chat" id="EbH-V5-SHr"/>
+                    <navigationItem key="navigationItem" title="Tinkoff Chat" id="EbH-V5-SHr">
+                        <barButtonItem key="rightBarButtonItem" title="Profile" id="4dt-nN-adi">
+                            <connections>
+                                <action selector="profileAction:" destination="zEd-N0-osS" id="RaO-6O-h1J"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="profileButton" destination="4dt-nN-adi" id="Kep-AV-ha1"/>
                         <outlet property="tableView" destination="Dp9-fF-KVQ" id="gEU-2Z-Ilu"/>
                     </connections>
                 </viewController>
@@ -124,13 +132,61 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="518"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="OWl-x7-qPc">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyMassage" rowHeight="44" id="OWl-x7-qPc" customClass="ChatMassageCellIView" customModule="tinkoffChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OWl-x7-qPc" id="GJb-Rc-RDt">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SOME " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mw1-H2-e5B" customClass="ChatLabel" customModule="tinkoffChat" customModuleProvider="target">
+                                                    <rect key="frame" x="304.5" y="9" width="52" height="26"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isMyMassage" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Mw1-H2-e5B" secondAttribute="bottom" constant="-2" id="e16-2L-Zqq"/>
+                                                <constraint firstItem="Mw1-H2-e5B" firstAttribute="top" secondItem="GJb-Rc-RDt" secondAttribute="topMargin" constant="-2" id="hms-Mz-nxo"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Mw1-H2-e5B" secondAttribute="trailing" constant="3.5" id="pya-fr-kLJ"/>
+                                                <constraint firstItem="Mw1-H2-e5B" firstAttribute="width" relation="lessThanOrEqual" secondItem="GJb-Rc-RDt" secondAttribute="width" multiplier="1:1.5" id="vbN-Ja-qe8"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="myMassage" destination="Mw1-H2-e5B" id="KgL-gd-RD0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendMassage" rowHeight="44" id="xqP-R0-WJx" customClass="ChatMassageCellIView" customModule="tinkoffChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xqP-R0-WJx" id="aIR-fL-FaK">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SOME" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAe-2m-CfZ" customClass="ChatLabel" customModule="tinkoffChat" customModuleProvider="target">
+                                                    <rect key="frame" x="10" y="10.5" width="47.5" height="26"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isMyMassage" value="NO"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nAe-2m-CfZ" firstAttribute="width" relation="lessThanOrEqual" secondItem="aIR-fL-FaK" secondAttribute="width" multiplier="1:1.5" id="Dr0-xM-P6g"/>
+                                                <constraint firstAttribute="bottom" secondItem="nAe-2m-CfZ" secondAttribute="bottom" constant="7" id="EFf-a8-yGF"/>
+                                                <constraint firstItem="nAe-2m-CfZ" firstAttribute="leading" secondItem="aIR-fL-FaK" secondAttribute="leading" constant="10" id="Oxi-sr-Wpg"/>
+                                                <constraint firstItem="nAe-2m-CfZ" firstAttribute="top" secondItem="aIR-fL-FaK" secondAttribute="top" constant="10.5" id="Yhs-gQ-zdL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="friendMassage" destination="nAe-2m-CfZ" id="T0G-LH-26m"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

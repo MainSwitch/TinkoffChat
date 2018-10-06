@@ -10,6 +10,7 @@ import UIKit
 
 class MassageManager {
     let conversationsPresenter: ConversationsPresenter
+    let profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
     
     static let shared = MassageManager()
     

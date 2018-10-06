@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ConversationCellConfiguration {
+protocol ConversationCellConfiguration: class {
     var name: String? {get set}
     var massage: String? {get set}
     var date: Date? {get set}

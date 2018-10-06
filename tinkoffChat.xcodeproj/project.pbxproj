@@ -10,10 +10,9 @@
 		3A2686BF215EC1250058D4DC /* UIViewController + Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2686BE215EC1250058D4DC /* UIViewController + Alerts.swift */; };
 		3A34044E216525A300D3FFB9 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A34044D216525A300D3FFB9 /* ConversationsListViewController.swift */; };
 		3A3404502165ECDC00D3FFB9 /* Conversations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A34044F2165ECDC00D3FFB9 /* Conversations.storyboard */; };
-		3A3404542165F37200D3FFB9 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404532165F37200D3FFB9 /* CellViewModel.swift */; };
 		3A34045A2165F3ED00D3FFB9 /* MassageCellVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404592165F3ED00D3FFB9 /* MassageCellVIew.swift */; };
 		3A34045D2165F4EF00D3FFB9 /* MassageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A34045C2165F4EF00D3FFB9 /* MassageModel.swift */; };
-		3A3404612165F7EF00D3FFB9 /* MassegeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404602165F7EF00D3FFB9 /* MassegeView.swift */; };
+		3A3404612165F7EF00D3FFB9 /* ConversationCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404602165F7EF00D3FFB9 /* ConversationCellConfiguration.swift */; };
 		3A3404642165FA9C00D3FFB9 /* Date + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404632165FA9C00D3FFB9 /* Date + String.swift */; };
 		3A4070C32153ADAE00AA9583 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C22153ADAE00AA9583 /* AppDelegate.swift */; };
 		3A4070C52153ADAE00AA9583 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C42153ADAE00AA9583 /* ProfileViewController.swift */; };
@@ -21,13 +20,14 @@
 		3A4070CA2153ADB000AA9583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070C92153ADB000AA9583 /* Assets.xcassets */; };
 		3A4070CD2153ADB000AA9583 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070CB2153ADB000AA9583 /* LaunchScreen.storyboard */; };
 		3A4070D82153ADB000AA9583 /* tinkoffChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */; };
-		3AE33B432166215D00B3264F /* CollectionView+cellWithModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE33B422166215D00B3264F /* CollectionView+cellWithModel.swift */; };
 		3AE33B462166443D00B3264F /* ConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE33B452166443D00B3264F /* ConversationsView.swift */; };
 		3AE33B4921664A2900B3264F /* ConversationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE33B4821664A2900B3264F /* ConversationsPresenter.swift */; };
-		3AF565DE216745C80074BE3D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565DD216745C80074BE3D /* TableViewCell.swift */; };
+		3AF20C232167C9A10072AFA1 /* MassageCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF20C222167C9A10072AFA1 /* MassageCellConfiguration.swift */; };
+		3AF565DE216745C80074BE3D /* ChatMassageCellIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565DD216745C80074BE3D /* ChatMassageCellIView.swift */; };
 		3AF565E0216754D40074BE3D /* NSMutableAttributedString + Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565DF216754D40074BE3D /* NSMutableAttributedString + Bold.swift */; };
 		3AF565E221676B6A0074BE3D /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565E121676B6A0074BE3D /* ConversationViewController.swift */; };
 		3AF565E4216778270074BE3D /* MassageSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565E3216778270074BE3D /* MassageSingleton.swift */; };
+		3AF7150E2168F00400473345 /* ChatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF7150D2168F00400473345 /* ChatLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,10 +44,9 @@
 		3A2686BE215EC1250058D4DC /* UIViewController + Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Alerts.swift"; sourceTree = "<group>"; };
 		3A34044D216525A300D3FFB9 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		3A34044F2165ECDC00D3FFB9 /* Conversations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversations.storyboard; sourceTree = "<group>"; };
-		3A3404532165F37200D3FFB9 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		3A3404592165F3ED00D3FFB9 /* MassageCellVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageCellVIew.swift; sourceTree = "<group>"; };
 		3A34045C2165F4EF00D3FFB9 /* MassageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageModel.swift; sourceTree = "<group>"; };
-		3A3404602165F7EF00D3FFB9 /* MassegeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassegeView.swift; sourceTree = "<group>"; };
+		3A3404602165F7EF00D3FFB9 /* ConversationCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCellConfiguration.swift; sourceTree = "<group>"; };
 		3A3404632165FA9C00D3FFB9 /* Date + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + String.swift"; sourceTree = "<group>"; };
 		3A4070BF2153ADAE00AA9583 /* tinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4070C22153ADAE00AA9583 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,13 +58,14 @@
 		3A4070D32153ADB000AA9583 /* tinkoffChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tinkoffChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tinkoffChatTests.swift; sourceTree = "<group>"; };
 		3A4070D92153ADB000AA9583 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3AE33B422166215D00B3264F /* CollectionView+cellWithModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+cellWithModel.swift"; sourceTree = "<group>"; };
 		3AE33B452166443D00B3264F /* ConversationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsView.swift; sourceTree = "<group>"; };
 		3AE33B4821664A2900B3264F /* ConversationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsPresenter.swift; sourceTree = "<group>"; };
-		3AF565DD216745C80074BE3D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		3AF20C222167C9A10072AFA1 /* MassageCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageCellConfiguration.swift; sourceTree = "<group>"; };
+		3AF565DD216745C80074BE3D /* ChatMassageCellIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMassageCellIView.swift; sourceTree = "<group>"; };
 		3AF565DF216754D40074BE3D /* NSMutableAttributedString + Bold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString + Bold.swift"; sourceTree = "<group>"; };
 		3AF565E121676B6A0074BE3D /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		3AF565E3216778270074BE3D /* MassageSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageSingleton.swift; sourceTree = "<group>"; };
+		3AF7150D2168F00400473345 /* ChatLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,6 @@
 			children = (
 				3A2686BE215EC1250058D4DC /* UIViewController + Alerts.swift */,
 				3A3404632165FA9C00D3FFB9 /* Date + String.swift */,
-				3AE33B422166215D00B3264F /* CollectionView+cellWithModel.swift */,
 				3AF565DF216754D40074BE3D /* NSMutableAttributedString + Bold.swift */,
 			);
 			path = extension;
@@ -108,7 +107,7 @@
 		3A3404522165F35900D3FFB9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				3A3404532165F37200D3FFB9 /* CellViewModel.swift */,
+				3AF7150D2168F00400473345 /* ChatLabel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -145,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				3A3404592165F3ED00D3FFB9 /* MassageCellVIew.swift */,
-				3AF565DD216745C80074BE3D /* TableViewCell.swift */,
+				3AF565DD216745C80074BE3D /* ChatMassageCellIView.swift */,
 			);
 			path = MassageCell;
 			sourceTree = "<group>";
@@ -162,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				3AF565E521677B2C0074BE3D /* Conversations */,
-				3A34045F2165F7D900D3FFB9 /* CellView */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -170,7 +168,8 @@
 		3A34045F2165F7D900D3FFB9 /* CellView */ = {
 			isa = PBXGroup;
 			children = (
-				3A3404602165F7EF00D3FFB9 /* MassegeView.swift */,
+				3A3404602165F7EF00D3FFB9 /* ConversationCellConfiguration.swift */,
+				3AF20C222167C9A10072AFA1 /* MassageCellConfiguration.swift */,
 			);
 			path = CellView;
 			sourceTree = "<group>";
@@ -230,6 +229,7 @@
 		3AE33B442166441700B3264F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A34045F2165F7D900D3FFB9 /* CellView */,
 				3AE33B452166443D00B3264F /* ConversationsView.swift */,
 			);
 			path = Views;
@@ -363,8 +363,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AF565DE216745C80074BE3D /* TableViewCell.swift in Sources */,
-				3A3404542165F37200D3FFB9 /* CellViewModel.swift in Sources */,
+				3AF7150E2168F00400473345 /* ChatLabel.swift in Sources */,
+				3AF565DE216745C80074BE3D /* ChatMassageCellIView.swift in Sources */,
 				3AF565E221676B6A0074BE3D /* ConversationViewController.swift in Sources */,
 				3A34045A2165F3ED00D3FFB9 /* MassageCellVIew.swift in Sources */,
 				3AF565E0216754D40074BE3D /* NSMutableAttributedString + Bold.swift in Sources */,
@@ -373,11 +373,11 @@
 				3A4070C52153ADAE00AA9583 /* ProfileViewController.swift in Sources */,
 				3AE33B462166443D00B3264F /* ConversationsView.swift in Sources */,
 				3A4070C32153ADAE00AA9583 /* AppDelegate.swift in Sources */,
-				3A3404612165F7EF00D3FFB9 /* MassegeView.swift in Sources */,
+				3A3404612165F7EF00D3FFB9 /* ConversationCellConfiguration.swift in Sources */,
+				3AF20C232167C9A10072AFA1 /* MassageCellConfiguration.swift in Sources */,
 				3A34045D2165F4EF00D3FFB9 /* MassageModel.swift in Sources */,
 				3A34044E216525A300D3FFB9 /* ConversationsListViewController.swift in Sources */,
 				3AE33B4921664A2900B3264F /* ConversationsPresenter.swift in Sources */,
-				3AE33B432166215D00B3264F /* CollectionView+cellWithModel.swift in Sources */,
 				3A2686BF215EC1250058D4DC /* UIViewController + Alerts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

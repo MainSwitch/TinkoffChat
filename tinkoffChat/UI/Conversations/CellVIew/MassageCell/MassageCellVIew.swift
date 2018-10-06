@@ -14,30 +14,48 @@ class MassageCellView: UITableViewCell, ConversationCellConfiguration {
     @IBOutlet weak var lastMassage: UILabel!
     @IBOutlet weak var chatDate: UILabel!
     
-    var name: String?
-    var massage: String?
-    var date: Date?
-    var online: Bool = false
-    var hasUnreadMassages: Bool = false
+    var name: String? {
+        didSet {
+            self.chatName.textColor = name != nil ? UIColor.black : UIColor.red
+            chatName.text = name ?? "unknown"
+        }
+    }
+    var massage: String? {
+        didSet {
+            lastMassage.text = massage
+        }
+    }
+    var date: Date? {
+        didSet {
+            self.chatDate.text = date?.toString() ?? "none"
+            chatDate.text = date?.toString()
+        }
+    }
+    var online: Bool = false {
+        didSet {
+            setupUI()
+        }
+    }
+    var hasUnreadMassages: Bool = false {
+        didSet {
+            setupUI()
+        }
+    }
     
     func setupUI() {
-        self.chatName.text = name ?? "unknown"
-        self.chatName.textColor = name != nil ? UIColor.black : UIColor.red
-        self.chatDate.text = date?.toString() ?? "none"
-        print("name: \(String(describing: name)), isOnline: \(online)")
         if online {
             self.backgroundColor = UIColor.yellow.withAlphaComponent(0.3)
         } else {
             self.backgroundColor = UIColor.white
         }
-        self.lastMassage.textColor = massage != nil ? UIColor.black : UIColor.darkGray
+        
         if hasUnreadMassages {
             let formattedString = NSMutableAttributedString()
             formattedString
                 .bold(massage ?? " ")
             self.lastMassage.attributedText = formattedString
         } else {
-            self.lastMassage.text = massage ?? "Now there are no messages"
+            self.lastMassage.text = massage
         }
     }
     
@@ -48,7 +66,7 @@ class MassageCellView: UITableViewCell, ConversationCellConfiguration {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    
+        
     }
 }
 

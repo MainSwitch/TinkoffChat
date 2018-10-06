@@ -1,5 +1,5 @@
 //
-//  TableViewCell.swift
+//  ChatMassageCellIView.swift
 //  tinkoffChat
 //
 //  Created by Anton on 05/10/2018.
@@ -8,8 +8,16 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class ChatMassageCellIView: UITableViewCell, MassageCellConfiguration {
+    
+    var textMassage: String?
 
+    @IBOutlet weak var myMassage: UILabel!
+    @IBOutlet weak var friendMassage: UILabel!
+    
+    func setupUI() {
+        textMassage = ""
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

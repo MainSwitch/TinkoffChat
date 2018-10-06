@@ -14,7 +14,13 @@ class ConversationsListViewController: UIViewController {
     var conversationsPresenter =  MassageManager.shared.conversationsPresenter
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var profileButton: UIBarButtonItem!
     
+    @IBAction func profileAction(_ sender: Any) {
+        let storyboard = MassageManager.shared.profileStoryboard
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as UIViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self

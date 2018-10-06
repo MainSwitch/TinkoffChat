@@ -24,6 +24,9 @@ class ProfileViewController: UIViewController {
         }
         showPhotoAlert(imagePicker: existingPicker)
     }
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -54,6 +57,7 @@ class ProfileViewController: UIViewController {
         super.viewDidAppear(animated)
             print("Select button frame in '\(#function)':\(self.editButton.frame)")
     }
+
     
     private func setupUI(){
         imagePicker?.delegate = self
