@@ -25,12 +25,12 @@ class ConversationsListViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        self.conversationsPresenter.addView(view: self)
+        self.conversationsPresenter.conversationListView = self
         self.conversationsPresenter.updateConversationsList()
     }
 }
 
-extension ConversationsListViewController: ConversationsView {
+extension ConversationsListViewController: ConversationsListView {
     func updateUI() {
         self.tableView.reloadData()
     }

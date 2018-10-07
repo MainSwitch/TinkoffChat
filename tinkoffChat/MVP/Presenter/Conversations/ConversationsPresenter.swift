@@ -14,21 +14,11 @@ class ConversationsPresenter {
 
     var chosenModel: MassageModel!
     var massage: [MassageModel]!
+
     
-    class WeakRefView {
-        private(set) weak var view: ConversationsView?
-        
-        init(_ view: ConversationsView?) {
-            self.view = view
-        }
-    }
+    weak var conversationListView: ConversationsListView!
+    weak var conversationView: ConversationsView!
     
-    private var views = [WeakRefView]()
-    
-    func addView(view: ConversationsView) {
-        views.append(WeakRefView(view))
-        views = views.filter { $0.view != nil } // remove old views
-    }
     
     func loadDialog() {
         massageModelArray.append(MassageModel(name: "Anton", massage: "Hello!", date: Date(), online: false, hasUnreadMassages: false))
@@ -41,7 +31,7 @@ class ConversationsPresenter {
         massageModelArray.append(MassageModel(name: "Dady", massage: "You're in deep trouble!!!!!", date: Date(), online: true, hasUnreadMassages: false))
         massageModelArray.append(MassageModel(name: "Donald Duck", massage: "QUACK", date: Date(timeIntervalSinceNow: -234), online: true, hasUnreadMassages: false))
         massageModelArray.append(MassageModel(name: "DONALD TRUMP", massage: "WE MAKE THE WALL", date: Date(timeIntervalSinceNow: -1345), online: true, hasUnreadMassages: false))
-        massageModelArray.append(MassageModel(name: "Steve Jobs", massage: "...", date: nil, online: true, hasUnreadMassages: false))
+        massageModelArray.append(MassageModel(name: "Steve Jobs", massage: nil, date: nil, online: true, hasUnreadMassages: false))
         massageModelArray.append(MassageModel(name: "BATMAN", massage: "where the detonator?????", date: Date(timeIntervalSinceNow: -71), online: true, hasUnreadMassages: true))
         massageModelArray.append(MassageModel(name: "Flash", massage: "I'm soo fast bro", date: Date(), online: true, hasUnreadMassages: false))
         massageModelArray.append(MassageModel(name: "Brother", massage: "ok, let's go..", date: Date(timeIntervalSinceNow: -179), online: true, hasUnreadMassages: true))
@@ -53,8 +43,14 @@ class ConversationsPresenter {
         massageModelArray.append(MassageModel(name: "Bro", massage: nil, date: Date(timeIntervalSinceNow: -1421355), online: false, hasUnreadMassages: false))
     }
     
-    func loadMassage(dialogName: String) {
-        
+    func loadMassage() {
+        var text = [MassageTextModel]()
+        text.append(MassageTextModel(text: "Hello"))
+        text.append(MassageTextModel(text: "how are you?"))
+        text.append(MassageTextModel(text: "I'm fine, what are you doing?😀"))
+        text.append(MassageTextModel(text: "Let's go to bowling?)))"))
+        text.append(MassageTextModel(text: "No"))
+        self.conversationView.loadMassage(massageText: text)
     }
     
     func choseModel(model: MassageModel?){
@@ -92,7 +88,7 @@ class ConversationsPresenter {
             return false
         }))
         
-        self.views.forEach({ $0.view?.updateData(model: sortMassageModel)})
+        self.conversationListView.updateData(model: sortMassageModel)
     }
     
     

@@ -8,12 +8,13 @@
 
 import Foundation
 
+
 protocol ConversationsView: class {
-    func updateData(model: [[MassageModel]]?)
+    func loadMassage(massageText: [MassageTextModel])
     func updateUI()
 }
 
 extension ConversationsView {
-    func updateData(model: [[MassageModel]]?) {}
+    func loadMassage(massageText: [MassageTextModel]) {}
     func updateUI() {}
 }

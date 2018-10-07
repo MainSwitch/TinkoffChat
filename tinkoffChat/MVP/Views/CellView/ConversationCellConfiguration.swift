@@ -1,5 +1,5 @@
 //
-//  MassegeView.swift
+//  ConversationCellConfiguration.swift
 //  tinkoffChat
 //
 //  Created by Anton on 04/10/2018.

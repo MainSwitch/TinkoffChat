@@ -22,7 +22,14 @@ class MassageCellView: UITableViewCell, ConversationCellConfiguration {
     }
     var massage: String? {
         didSet {
-            lastMassage.text = massage
+            if massage == nil {
+                lastMassage.font = UIFont(name: "AvenirNext-Medium", size: 13)
+                lastMassage.text = "No messages yet"
+                massage = "No messages yet"
+            } else {
+                lastMassage.font = UIFont.systemFont(ofSize: 17)
+                lastMassage.text = massage
+            }
         }
     }
     var date: Date? {
@@ -52,7 +59,7 @@ class MassageCellView: UITableViewCell, ConversationCellConfiguration {
         if hasUnreadMassages {
             let formattedString = NSMutableAttributedString()
             formattedString
-                .bold(massage ?? " ")
+                .bold(massage ?? "")
             self.lastMassage.attributedText = formattedString
         } else {
             self.lastMassage.text = massage
