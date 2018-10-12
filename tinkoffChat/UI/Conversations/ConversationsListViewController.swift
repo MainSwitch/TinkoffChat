@@ -8,14 +8,24 @@
 
 import UIKit
 
-class ConversationsListViewController: UIViewController {
+class ConversationsListViewController: UIViewController, ThemesViewControllerDelegate {
     
+    func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
+        logThemeChanging(selectedTheme: selectedTheme)
+    }
+    
+    var delegate: ThemesViewControllerDelegate!
     var massageModel: [[MassageModel]]!
     var conversationsPresenter =  MassageManager.shared.conversationsPresenter
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profileButton: UIBarButtonItem!
     
+    @IBAction func themesAction(_ sender: Any) {
+        let storyboard = MassageManager.shared.themesStoryboard
+        let vc = storyboard.instantiateViewController(withIdentifier: "ThemesNavigationVC") as UIViewController
+        self.present(vc, animated: true, completion: nil)
+    }
     @IBAction func profileAction(_ sender: Any) {
         let storyboard = MassageManager.shared.profileStoryboard
         let vc = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as UIViewController
@@ -38,6 +48,15 @@ extension ConversationsListViewController: ConversationsListView {
     func updateData(model: [[MassageModel]]?) {
         if let modelArray = model {
             self.massageModel = modelArray
+        }
+    }
+    func logThemeChanging(selectedTheme: UIColor) {
+        if selectedTheme == UIColor.yellow {
+            print("yellow")
+        } else if selectedTheme == UIColor.black {
+            print("black")
+        }else if selectedTheme == UIColor.darkGray {
+            print("darkGray")
         }
     }
 }

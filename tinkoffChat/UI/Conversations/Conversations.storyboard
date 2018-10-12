@@ -105,6 +105,11 @@
                         <viewLayoutGuide key="safeArea" id="ktQ-z3-chP"/>
                     </view>
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="EbH-V5-SHr">
+                        <barButtonItem key="leftBarButtonItem" title="Them" id="2xl-Qt-8PH">
+                            <connections>
+                                <action selector="themesAction:" destination="zEd-N0-osS" id="ceF-sO-498"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Profile" id="4dt-nN-adi">
                             <connections>
                                 <action selector="profileAction:" destination="zEd-N0-osS" id="RaO-6O-h1J"/>

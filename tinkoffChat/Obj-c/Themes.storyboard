@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="iTR-eD-TwE">
+            <objects>
+                <navigationController storyboardIdentifier="ThemesNavigationVC" id="V15-xc-IsQ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0rv-ZD-09N">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ODB-3s-rZY" kind="relationship" relationship="rootViewController" id="GbM-kS-4wG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SGo-3y-TR3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1038" y="-52"/>
+        </scene>
+        <!--Themes View Controller-->
+        <scene sceneID="DOT-oX-7fM">
+            <objects>
+                <viewController storyboardIdentifier="ThemesVC" id="ODB-3s-rZY" customClass="ThemesViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xM4-Up-RYX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="44" translatesAutoresizingMaskIntoConstraints="NO" id="ozR-0n-f8Q">
+                                <rect key="frame" x="56.333333333333343" y="344" width="262.33333333333326" height="178"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zs3-to-AXk">
+                                        <rect key="frame" x="0.0" y="0.0" width="262.33333333333331" height="30"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Тема 1"/>
+                                        <connections>
+                                            <action selector="themeOneAction:" destination="ODB-3s-rZY" eventType="touchUpInside" id="0mu-FU-Ley"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oA-8d-Us6">
+                                        <rect key="frame" x="0.0" y="74" width="262.33333333333331" height="30"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Тема 2"/>
+                                        <connections>
+                                            <action selector="themeTwoAction:" destination="ODB-3s-rZY" eventType="touchUpInside" id="7Qi-ma-jOi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="viv-La-VOQ">
+                                        <rect key="frame" x="0.0" y="148" width="262.33333333333331" height="30"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Тема 3"/>
+                                        <connections>
+                                            <action selector="themeThreeAction:" destination="ODB-3s-rZY" eventType="touchUpInside" id="OUX-2y-eh8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ozR-0n-f8Q" firstAttribute="centerY" secondItem="tgk-CN-bMr" secondAttribute="centerY" id="D02-fP-R1G"/>
+                            <constraint firstItem="ozR-0n-f8Q" firstAttribute="centerX" secondItem="tgk-CN-bMr" secondAttribute="centerX" id="IHa-kg-fUx"/>
+                            <constraint firstItem="ozR-0n-f8Q" firstAttribute="width" secondItem="xM4-Up-RYX" secondAttribute="width" multiplier="0.7" id="yXl-Go-2Ui"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tgk-CN-bMr"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jpY-4v-5k0">
+                        <barButtonItem key="rightBarButtonItem" title="Закрыть" id="QxB-ob-BhN">
+                            <connections>
+                                <action selector="closeVC:" destination="ODB-3s-rZY" id="dQT-Ov-SYu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Te9-ZH-W8n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4" y="-51.724137931034484"/>
+        </scene>
+    </scenes>
+</document>
