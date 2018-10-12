@@ -10,9 +10,47 @@
 #import "ThemesViewControllerDelegate.h"
 #import "tinkoffChat-Swift.h"
 
+
 @class Themes;
 
 @implementation ThemesViewController
+
+//Delegate Setter
+- (void)setThemesVCDelegate:(id<ThemesViewControllerDelegate>)delegate{
+    _delegate = nil;
+    @autoreleasepool {
+        _delegate = self;
+    }
+}
+//Delegate gettret
+-(id<ThemesViewControllerDelegate>)getDelegate {
+    return _delegate;
+}
+
+//conversationsDelegate setter
+-(void)setConversationsDelegate:(id <ThemesViewControllerDelegate>)conversationsDelegate{
+    _conversationsDelegate = nil;
+    @autoreleasepool {
+        _conversationsDelegate = ConversationVC;
+    }
+}
+
+//conversationsDelegate gettet
+-(id<ThemesViewControllerDelegate>)getConversationsDelegate {
+    return _conversationsDelegate;
+}
+
+- (void)setModel:(Themes *)model {
+    _model = nil;
+    @autoreleasepool {
+        _model = model;
+    }
+}
+
+-(Themes*)getThemes {
+    return _model;
+}
+
 ConversationsListViewController *ConversationVC;
 
 - (void)themesViewController:(nonnull ThemesViewController *)controller didSelectTheme:(nonnull UIColor *)selectedTheme {
@@ -38,12 +76,13 @@ ConversationsListViewController *ConversationVC;
 - (void)viewDidLoad {
     [super viewDidLoad];
     @autoreleasepool {
-        _model = ([[Themes alloc] init]);
         ConversationVC = [ConversationsListViewController new];
-        
-        self.conversationsDelegate = ConversationVC;
-        self.delegate = self;
     }
+    
+    [self setConversationsDelegate:ConversationVC];
+    [self setDelegate:self];
+    [self setModel:[[Themes alloc] init]];
+    
     _model.theme1 = UIColor.yellowColor;
     _model.theme2 = UIColor.blackColor;
     _model.theme3 = UIColor.darkGrayColor;
@@ -52,6 +91,14 @@ ConversationsListViewController *ConversationVC;
     
 }
 
+- (void)dealloc
+{
+    free((__bridge void *)(_delegate));
+    free((__bridge void *)(_model));
+    ConversationVC = nil;
+    _delegate = nil;
+    _model = nil;
+}
 
 /*
 #pragma mark - Navigation

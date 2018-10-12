@@ -17,7 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id <ThemesViewControllerDelegate> delegate;
 @property (nonatomic, weak) id <ThemesViewControllerDelegate> conversationsDelegate;
-@property Themes* model;
+@property (nonatomic) Themes* model;
+
+-(void)setThemesVCDelegate:(id <ThemesViewControllerDelegate>)delegate;
+-(void)setConversationsDelegate:(id <ThemesViewControllerDelegate>)conversationsDelegate;
+-(void)setModel:(Themes*)model;
 
 @end
 
