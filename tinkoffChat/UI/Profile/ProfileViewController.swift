@@ -24,7 +24,8 @@ class ProfileViewController: UIViewController {
         }
         showPhotoAlert(imagePicker: existingPicker)
     }
-    @IBAction func backButton(_ sender: Any) {
+    
+    @objc func backButton() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -61,6 +62,9 @@ class ProfileViewController: UIViewController {
     
     private func setupUI(){
         imagePicker?.delegate = self
+        
+        let closeNavigationVCItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(backButton))
+        self.navigationItem.leftBarButtonItem = closeNavigationVCItem
         
         editButton.backgroundColor = .white
         editButton.layer.borderWidth = 1

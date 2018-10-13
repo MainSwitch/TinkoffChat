@@ -17,7 +17,7 @@
 
 //Delegate Setter
 - (void)setThemesVCDelegate:(id<ThemesViewControllerDelegate>)delegate{
-    _delegate = nil;
+    [_delegate release];
     @autoreleasepool {
         _delegate = self;
     }
@@ -29,7 +29,7 @@
 
 //conversationsDelegate setter
 -(void)setConversationsDelegate:(id <ThemesViewControllerDelegate>)conversationsDelegate{
-    _conversationsDelegate = nil;
+    [_delegate release];
     @autoreleasepool {
         _conversationsDelegate = ConversationVC;
     }
@@ -41,7 +41,7 @@
 }
 
 - (void)setModel:(Themes *)model {
-    _model = nil;
+    [_model release];
     @autoreleasepool {
         _model = model;
     }
@@ -82,6 +82,7 @@ UIButton *themeButton3;
     UIBarButtonItem *navigationItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeVC:)];
     self.navigationController.topViewController.navigationItem.rightBarButtonItem = navigationItem;
     navigationItem.enabled=TRUE;
+    [navigationItem release];
     
     themeButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [themeButton1 addTarget:self
@@ -126,9 +127,7 @@ UIButton *themeButton3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;
-    @autoreleasepool {
-        ConversationVC = [ConversationsListViewController new];
-    }
+    ConversationVC = [[ConversationsListViewController alloc] init];
     
     [self setConversationsDelegate:ConversationVC];
     [self setDelegate:self];
@@ -143,19 +142,24 @@ UIButton *themeButton3;
 
 - (void)dealloc
 {
+    [super dealloc];
     _delegate = nil;
     _model = nil;
     themeButton1 = nil;
     themeButton2 = nil;
     themeButton3 = nil;
-    self.navigationController.topViewController.navigationItem.rightBarButtonItem = nil;
+    [_model release];
+    [_delegate release];
+    [themeButton1 release];
+    [themeButton2 release];
+    [themeButton3 release];
     free((__bridge void *)(themeButton1));
     free((__bridge void *)(themeButton1));
     free((__bridge void *)(themeButton1));
     free((__bridge void *)(_delegate));
     free((__bridge void *)(_model));
     ConversationVC = nil;
-    
+    [ConversationVC release];
 }
 
 /*

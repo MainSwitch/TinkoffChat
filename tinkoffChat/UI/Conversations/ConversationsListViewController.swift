@@ -24,8 +24,9 @@ class ConversationsListViewController: UIViewController {
     }
     @IBAction func profileAction(_ sender: Any) {
         let storyboard = MassageManager.shared.profileStoryboard
-        let vc = storyboard.instantiateViewController(withIdentifier: "ProfileNavigationVC") as UIViewController
-        self.present(vc, animated: true, completion: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as UIViewController
+        let navigationVC = UINavigationController(rootViewController: vc)
+        self.present(navigationVC, animated: true, completion: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,6 +106,7 @@ extension ConversationsListViewController: UITableViewDelegate {
     }
 
 }
+
 #if OBJ
 extension ConversationsListViewController: ThemesViewControllerDelegate {
     

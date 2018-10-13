@@ -22,7 +22,6 @@
 		3A4070CD2153ADB000AA9583 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070CB2153ADB000AA9583 /* LaunchScreen.storyboard */; };
 		3A4070D82153ADB000AA9583 /* tinkoffChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */; };
 		3A4445CE217131590047B1DE /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4445CD217131580047B1DE /* Themes.m */; };
-		3ADD6A4C216FCA2200759687 /* Themes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD6A45216FCA2200759687 /* Themes.storyboard */; };
 		3ADD6A4D216FCA2200759687 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD6A48216FCA2200759687 /* ThemesViewController.m */; };
 		3AE33B462166443D00B3264F /* ConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE33B452166443D00B3264F /* ConversationsView.swift */; };
 		3AE33B4921664A2900B3264F /* ConversationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE33B4821664A2900B3264F /* ConversationsPresenter.swift */; };
@@ -50,9 +49,9 @@
 		3AF34C4F217261520072BBD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070CB2153ADB000AA9583 /* LaunchScreen.storyboard */; };
 		3AF34C50217261520072BBD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070C92153ADB000AA9583 /* Assets.xcassets */; };
 		3AF34C51217261520072BBD3 /* Conversations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A34044F2165ECDC00D3FFB9 /* Conversations.storyboard */; };
-		3AF34C52217261520072BBD3 /* Themes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD6A45216FCA2200759687 /* Themes.storyboard */; };
 		3AF34C53217261520072BBD3 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070C62153ADAE00AA9583 /* Profile.storyboard */; };
 		3AF34C59217285EB0072BBD3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C42153ADAE00AA9583 /* ProfileViewController.swift */; };
+		3AF34C5B21729B220072BBD3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C42153ADAE00AA9583 /* ProfileViewController.swift */; };
 		3AF565DE216745C80074BE3D /* ChatMassageCellIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565DD216745C80074BE3D /* ChatMassageCellIView.swift */; };
 		3AF565E0216754D40074BE3D /* NSMutableAttributedString + Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565DF216754D40074BE3D /* NSMutableAttributedString + Bold.swift */; };
 		3AF565E221676B6A0074BE3D /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565E121676B6A0074BE3D /* ConversationViewController.swift */; };
@@ -92,7 +91,6 @@
 		3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tinkoffChatTests.swift; sourceTree = "<group>"; };
 		3A4070D92153ADB000AA9583 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A4445CD217131580047B1DE /* Themes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Themes.m; path = tinkoffChat/Themes.m; sourceTree = SOURCE_ROOT; };
-		3ADD6A45216FCA2200759687 /* Themes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Themes.storyboard; sourceTree = "<group>"; };
 		3ADD6A47216FCA2200759687 /* ThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
 		3ADD6A48216FCA2200759687 /* ThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
 		3ADD6A49216FCA2200759687 /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -287,7 +285,6 @@
 		3ADD6A44216FCA2200759687 /* Obj-c */ = {
 			isa = PBXGroup;
 			children = (
-				3ADD6A45216FCA2200759687 /* Themes.storyboard */,
 				3ADD6A46216FCA2200759687 /* ThemesViewController */,
 				3ADD6A49216FCA2200759687 /* ThemesViewControllerDelegate.h */,
 				3ADD6A4B216FCA2200759687 /* Themes.h */,
@@ -451,7 +448,6 @@
 				3A4070CD2153ADB000AA9583 /* LaunchScreen.storyboard in Resources */,
 				3A4070CA2153ADB000AA9583 /* Assets.xcassets in Resources */,
 				3A3404502165ECDC00D3FFB9 /* Conversations.storyboard in Resources */,
-				3ADD6A4C216FCA2200759687 /* Themes.storyboard in Resources */,
 				3A4070C82153ADAE00AA9583 /* Profile.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,7 +466,6 @@
 				3AF34C4F217261520072BBD3 /* LaunchScreen.storyboard in Resources */,
 				3AF34C50217261520072BBD3 /* Assets.xcassets in Resources */,
 				3AF34C51217261520072BBD3 /* Conversations.storyboard in Resources */,
-				3AF34C52217261520072BBD3 /* Themes.storyboard in Resources */,
 				3AF34C53217261520072BBD3 /* Profile.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,6 +495,7 @@
 				3A2A99FA216A28E600A2D934 /* MassageTextModel.swift in Sources */,
 				3A34044E216525A300D3FFB9 /* ConversationsListViewController.swift in Sources */,
 				3A4445CE217131590047B1DE /* Themes.m in Sources */,
+				3AF34C5B21729B220072BBD3 /* ProfileViewController.swift in Sources */,
 				3AE33B4921664A2900B3264F /* ConversationsPresenter.swift in Sources */,
 				3A2686BF215EC1250058D4DC /* UIViewController + Alerts.swift in Sources */,
 			);
@@ -580,7 +576,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -641,7 +637,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
