@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qDq-wh-F2a">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Profile View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="CLI-Fq-g2X">
+            <objects>
+                <navigationController storyboardIdentifier="ProfileNavigationVC" id="qDq-wh-F2a" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LlD-fO-PBJ">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="kom-lZ-zNn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sbb-0g-UZ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-836" y="98"/>
+        </scene>
+        <!--Profile-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="ProfileVC" id="BYZ-38-t0r" customClass="ProfileViewController" customModule="tinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -71,49 +87,32 @@
                                     <action selector="selectProfileImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v8D-N7-CV7"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3KB-oe-gPI">
-                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Profile" id="Rxh-BC-Axy">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="yo6-UX-Wbg">
-                                            <connections>
-                                                <action selector="backButton:" destination="BYZ-38-t0r" id="IMM-dS-ZQ1"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2w-gh-lZR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.97647863626480103" green="0.9751238226890564" blue="0.97603911161422729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3KB-oe-gPI" firstAttribute="top" secondItem="b2w-gh-lZR" secondAttribute="bottom" id="1Zn-eB-uKY"/>
                             <constraint firstItem="TmR-PD-2h6" firstAttribute="trailing" secondItem="ujU-tO-BGt" secondAttribute="trailing" id="1ln-hb-1xl"/>
-                            <constraint firstItem="b2w-gh-lZR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5u6-YN-laq"/>
+                            <constraint firstItem="TmR-PD-2h6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="2bA-wQ-cYt"/>
                             <constraint firstItem="TmR-PD-2h6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="9ZD-r6-h92"/>
-                            <constraint firstItem="3KB-oe-gPI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="AJq-Mi-4XS"/>
-                            <constraint firstItem="3KB-oe-gPI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="AYu-Ku-FA8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tk0-6i-ATs" secondAttribute="trailing" constant="16" id="Aay-hB-lrS"/>
                             <constraint firstItem="ujU-tO-BGt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="HCo-EY-k9D"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xlb-X1-3AL" secondAttribute="trailing" constant="16" id="Ide-Uv-dMd"/>
                             <constraint firstItem="Xlb-X1-3AL" firstAttribute="top" secondItem="TmR-PD-2h6" secondAttribute="bottom" constant="16" id="KFg-T1-Jzb"/>
                             <constraint firstItem="TmR-PD-2h6" firstAttribute="bottom" secondItem="ujU-tO-BGt" secondAttribute="bottom" id="Oph-gi-JeR"/>
                             <constraint firstItem="Xlb-X1-3AL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="Qbi-cP-vln"/>
-                            <constraint firstItem="TmR-PD-2h6" firstAttribute="top" secondItem="3KB-oe-gPI" secondAttribute="bottom" constant="10" id="Vzd-iy-4cl"/>
-                            <constraint firstItem="b2w-gh-lZR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Xw3-ue-Up3"/>
                             <constraint firstItem="Tk0-6i-ATs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Xlb-X1-3AL" secondAttribute="bottom" constant="4" id="Xzm-cl-aMf"/>
                             <constraint firstItem="Tk0-6i-ATs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="aXZ-oN-Fow"/>
-                            <constraint firstAttribute="trailing" secondItem="b2w-gh-lZR" secondAttribute="trailing" id="eeO-Dj-rTq"/>
-                            <constraint firstItem="3KB-oe-gPI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="maT-hp-cGe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TmR-PD-2h6" secondAttribute="trailing" constant="16" id="mc1-ZN-LoE"/>
                             <constraint firstItem="Tk0-6i-ATs" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-25" id="vtf-o5-kp6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="4dV-dw-RuG"/>
+                    <navigationItem key="navigationItem" title="Profile" id="4dV-dw-RuG">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="yo6-UX-Wbg">
+                            <connections>
+                                <action selector="backButton:" destination="BYZ-38-t0r" id="IMM-dS-ZQ1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="editButton" destination="Tk0-6i-ATs" id="HnC-03-njr"/>
                         <outlet property="profileImage" destination="TmR-PD-2h6" id="xRd-Cj-88R"/>

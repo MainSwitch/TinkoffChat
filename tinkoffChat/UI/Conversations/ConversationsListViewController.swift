@@ -8,11 +8,7 @@
 
 import UIKit
 
-class ConversationsListViewController: UIViewController, ThemesViewControllerDelegate {
-    
-    func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
-        logThemeChanging(selectedTheme: selectedTheme)
-    }
+class ConversationsListViewController: UIViewController {
     
     var delegate: ThemesViewControllerDelegate!
     var massageModel: [[MassageModel]]!
@@ -22,13 +18,13 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
     @IBOutlet weak var profileButton: UIBarButtonItem!
     
     @IBAction func themesAction(_ sender: Any) {
-        let storyboard = MassageManager.shared.themesStoryboard
-        let vc = storyboard.instantiateViewController(withIdentifier: "ThemesNavigationVC") as UIViewController
-        self.present(vc, animated: true, completion: nil)
+        let vc = ThemesViewController()
+        let navigationController = UINavigationController(rootViewController: vc)
+        self.present(navigationController, animated: true, completion: nil)
     }
     @IBAction func profileAction(_ sender: Any) {
         let storyboard = MassageManager.shared.profileStoryboard
-        let vc = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as UIViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProfileNavigationVC") as UIViewController
         self.present(vc, animated: true, completion: nil)
     }
     override func viewDidLoad() {
@@ -109,3 +105,11 @@ extension ConversationsListViewController: UITableViewDelegate {
     }
 
 }
+#if OBJ
+extension ConversationsListViewController: ThemesViewControllerDelegate {
+    
+    func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
+        logThemeChanging(selectedTheme: selectedTheme)
+    }
+}
+#endif
