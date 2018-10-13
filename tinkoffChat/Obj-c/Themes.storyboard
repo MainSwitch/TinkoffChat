@@ -73,7 +73,12 @@
                         <viewLayoutGuide key="safeArea" id="tgk-CN-bMr"/>
                     </view>
                     <navigationItem key="navigationItem" id="jpY-4v-5k0">
-                        <barButtonItem key="rightBarButtonItem" title="Закрыть" id="QxB-ob-BhN">
+                        <barButtonItem key="leftBarButtonItem" title="Swift themes" id="Y68-9o-P30">
+                            <connections>
+                                <segue destination="FEX-cw-1Ya" kind="show" id="ftS-8r-eGw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="QxB-ob-BhN">
                             <connections>
                                 <action selector="closeVC:" destination="ODB-3s-rZY" id="dQT-Ov-SYu"/>
                             </connections>
@@ -83,6 +88,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Te9-ZH-W8n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4" y="-51.724137931034484"/>
+        </scene>
+        <!--Themes View Controller Swift-->
+        <scene sceneID="aZp-Ib-NwR">
+            <objects>
+                <viewController id="FEX-cw-1Ya" customClass="ThemesViewControllerSwift" customModule="tinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="acC-y3-zwc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="51" translatesAutoresizingMaskIntoConstraints="NO" id="kn3-eY-dXW">
+                                <rect key="frame" x="56.333333333333343" y="337" width="262.33333333333326" height="192"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HM7-bf-FrR">
+                                        <rect key="frame" x="0.0" y="0.0" width="262.33333333333331" height="30"/>
+                                        <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Cветлая"/>
+                                        <connections>
+                                            <action selector="LightThemeButton:" destination="FEX-cw-1Ya" eventType="touchUpInside" id="GaQ-RE-J8N"/>
+                                            <action selector="themeOneAction:" destination="ODB-3s-rZY" eventType="touchUpInside" id="vZE-03-WC1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dIs-XB-i5h">
+                                        <rect key="frame" x="0.0" y="81" width="262.33333333333331" height="30"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Тёмная"/>
+                                        <connections>
+                                            <action selector="DarkThemeButton:" destination="FEX-cw-1Ya" eventType="touchUpInside" id="KPE-UB-la1"/>
+                                            <action selector="themeTwoAction:" destination="ODB-3s-rZY" eventType="touchUpInside" id="W8h-JI-0Vd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDp-E0-wB6">
+                                        <rect key="frame" x="0.0" y="162" width="262.33333333333331" height="30"/>
+                                        <color key="backgroundColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Шампань"/>
+                                        <connections>
+                                            <action selector="ShapayneThemeButtom:" destination="FEX-cw-1Ya" eventType="touchUpInside" id="QOk-nD-h0M"/>
+                                            <action selector="themeThreeAction:" destination="ODB-3s-rZY" eventType="touchUpInside" id="RFJ-Xo-pzP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kn3-eY-dXW" firstAttribute="centerX" secondItem="6RB-b1-Hv0" secondAttribute="centerX" id="9Lh-np-LYE"/>
+                            <constraint firstItem="kn3-eY-dXW" firstAttribute="centerY" secondItem="6RB-b1-Hv0" secondAttribute="centerY" id="i2R-8D-YUr"/>
+                            <constraint firstItem="kn3-eY-dXW" firstAttribute="width" secondItem="acC-y3-zwc" secondAttribute="width" multiplier="0.7" id="o7M-hD-u4B"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6RB-b1-Hv0"/>
+                    </view>
+                    <connections>
+                        <outlet property="shampayneBtn" destination="QDp-E0-wB6" id="eD0-FE-j7S"/>
+                        <outlet property="themeDarckBtn" destination="dIs-XB-i5h" id="dsX-Ye-x86"/>
+                        <outlet property="themeLightBtn" destination="HM7-bf-FrR" id="XyF-T7-nfo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K2K-hI-prP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="820" y="-51.724137931034484"/>
         </scene>
     </scenes>
 </document>

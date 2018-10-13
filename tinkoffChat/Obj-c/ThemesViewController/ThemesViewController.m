@@ -56,6 +56,7 @@ ConversationsListViewController *ConversationVC;
 - (void)themesViewController:(nonnull ThemesViewController *)controller didSelectTheme:(nonnull UIColor *)selectedTheme {
     controller.view.backgroundColor = selectedTheme;
 }
+
 - (IBAction)closeVC:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -84,8 +85,8 @@ ConversationsListViewController *ConversationVC;
     [self setModel:[[Themes alloc] init]];
     
     _model.theme1 = UIColor.yellowColor;
-    _model.theme2 = UIColor.blackColor;
-    _model.theme3 = UIColor.darkGrayColor;
+    _model.theme2 = UIColor.darkGrayColor;
+    _model.theme3 = UIColor.purpleColor;
     // Do any additional setup after loading the view.
     
     
@@ -93,11 +94,12 @@ ConversationsListViewController *ConversationVC;
 
 - (void)dealloc
 {
+    _delegate = nil;
+    _model = nil;
     free((__bridge void *)(_delegate));
     free((__bridge void *)(_model));
     ConversationVC = nil;
-    _delegate = nil;
-    _model = nil;
+    
 }
 
 /*

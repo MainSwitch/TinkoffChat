@@ -52,11 +52,11 @@ extension ConversationsListViewController: ConversationsListView {
     }
     func logThemeChanging(selectedTheme: UIColor) {
         if selectedTheme == UIColor.yellow {
-            print("yellow")
-        } else if selectedTheme == UIColor.black {
-            print("black")
-        }else if selectedTheme == UIColor.darkGray {
-            print("darkGray")
+            print("Yellow")
+        } else if selectedTheme == UIColor.darkGray {
+            print("DarkGray")
+        }else if selectedTheme == UIColor.purple {
+            print("Shampayne")
         }
     }
 }

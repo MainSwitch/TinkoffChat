@@ -33,6 +33,8 @@
 		3AF565E221676B6A0074BE3D /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565E121676B6A0074BE3D /* ConversationViewController.swift */; };
 		3AF565E4216778270074BE3D /* MassageSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565E3216778270074BE3D /* MassageSingleton.swift */; };
 		3AF7150E2168F00400473345 /* ChatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF7150D2168F00400473345 /* ChatLabel.swift */; };
+		3AF8AFF32171BE6700E5B145 /* ThemesViewControllerSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8AFF22171BE6700E5B145 /* ThemesViewControllerSwift.swift */; };
+		3AF8AFF62171D55800E5B145 /* UIColor + Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8AFF52171D55800E5B145 /* UIColor + Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,8 @@
 		3AF565E121676B6A0074BE3D /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		3AF565E3216778270074BE3D /* MassageSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageSingleton.swift; sourceTree = "<group>"; };
 		3AF7150D2168F00400473345 /* ChatLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLabel.swift; sourceTree = "<group>"; };
+		3AF8AFF22171BE6700E5B145 /* ThemesViewControllerSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewControllerSwift.swift; sourceTree = "<group>"; };
+		3AF8AFF52171D55800E5B145 /* UIColor + Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Theme.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 				3A2686BE215EC1250058D4DC /* UIViewController + Alerts.swift */,
 				3A3404632165FA9C00D3FFB9 /* Date + String.swift */,
 				3AF565DF216754D40074BE3D /* NSMutableAttributedString + Bold.swift */,
+				3AF8AFF52171D55800E5B145 /* UIColor + Theme.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 		3A3404552165F39400D3FFB9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				3AF8AFF12171BE3C00E5B145 /* Themes */,
 				3ADBEF5A216699E800C709DC /* Profile */,
 				3A3404562165F39A00D3FFB9 /* Conversations */,
 			);
@@ -300,6 +306,14 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		3AF8AFF12171BE3C00E5B145 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				3AF8AFF22171BE6700E5B145 /* ThemesViewControllerSwift.swift */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -410,12 +424,14 @@
 				3A34045A2165F3ED00D3FFB9 /* MassageCellVIew.swift in Sources */,
 				3AF565E0216754D40074BE3D /* NSMutableAttributedString + Bold.swift in Sources */,
 				3AF565E4216778270074BE3D /* MassageSingleton.swift in Sources */,
+				3AF8AFF62171D55800E5B145 /* UIColor + Theme.swift in Sources */,
 				3A3404642165FA9C00D3FFB9 /* Date + String.swift in Sources */,
 				3A4070C52153ADAE00AA9583 /* ProfileViewController.swift in Sources */,
 				3AE33B462166443D00B3264F /* ConversationsView.swift in Sources */,
 				3A4070C32153ADAE00AA9583 /* AppDelegate.swift in Sources */,
 				3A3404612165F7EF00D3FFB9 /* ConversationCellConfiguration.swift in Sources */,
 				3ADD6A4D216FCA2200759687 /* ThemesViewController.m in Sources */,
+				3AF8AFF32171BE6700E5B145 /* ThemesViewControllerSwift.swift in Sources */,
 				3AF20C232167C9A10072AFA1 /* MassageCellConfiguration.swift in Sources */,
 				3A34045D2165F4EF00D3FFB9 /* MassageModel.swift in Sources */,
 				3A2A99FA216A28E600A2D934 /* MassageTextModel.swift in Sources */,
