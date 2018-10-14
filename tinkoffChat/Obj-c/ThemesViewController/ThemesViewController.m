@@ -24,6 +24,7 @@
 }
 //Delegate gettret
 -(id<ThemesViewControllerDelegate>)getDelegate {
+    [_delegate retain];
     return _delegate;
 }
 
@@ -37,6 +38,7 @@
 
 //conversationsDelegate gettet
 -(id<ThemesViewControllerDelegate>)getConversationsDelegate {
+    [_conversationsDelegate retain];
     return _conversationsDelegate;
 }
 
@@ -48,6 +50,7 @@
 }
 
 -(Themes*)getThemes {
+    [_model retain];
     return _model;
 }
 
@@ -60,67 +63,53 @@ UIButton *themeButton3;
     controller.view.backgroundColor = selectedTheme;
 }
 
-- (IBAction)closeVC:(id)sender {
+- (void)closeVC:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)themeOneAction:(id)sender {
+- (void)themeOneAction:(id)sender {
     [self.delegate themesViewController:self didSelectTheme:_model.theme1];
     [self.conversationsDelegate themesViewController:self didSelectTheme:_model.theme1];
 }
-- (IBAction)themeTwoAction:(id)sender {
+- (void)themeTwoAction:(id)sender {
     [self.delegate themesViewController:self didSelectTheme:_model.theme2];
     [self.conversationsDelegate themesViewController:self didSelectTheme:_model.theme2];
 }
-- (IBAction)themeThreeAction:(id)sender {
+- (void)themeThreeAction:(id)sender {
     [self.delegate themesViewController:self didSelectTheme:_model.theme3];
     [self.conversationsDelegate themesViewController:self didSelectTheme:_model.theme3];
+}
+
+-(void)setBtn:(nonnull UIButton*)btn buttonTitle:(nonnull NSString*)title positionFromOneToEight:(int)position selector:(SEL)selector {
+    double doublePosition = (double)position;
+    btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
+    [btn setTitle:title forState:UIControlStateNormal];
+    btn.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.75f];
+    btn.bounds = CGRectMake(0, 0, 144, 44);
+    [btn addTarget:self
+                     action:selector
+           forControlEvents:UIControlEventTouchUpInside];
+    btn.center = CGPointMake(self.view.center.x, (self.view.frame.size.height/8)*doublePosition);
+    [self.view addSubview:btn];
 }
 
 -(void)setupUI {
     
     UIBarButtonItem *navigationItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeVC:)];
     self.navigationController.topViewController.navigationItem.rightBarButtonItem = navigationItem;
+    [navigationItem retain];
     navigationItem.enabled=TRUE;
     [navigationItem release];
     
     themeButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [themeButton1 addTarget:self
-               action:@selector(themeOneAction:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [themeButton1 setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
-    [themeButton1 setTitle:@"Тема 1" forState:UIControlStateNormal];
-    themeButton1.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.75f];
-    //theme1.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
-    themeButton1.bounds = CGRectMake(0, 0, 144, 44);
-    themeButton1.center = CGPointMake(self.view.center.x, (self.view.frame.size.height/8)*3);
-    [self.view addSubview:themeButton1];
+    [self setBtn:themeButton1 buttonTitle:@"Тема 1" positionFromOneToEight:3 selector:@selector(themeOneAction:)];
     
     themeButton2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    themeButton2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [themeButton2 addTarget:self
-               action:@selector(themeTwoAction:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [themeButton2 setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
-    [themeButton2 setTitle:@"Тема 2" forState:UIControlStateNormal];
-    themeButton2.titleLabel.textColor = UIColor.blueColor;
-    themeButton2.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.75f];
-    themeButton2.bounds = CGRectMake(0, 0, 144, 44);
-    themeButton2.center = CGPointMake(self.view.center.x, (self.view.frame.size.height/8)*4);
-    [self.view addSubview:themeButton2];
+    [self setBtn:themeButton2 buttonTitle:@"Тема 2" positionFromOneToEight:4 selector:@selector(themeTwoAction:)];
     
     themeButton3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    themeButton3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [themeButton3 addTarget:self
-               action:@selector(themeThreeAction:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [themeButton3 setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
-    [themeButton3 setTitle:@"Тема 3" forState:UIControlStateNormal];
-    themeButton3.titleLabel.textColor = UIColor.blueColor;
-    themeButton3.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.75f];
-    themeButton3.bounds = CGRectMake(0, 0, 144, 44);
-    themeButton3.center = CGPointMake(self.view.center.x, (self.view.frame.size.height/8)*5);
-    [self.view addSubview:themeButton3];
+    [self setBtn:themeButton3 buttonTitle:@"Тема 3" positionFromOneToEight:5 selector:@selector(themeThreeAction:)];
 }
 
 
@@ -142,7 +131,6 @@ UIButton *themeButton3;
 
 - (void)dealloc
 {
-    [super dealloc];
     _delegate = nil;
     _model = nil;
     themeButton1 = nil;
@@ -153,13 +141,9 @@ UIButton *themeButton3;
     [themeButton1 release];
     [themeButton2 release];
     [themeButton3 release];
-    free((__bridge void *)(themeButton1));
-    free((__bridge void *)(themeButton1));
-    free((__bridge void *)(themeButton1));
-    free((__bridge void *)(_delegate));
-    free((__bridge void *)(_model));
     ConversationVC = nil;
     [ConversationVC release];
+    [super dealloc];
 }
 
 /*
