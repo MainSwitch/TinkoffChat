@@ -11,9 +11,20 @@ import UIKit
 //MARK: Alert with title and massage
 extension UIViewController {
     
-    func showAlertWith(title: String, message: String) {
+    func showAlertWith(title: String, message: String?, completion: (()->())?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            completion?()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showSaveAlertWith(title: String, message: String?, completionRepeat: (()->())?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Повторить", style: .cancel, handler: { (action) in
+            completionRepeat?()
+        }))
         self.present(alert, animated: true, completion: nil)
     }
 }
@@ -34,7 +45,7 @@ extension UIViewController: UIImagePickerControllerDelegate,UINavigationControll
                 imagePicker.cameraCaptureMode = .photo
                 self.present(imagePicker, animated: true, completion: nil)
             }else{
-                self.showAlertWith(title: "Camera Not Found", message: "This device has no Camera")
+                self.showAlertWith(title: "Camera Not Found", message: "This device has no Camera", completion: nil)
             }
         }))
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
