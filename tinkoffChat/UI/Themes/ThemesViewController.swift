@@ -16,6 +16,7 @@ class ThemesViewController: UIViewController {
     var themeLightBtn: UIButton!
     var themeDarckBtn: UIButton!
     var shampayneBtn: UIButton!
+    let saveQueue = DispatchQueue.global(qos: .utility)
     
     enum Position: Int {
         case first = 3
@@ -24,11 +25,11 @@ class ThemesViewController: UIViewController {
     }
     
     var setThemeClosure = { (controller: ThemesViewController, color: UIColor, colorClosure: ()->()) in
+        colorClosure()
         controller.view.backgroundColor = color
         controller.conversationListView.logThemeChanging(selectedTheme: color)
         UINavigationBar.appearance().backgroundColor = color
         controller.navigationController?.navigationBar.backgroundColor = color
-        colorClosure()
     }
     
     @objc func dissmisVC() {
@@ -38,7 +39,9 @@ class ThemesViewController: UIViewController {
     @objc func lightThemeButton(_ sender: Any) {
         if let btnColor = themeLightBtn.backgroundColor {
             setThemeClosure(self, btnColor) {
-                userDefaults.set(1, forKey: "themeColor")
+                saveQueue.async {
+                    self.userDefaults.set(1, forKey: "themeColor")
+                }
             }
             
         }
@@ -46,14 +49,18 @@ class ThemesViewController: UIViewController {
     @objc func darkThemeButton(_ sender: Any) {
         if let btnColor = themeDarckBtn.backgroundColor {
             setThemeClosure(self, btnColor) {
-                userDefaults.set(2, forKey: "themeColor")
+                saveQueue.async {
+                    self.userDefaults.set(2, forKey: "themeColor")
+                }
             }
         }
     }
     @objc func shapayneThemeButtom(_ sender: Any) {
         if let btnColor = shampayneBtn.backgroundColor {
             setThemeClosure(self, btnColor) {
-                userDefaults.set(3, forKey: "themeColor")
+                saveQueue.async {
+                    self.userDefaults.set(3, forKey: "themeColor")
+                }
             }
         }
     }

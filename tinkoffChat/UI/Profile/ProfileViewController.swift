@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController {
     var rightItemBack: UIBarButtonItem!
     
     var presenter: ProfilePresenter!
-    var operationManager: OperationDataManager!
+    var operationManager: SaveOperation!
     
     @IBAction func selectProfileImage(_ sender: Any) {
         print("Выбери изображение профиля")
@@ -43,18 +43,7 @@ class ProfileViewController: UIViewController {
         showPhotoAlert(imagePicker: existingPicker)
     }
     @IBAction func gcdAction(_ sender: Any) {
-    }
-    
-    
-    @IBAction func operationAction(_ sender: Any) {
-        self.operationManager = OperationDataManager(image: reductImageView.image, name: self.reductNameTextField.text, about: self.reductTextView.text, opration: OperationDataManager.OperationType.write)
-        let operationQueue = OperationQueue()
-        activityView.isHidden = false
-        activityView.startAnimating()
-        self.reductGCDBtn.isEnabled = false
-        self.reductOperationBtn.isEnabled = false
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
-        operationManager.completionBlock = {
+        let completion = {
             OperationQueue.main.addOperation({
                 if self.operationManager.errors.isEmpty {
                     self.activityView.stopAnimating()
@@ -72,7 +61,47 @@ class ProfileViewController: UIViewController {
                 }
             })
         }
-        operationQueue.addOperation(operationManager)
+        self.operationManager = GCDDataManager(name: reductNameTextField.text, about: reductTextView.text, image: reductImageView.image, completionBlock: completion)
+        activityView.isHidden = false
+        activityView.startAnimating()
+        self.reductGCDBtn.isEnabled = false
+        self.reductOperationBtn.isEnabled = false
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.tapOnView(sender: self)
+        self.operationManager.saveData()
+    }
+    
+    
+    @IBAction func operationAction(_ sender: Any) {
+        let completion = {
+            OperationQueue.main.addOperation({
+                if self.operationManager.errors.isEmpty {
+                    self.activityView.stopAnimating()
+                    self.showAlertWith(title: "Данные сохранены", message: nil, completion: {
+                        self.presenter.setSeveData()
+                        self.reductGCDBtn.isEnabled = true
+                        self.reductOperationBtn.isEnabled = true
+                        self.navigationItem.rightBarButtonItem?.isEnabled = true
+                        self.cancelButton()
+                    })
+                } else {
+                    self.showSaveAlertWith(title: "Ошибка", message: "Не удалось сохранить данные", completionRepeat: {
+                        self.operationAction(self.reductOperationBtn)
+                    })
+                }
+            })
+        }
+        self.operationManager = OperationDataManager(image: reductImageView.image, name: self.reductNameTextField.text, about: self.reductTextView.text,completionBlock: completion, opration: OperationDataManager.OperationType.write)
+        let operationQueue = OperationQueue()
+        activityView.isHidden = false
+        activityView.startAnimating()
+        self.reductGCDBtn.isEnabled = false
+        self.reductOperationBtn.isEnabled = false
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.tapOnView(sender: self)
+        if let operation = operationManager as? OperationDataManager {
+            operationQueue.addOperation(operation)
+        }
     }
     
     @IBAction func reduct(_ sender: Any) {
@@ -89,6 +118,7 @@ class ProfileViewController: UIViewController {
         isHiddenReductUI(isHidden: true)
         isHiddenMainUI(isHidden: false)
         presenter.loadReductData()
+        tapOnView(sender: self)
         navigationItem.leftBarButtonItem?.isEnabled = true
         navigationItem.rightBarButtonItem = nil
     }
@@ -163,8 +193,10 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.view.frame.origin.y -= keyboardSize.height
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
         }
     }
     
@@ -195,9 +227,9 @@ class ProfileViewController: UIViewController {
     
     func isEnabledSave(isEnabled: Bool) {
         reductOperationBtn.isEnabled = isEnabled
-        reductOperationBtn.isEnabled = isEnabled
+        reductGCDBtn.isEnabled = isEnabled
     }
-     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage]  as? UIImage else {
             return
         }
@@ -208,32 +240,35 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: ProfileSaveView {
     func getSaveData() {
-        self.profileImage.image = reductImageView.image
-        self.userName.text = reductNameTextField.text
-        self.userDescription.text = reductTextView.text
+        loadMainData() // Дабы удовлетворить пункт 9
+//        self.profileImage.image = reductImageView.image
+//        self.userName.text = reductNameTextField.text
+//        self.userDescription.text = reductTextView.text
     }
     
     func loadMainData() {
-        self.operationManager = OperationDataManager()
-        if let name = UserDefaults.standard.string(forKey: "name") {
-            self.userName.text = name
-            self.reductNameTextField.text = name
+        let completion = {
+            OperationQueue.main.addOperation {
+                if let name = self.operationManager.userName {
+                    self.userName.text = name
+                }
+                if let about = self.operationManager.about {
+                    self.userDescription.text = about
+                }
+                if let image = self.operationManager.image {
+                    self.profileImage.image = image
+                }
+            }
         }
-        if let about = UserDefaults.standard.string(forKey: "about") {
-            self.userDescription.text = about
-            self.reductTextView.text = about
-        }
-        if let dataImage = operationManager.getImage() {
-            let image = UIImage(data: dataImage)
-            self.profileImage.image = image
-            self.reductImageView.image = image
+        self.operationManager = OperationDataManager(image: nil, name: nil, about: nil, completionBlock: completion, opration: .get)
+        let operationQueue = OperationQueue()
+        if let operation = operationManager as? OperationDataManager {
+            operationQueue.addOperation(operation)
         }
     }
     
     func loadReductData() {
-        self.operationManager = OperationDataManager(image: nil, name: nil, about: nil, opration: .get)
-        let operationQueue = OperationQueue()
-        operationManager.completionBlock = {
+        let completion = {
             OperationQueue.main.addOperation {
                 if let name = self.operationManager.userName {
                     self.reductNameTextField.text = name
@@ -246,8 +281,12 @@ extension ProfileViewController: ProfileSaveView {
                 }
             }
         }
+        self.operationManager = OperationDataManager(image: nil, name: nil, about: nil, completionBlock: completion, opration: .get)
+        let operationQueue = OperationQueue()
         
-        operationQueue.addOperation(operationManager)
+        if let operation = operationManager as? OperationDataManager {
+            operationQueue.addOperation(operation)
+        }
     }
 }
 
@@ -266,13 +305,30 @@ extension ProfileViewController: UITextViewDelegate {
 
 extension ProfileViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let text = textField.text {
-            if text != operationManager.userName {
-                isEnabledSave(isEnabled: true)
-            } else {
-                isEnabledSave(isEnabled: false)
-            }
+        var resultText: String?
+        guard let text = textField.text else {
+            isEnabledSave(isEnabled: true)
+            return true
         }
+        switch range.length {
+        case 0:
+            resultText = text + string
+        case 1:
+            resultText = text
+            resultText?.removeLast()
+        default:
+            break
+        }
+        if operationManager.userName != resultText {
+            isEnabledSave(isEnabled: true)
+        } else {
+            isEnabledSave(isEnabled: false)
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        tapOnView(sender: self)
         return true
     }
 }

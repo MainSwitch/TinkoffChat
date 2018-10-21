@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_user" translatesAutoresizingMaskIntoConstraints="NO" id="TmR-PD-2h6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_user" translatesAutoresizingMaskIntoConstraints="NO" id="TmR-PD-2h6">
                                 <rect key="frame" x="16" y="54" width="343" height="343"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="TmR-PD-2h6" secondAttribute="height" multiplier="1:1" id="mkY-hM-wNW"/>
@@ -39,7 +39,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Xlb-X1-3AL">
                                 <rect key="frame" x="16" y="413" width="343" height="55"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="Anton Potapov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRw-LS-waZ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="You'r name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRw-LS-waZ">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.666666666666668"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20.5" id="uWl-Pq-Dop"/>
@@ -48,7 +48,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Love iOS developing " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asO-i2-y3p">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="About you " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asO-i2-y3p">
                                         <rect key="frame" x="0.0" y="34.666666666666686" width="343" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>

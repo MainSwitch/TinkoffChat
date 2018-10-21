@@ -12,20 +12,23 @@ import UIKit
 extension UIColor {
     static func getTheme() -> UIColor {
         var themeColor = UIColor.white
-        if let colorInt = UserDefaults.standard.object(forKey: "themeColor") as? Int {
-            switch colorInt {
-            case 1:
-                themeColor = .yellow
-                UINavigationBar.appearance().backgroundColor = .yellow
-            case 2:
-                themeColor = .darkGray
-                UINavigationBar.appearance().backgroundColor = .darkGray
-            case 3:
-                themeColor = .purple
-                UINavigationBar.appearance().backgroundColor = .purple
-            default:
-                themeColor = .white
-                UINavigationBar.appearance().backgroundColor = .white
+        let getQueue = DispatchQueue.global(qos: .userInitiated)
+        getQueue.async {
+            if let colorInt = UserDefaults.standard.object(forKey: "themeColor") as? Int {
+                switch colorInt {
+                case 1:
+                    themeColor = .yellow
+                    UINavigationBar.appearance().backgroundColor = .yellow
+                case 2:
+                    themeColor = .darkGray
+                    UINavigationBar.appearance().backgroundColor = .darkGray
+                case 3:
+                    themeColor = .purple
+                    UINavigationBar.appearance().backgroundColor = .purple
+                default:
+                    themeColor = .white
+                    UINavigationBar.appearance().backgroundColor = .white
+                }
             }
         }
         return themeColor

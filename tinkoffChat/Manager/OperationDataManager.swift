@@ -8,7 +8,13 @@
 
 import UIKit
 
-class OperationDataManager: AsyncOperation {
+enum SaveError: Error {
+    case enumerating(reason: String)
+    case dontSave(reason: String)
+}
+
+class OperationDataManager: AsyncOperation, SaveOperation {
+    
     let fileManager = FileManager.default
     let userDefaults = UserDefaults.standard
     var errors: [SaveError] = []
@@ -16,21 +22,18 @@ class OperationDataManager: AsyncOperation {
     var image: UIImage?
     var about: String?
     let operation: OperationType
+    var customCompletionBlock: (() -> Void)?
     
     convenience override init() {
-        self.init(image: nil, name: nil, about: nil, opration: .none)
+        self.init(image: nil, name: nil, about: nil, completionBlock: nil, opration: .none)
     }
     
-    init(image: UIImage?,name: String?,about: String?, opration: OperationType) {
+    init(image: UIImage?,name: String?,about: String?,completionBlock: (() -> Void)?, opration: OperationType) {
         self.userName = name
         self.image = image
         self.about = about
         self.operation = opration
-    }
-    
-    enum SaveError: Error {
-        case enumerating(reason: String)
-        case dontSave(reason: String)
+        self.customCompletionBlock = completionBlock
     }
     
     enum OperationType {
@@ -57,7 +60,7 @@ class OperationDataManager: AsyncOperation {
         }
     }
     
-    func saveImage(image: UIImage?){
+    func saveImage(image: UIImage?) {
         let imageFromURL = getImage()
         guard let image = image else {
             return
@@ -84,7 +87,7 @@ class OperationDataManager: AsyncOperation {
     func getImage() -> Data? {
         var imageFromURL: Data? = nil
         do {
-            var fileURLs = try fileManager.contentsOfDirectory(at: getDocumentsDirectory(), includingPropertiesForKeys: nil)
+            let fileURLs = try fileManager.contentsOfDirectory(at: getDocumentsDirectory(), includingPropertiesForKeys: nil)
             // process files
             if let path = fileURLs.first?.path {
                 let imageData = fileManager.contents(atPath: path)
@@ -115,12 +118,17 @@ class OperationDataManager: AsyncOperation {
         self.about = getAbout()
     }
     
+    func saveData() {
+        saveImage(image: self.image)
+        saveName(name: self.userName)
+        saveAbout(about: self.about)
+    }
+    
     override func execute() {
+        self.completionBlock = customCompletionBlock
         switch operation {
         case .write:
-            saveImage(image: self.image)
-            saveName(name: self.userName)
-            saveAbout(about: self.about)
+            saveData()
         case .get:
             getData()
         case .none:
