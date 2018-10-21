@@ -42,6 +42,7 @@ class ProfileViewController: UIViewController {
         isEnabledSave(isEnabled: true)
         showPhotoAlert(imagePicker: existingPicker)
     }
+    
     @IBAction func gcdAction(_ sender: Any) {
         let completion = {
             OperationQueue.main.addOperation({
@@ -55,8 +56,14 @@ class ProfileViewController: UIViewController {
                         self.cancelButton()
                     })
                 } else {
-                    self.showSaveAlertWith(title: "Ошибка", message: "Не удалось сохранить данные", completionRepeat: {
-                        self.operationAction(self.reductOperationBtn)
+                    self.showSaveAlertWith(title: "Ошибка", message: "Не удалось сохранить данные", completionOK: {
+                        self.activityView.stopAnimating()
+                        self.operationManager = nil
+                        self.reductGCDBtn.isEnabled = true
+                        self.reductOperationBtn.isEnabled = true
+                        self.navigationItem.rightBarButtonItem?.isEnabled = true
+                    }, completionRepeat: {
+                        self.operationAction(self.reductGCDBtn)
                     })
                 }
             })
@@ -85,7 +92,18 @@ class ProfileViewController: UIViewController {
                         self.cancelButton()
                     })
                 } else {
-                    self.showSaveAlertWith(title: "Ошибка", message: "Не удалось сохранить данные", completionRepeat: {
+                    self.showSaveAlertWith(title: "Ошибка", message: "Не удалось сохранить данные",completionOK: {
+                        self.activityView.stopAnimating()
+                        self.operationManager = nil
+                        self.reductGCDBtn.isEnabled = true
+                        self.reductOperationBtn.isEnabled = true
+                        self.navigationItem.rightBarButtonItem?.isEnabled = true
+                    }, completionRepeat: {
+                        self.activityView.stopAnimating()
+                        self.operationManager = nil
+                        self.reductGCDBtn.isEnabled = true
+                        self.reductOperationBtn.isEnabled = true
+                        self.navigationItem.rightBarButtonItem?.isEnabled = true
                         self.operationAction(self.reductOperationBtn)
                     })
                 }
@@ -118,6 +136,7 @@ class ProfileViewController: UIViewController {
         isHiddenReductUI(isHidden: true)
         isHiddenMainUI(isHidden: false)
         presenter.loadReductData()
+        presenter.loadMainData()
         tapOnView(sender: self)
         navigationItem.leftBarButtonItem?.isEnabled = true
         navigationItem.rightBarButtonItem = nil
@@ -166,7 +185,7 @@ class ProfileViewController: UIViewController {
         reductNameTextField.delegate = self
         reductTextView.delegate = self
         
-        self.loadReductData()
+        self.presenter.loadReductData()
         let closeNavigationVCItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(backButton))
         self.navigationItem.leftBarButtonItem = closeNavigationVCItem
         

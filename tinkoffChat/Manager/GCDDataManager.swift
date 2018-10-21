@@ -28,13 +28,15 @@ class GCDDataManager: SaveOperation {
     }
     
     func saveName(name: String?) {
-        saveQueue.async {
-            guard let name = name else {
-                return
-            }
-            if name != self.getName() {
-                self.userDefaults.set(name, forKey: "name")
-            }
+        guard let name = name else {
+            return
+        }
+        if name != self.getName() {
+            self.userDefaults.set(name, forKey: "name")
+        }
+        guard let _ = self.getName() else {
+            self.finish(withError: .dontSave(reason: "save Error"))
+            return
         }
     }
     
@@ -42,8 +44,12 @@ class GCDDataManager: SaveOperation {
         guard let about = about else {
             return
         }
-        if about != getAbout() {
-            userDefaults.set(about, forKey: "about")
+        if about != self.getAbout() {
+            self.userDefaults.set(about, forKey: "about")
+        }
+        guard let _ = self.getAbout() else {
+            self.finish(withError: .dontSave(reason: "save Error"))
+            return
         }
     }
     
@@ -59,6 +65,10 @@ class GCDDataManager: SaveOperation {
             } else if imageFromURL == nil {
                 let fileName = getDocumentsDirectory().appendingPathComponent("copy.png")
                 try? data.write(to: fileName)
+                guard let _ = getImage() else {
+                    finish(withError: .dontSave(reason: "save Error"))
+                    return
+                }
             }
         }    }
     

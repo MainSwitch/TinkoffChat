@@ -19,9 +19,11 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func showSaveAlertWith(title: String, message: String?, completionRepeat: (()->())?) {
+    func showSaveAlertWith(title: String, message: String?,completionOK: (()->())?, completionRepeat: (()->())?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: { (action) in
+        completionOK?()
+    }))
         alert.addAction(UIAlertAction(title: "Повторить", style: .default, handler: { (action) in
             completionRepeat?()
         }))

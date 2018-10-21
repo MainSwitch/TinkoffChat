@@ -48,6 +48,10 @@ class OperationDataManager: AsyncOperation, SaveOperation {
         }
         if name != getName() {
             userDefaults.set(name, forKey: "name")
+            guard let _ = getName() else {
+                finish(withError: .dontSave(reason: "save Error"))
+                return
+            }
         }
     }
     
@@ -57,6 +61,10 @@ class OperationDataManager: AsyncOperation, SaveOperation {
         }
         if about != getAbout() {
             userDefaults.set(about, forKey: "about")
+            guard let _ = getAbout() else {
+                finish(withError: .dontSave(reason: "save Error"))
+                return
+            }
         }
     }
     
@@ -65,6 +73,7 @@ class OperationDataManager: AsyncOperation, SaveOperation {
         guard let image = image else {
             return
         }
+        
         if let data = image.pngData() {
             if let existImage = imageFromURL, existImage.count != data.count {
                 let fileName = getDocumentsDirectory().appendingPathComponent("copy.png")
@@ -72,7 +81,13 @@ class OperationDataManager: AsyncOperation, SaveOperation {
             } else if imageFromURL == nil {
                 let fileName = getDocumentsDirectory().appendingPathComponent("copy.png")
                 try? data.write(to: fileName)
+                guard let _ = getImage() else {
+                    finish(withError: .dontSave(reason: "save Error"))
+                    return
+                }
             }
+        } else {
+            finish(withError: .dontSave(reason: "save error"))
         }
     }
     
@@ -94,13 +109,13 @@ class OperationDataManager: AsyncOperation, SaveOperation {
                 if let imageData = imageData {
                     imageFromURL = imageData
                 } else {
-                    finish(withError: .dontSave(reason: "Не удалось преобразовать картинку"))
+                    print("Не удалось преобразовать картинку")
                 }
             } else {
-                finish(withError: .dontSave(reason: "Не удалось выполнить сохранение"))
+                print("Не удалось выполнить сохранение")
             }
         } catch {
-            finish(withError: .enumerating(reason: "Error while enumerating files"))
+            print("Не удалось выполнить сохранение")
         }
         return imageFromURL
     }
