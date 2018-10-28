@@ -196,6 +196,7 @@
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pon-ax-NYe">
                                 <rect key="frame" x="15" y="622" width="294" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="0.2790828339041096" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -227,7 +228,9 @@
                     </view>
                     <connections>
                         <outlet property="messageTextField" destination="Pon-ax-NYe" id="PC6-lJ-TGf"/>
+                        <outlet property="sendButtonLayout" destination="HEc-Zf-zA8" id="JvC-YG-Jaf"/>
                         <outlet property="tableView" destination="IPX-XV-evA" id="Pgq-F1-CLL"/>
+                        <outlet property="textFieldLayout" destination="bm6-dM-Ib9" id="1JH-dl-ubp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PVE-q6-QpB" userLabel="First Responder" sceneMemberID="firstResponder"/>

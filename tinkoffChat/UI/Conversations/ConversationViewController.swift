@@ -20,6 +20,8 @@ class ConversationViewController: UIViewController {
     var messageFrom = [String]()
     var messageText = [MessageTextModel]()
     var lastMessage: MessageModel!
+    @IBOutlet var textFieldLayout: NSLayoutConstraint!
+    @IBOutlet var sendButtonLayout: NSLayoutConstraint!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var messageTextField: UITextField!
@@ -31,6 +33,8 @@ class ConversationViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.separatorStyle = .none
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         appDelegate.communicationManager.conversationViewController = self
         self.session = appDelegate.communicationManager.mpcManager.dialogWithPeer.session
         self.peer = appDelegate.communicationManager.mpcManager.dialogWithPeer.peerID
@@ -44,20 +48,47 @@ class ConversationViewController: UIViewController {
             messageFrom.removeAll()
             messageText.removeAll()
         }
+        messageTextField.delegate = self
+        let tapOnView = UITapGestureRecognizer(target: self, action: #selector(self.tapOnView(sender:)))
+        self.view.addGestureRecognizer(tapOnView)
         if !conversationsPresenter.messageConversation.isEmpty {
             conversationsPresenter.loadMessage()
         }
     }
     
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            self.textFieldLayout.constant += keyboardSize.height + 5
+            self.sendButtonLayout.constant += keyboardSize.height + 5
+            //self.view.frame.origin.y -= keyboardSize.height
+            UIView.animate(withDuration: 0.5){
+                self.view.layoutIfNeeded()
+            }
+
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        //self.view.frame.origin.y = 0
+        self.textFieldLayout.constant = 15
+        self.sendButtonLayout.constant = 15
+        UIView.animate(withDuration: 0.5){
+            self.view.layoutIfNeeded()
+        }
+
+    }
+    
     @IBAction func sendAction(_ sender: Any) {
         isSelfSeend = true
         let messageText = messageTextField.text ?? "nil"
+        messageTextField.text = ""
         lastMessage = MessageModel(name: self.title, message: messageText, date: Date(), online: true, hasUnreadMessages: false)
         appDelegate.communicationManager.mpcManager.sendSession = self.session
         appDelegate.communicationManager.mpcManager.sendMessage(string: messageText, to: peer.displayName) { (succsess, error) in
             if succsess {
                 self.messageText.append(MessageTextModel(text: messageText))
-                self.messageFrom.append(self.appDelegate.communicationManager.mpcManager.userName ?? UIDevice.current.name)
+                self.messageFrom.append(self.appDelegate.communicationManager.mpcManager.userName)
                 self.tableView.reloadData()
             }
             if (error != nil) {
@@ -65,6 +96,10 @@ class ConversationViewController: UIViewController {
             }
         }
     }
+    @objc func tapOnView(sender: UIViewController) {
+        self.view.endEditing(true)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if lastMessage != nil {
@@ -77,6 +112,15 @@ class ConversationViewController: UIViewController {
                 }
             }
         }
+    }
+}
+
+
+extension ConversationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        self.sendAction(self)
+        return true
     }
 }
 

@@ -42,12 +42,12 @@ class MultipeerCommunicator: NSObject, MCSessionDelegate, MCNearbyServiceBrowser
     var advertiser: MCNearbyServiceAdvertiser!
     var foundPeers = [MCPeerID]()
     var invitationHandler: ((Bool, MCSession?)->Void)!
-    var userName = UserDefaults.standard.string(forKey: "name")
+    var userName = UserDefaults.standard.string(forKey: "name") ?? UIDevice.current.name
     var online: Bool = false
 
     override init() {
         super.init()
-        peer = MCPeerID(displayName: userName ?? UIDevice.current.name)
+        peer = MCPeerID(displayName: userName)
         
         session = MCSession(peer: peer)
         session.delegate = self
