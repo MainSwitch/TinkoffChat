@@ -97,11 +97,11 @@ class CommunicationManager: CommunicationDelegate {
                     conversationsPresenter.messageModelArray.remove(at: index)
                     for (index, model) in conversationsPresenter.messageConversationFrom.enumerated() {
                         for from in model {
-                            if from == conversationsPresenter.chosenModel.name && countAdd > 1 {
+                            if from == conversationsPresenter.chosenModel.name && countAdd == 0 {
                             conversationsPresenter.messageConversationFrom[index].append(fromUser)
                             conversationsPresenter.messageConversation[index].append(MessageTextModel(text: text))
+                            conversationsPresenter.lastMessageArray.append(MessageModel(name: from, message: text, date: Date(), online: true, hasUnreadMessages: true))
                                 countAdd = 1
-                                //////////
                             }
                         }
                     }

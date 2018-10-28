@@ -16,7 +16,7 @@ class ConversationsPresenter {
     var lastMessageArray = [MessageModel]()
 
     var chosenModel: MessageModel!
-    var message: [MessageModel]!
+    //var message: [MessageModel]!
 
     
     weak var conversationListView: ConversationsListView!
