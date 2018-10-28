@@ -25,6 +25,7 @@ class ConversationViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var messageTextField: UITextField!
+    @IBOutlet var sendButton: UIButton!
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -44,10 +45,10 @@ class ConversationViewController: UIViewController {
         tableView.estimatedRowHeight = 44
         self.title = tapMessageModel.name
         self.conversationsPresenter.loadMessage()
-        if tapMessageModel.message == nil {
-            messageFrom.removeAll()
-            messageText.removeAll()
-        }
+//        if tapMessageModel.message == nil {
+//            messageFrom.removeAll()
+//            messageText.removeAll()
+//        }
         messageTextField.delegate = self
         let tapOnView = UITapGestureRecognizer(target: self, action: #selector(self.tapOnView(sender:)))
         self.view.addGestureRecognizer(tapOnView)
@@ -105,6 +106,7 @@ class ConversationViewController: UIViewController {
         if lastMessage != nil {
             conversationsPresenter.messageConversation.append(messageText)
             conversationsPresenter.messageConversationFrom.append(messageFrom)
+            conversationsPresenter.lastMessageArray.append(self.lastMessage)
             for (index,model) in conversationsPresenter.messageModelArray.enumerated() {
                 if model.name == conversationsPresenter.chosenModel.name {
                     conversationsPresenter.messageModelArray.remove(at: index)
@@ -126,10 +128,16 @@ extension ConversationViewController: UITextFieldDelegate {
 
 extension ConversationViewController: ConversationsView {
     func loadMessage(messageConversation: [[MessageTextModel]], messageForm: [[String]]) {
+        lastMessage = self.conversationsPresenter.chosenModel
+        for (index, model) in conversationsPresenter.messageModelArray.enumerated() {
+            if model.name == lastMessage.name{
+                self.lastMessage = conversationsPresenter.messageModelArray[index]
+            }
+        }
         var arrayIndex: Int!
         for (index, model) in messageForm.enumerated() {
             for from in model {
-                if from == self.title {
+                if from == conversationsPresenter.chosenModel.name || lastMessage.name == self.title {
                     arrayIndex = index
                 }
             }

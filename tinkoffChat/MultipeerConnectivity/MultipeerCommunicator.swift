@@ -55,7 +55,7 @@ class MultipeerCommunicator: NSObject, MCSessionDelegate, MCNearbyServiceBrowser
         browser = MCNearbyServiceBrowser(peer: peer, serviceType: "tinkoff-chat")
         browser.delegate = self
         
-        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["userName":userName ?? UIDevice.current.name], serviceType: "tinkoff-chat")
+        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["userName":userName], serviceType: "tinkoff-chat")
         advertiser.delegate = self
     }
     
@@ -118,7 +118,7 @@ class MultipeerCommunicator: NSObject, MCSessionDelegate, MCNearbyServiceBrowser
         let json = try? JSONSerialization.jsonObject(with: data) as! [String:String]
         if let model = json {
             let parsModel = JsonMessage(eventType: model["eventType"] ?? "",messageId: model["messageId"] ?? "" ,text: model["text"] ?? "")
-            delegate?.didReceiveMessage(text: parsModel.text, fromUser: peerID.displayName, toUser: self.userName ?? UIDevice.current.name)
+            delegate?.didReceiveMessage(text: parsModel.text, fromUser: peerID.displayName, toUser: self.userName )
         }
     }
     

@@ -13,6 +13,7 @@ class ConversationsPresenter {
     var messageModelArray: [MessageModel] = [MessageModel]()
     var messageConversation: [[MessageTextModel]] = [[MessageTextModel]()]
     var messageConversationFrom: [[String]] = [[String]()]
+    var lastMessageArray = [MessageModel]()
 
     var chosenModel: MessageModel!
     var message: [MessageModel]!
@@ -22,26 +23,8 @@ class ConversationsPresenter {
     weak var conversationView: ConversationsView!
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    //этот метод я не выпилил так как не успеваю
     func loadDialog() {
-        var isContain = false
-        for model in appDelegate.communicationManager.foundUser {
-            for message in messageModelArray {
-                if model.userID == message.name {
-                    isContain = true
-                }
-            }
-        }
-        if !isContain {
-            for user in appDelegate.communicationManager.foundUser {
-                for (index, model) in messageModelArray.enumerated() {
-                    if model.name == user.userName {
-                        messageModelArray.remove(at: index)
-                        break
-                    }
-                }
-                messageModelArray.append(MessageModel(name: user.userName, message: nil, date: nil, online: true, hasUnreadMessages: false))
-            }
-        }
         if appDelegate.communicationManager.foundUser.isEmpty {
             messageModelArray = []
         }
@@ -65,6 +48,18 @@ class ConversationsPresenter {
 //        messageModelArray.append(MessageModel(name: "Tony Stark", message: "hi mechanic!!", date: Date(timeIntervalSinceNow: -5235), online: false, hasUnreadMessages: false))
 //        messageModelArray.append(MessageModel(name: "Thor", message: "will you come?", date: Date(timeIntervalSinceNow: -1421355), online: false, hasUnreadMessages: false))
 //        messageModelArray.append(MessageModel(name: "Bro", message: nil, date: Date(timeIntervalSinceNow: -1421355), online: false, hasUnreadMessages: false))
+    }
+    
+    func foundUser() {
+        for user in appDelegate.communicationManager.foundUser {
+            for (index, model) in messageModelArray.enumerated() {
+                if model.name == user.userName {
+                    messageModelArray.remove(at: index)
+                    break
+                }
+            }
+            messageModelArray.append(MessageModel(name: user.userName, message: nil, date: nil, online: true, hasUnreadMessages: false))
+        }
     }
     
     func loadMessage() {
@@ -109,7 +104,6 @@ class ConversationsPresenter {
         
         
         self.conversationListView.updateData(model: sortMessageModel)
-        //self.conversationListView.updateData(model: sortMessageModel)
     }
     
     

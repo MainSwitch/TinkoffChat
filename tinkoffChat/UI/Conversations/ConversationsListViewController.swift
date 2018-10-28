@@ -79,24 +79,6 @@ extension ConversationsListViewController: UITableViewDataSource {
         cell.hasUnreadMessages = sectionMessageModel.hasUnreadMessages
         cell.message = sectionMessageModel.message
         cell.setupUI()
-        
-//        if communicationManager.conectedPeer.isEmpty {
-//
-//            cell.name = communicationManager.foundPeer[indexPath.row].values.first
-//            cell.online = true
-//            cell.date = nil
-//            cell.hasUnreadMessages = false
-//            cell.message = nil
-//            cell.setupUI()
-//        } else {
-//            cell.name = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
-//            cell.online = true
-//            cell.date = Date()
-//            cell.hasUnreadMessages = false
-//            cell.message = ""
-//            cell.setupUI()
-//        }
-        
         return cell
     }
     

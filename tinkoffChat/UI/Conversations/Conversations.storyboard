@@ -228,6 +228,7 @@
                     </view>
                     <connections>
                         <outlet property="messageTextField" destination="Pon-ax-NYe" id="PC6-lJ-TGf"/>
+                        <outlet property="sendButton" destination="DTX-u5-D0w" id="TyE-Ka-ojO"/>
                         <outlet property="sendButtonLayout" destination="HEc-Zf-zA8" id="JvC-YG-Jaf"/>
                         <outlet property="tableView" destination="IPX-XV-evA" id="Pgq-F1-CLL"/>
                         <outlet property="textFieldLayout" destination="bm6-dM-Ib9" id="1JH-dl-ubp"/>

@@ -52,7 +52,9 @@ class CommunicationManager: CommunicationDelegate {
     func didFoundUser(userID: String, userName: String?) {
         //let newMcpManager = MultipeerCommunicator()
         foundUser.append((FoundUser(userID: userID, userName: userName ?? "unknown")))
+        conversationsPresenter.foundUser()
         conversationsListViewController.tableView.reloadData()
+        
     }
     
     func didLostUser(userID: String) {
@@ -66,6 +68,9 @@ class CommunicationManager: CommunicationDelegate {
                 foundUser.remove(at: index)
             }
         }
+        if conversationViewController != nil {
+            conversationViewController.sendButton.isEnabled = false
+        }
         conversationsListViewController.tableView.reloadData()
     }
     
@@ -78,12 +83,36 @@ class CommunicationManager: CommunicationDelegate {
     }
     
     func didReceiveMessage(text: String, fromUser: String, toUser: String) {
-        conversationViewController.messageFrom.append(fromUser)
-        conversationViewController.messageText.append(MessageTextModel(text: text))
-        conversationViewController.lastMessage = MessageModel(name: fromUser, message: text, date: Date(), online: true, hasUnreadMessages: false)
-        DispatchQueue.main.async {
-            self.conversationViewController.tableView.reloadData()
+        if conversationViewController != nil {
+            conversationViewController.messageFrom.append(fromUser)
+            conversationViewController.messageText.append(MessageTextModel(text: text))
+            conversationViewController.lastMessage = MessageModel(name: fromUser, message: text, date: Date(), online: true, hasUnreadMessages: false)
+            DispatchQueue.main.async {
+                self.conversationViewController.tableView.reloadData()
+            }
+        } else {
+            var countAdd = 0
+            for (index,model) in conversationsPresenter.messageModelArray.enumerated() {
+                if model.name == conversationsPresenter.chosenModel.name {
+                    conversationsPresenter.messageModelArray.remove(at: index)
+                    for (index, model) in conversationsPresenter.messageConversationFrom.enumerated() {
+                        for from in model {
+                            if from == conversationsPresenter.chosenModel.name && countAdd > 1 {
+                            conversationsPresenter.messageConversationFrom[index].append(fromUser)
+                            conversationsPresenter.messageConversation[index].append(MessageTextModel(text: text))
+                                countAdd = 1
+                                //////////
+                            }
+                        }
+                    }
+                    conversationsPresenter.messageModelArray.insert(MessageModel(name: fromUser, message: text, date: Date(), online: true, hasUnreadMessages: true), at: index)
+                    DispatchQueue.main.async {
+                        self.conversationsListViewController.tableView.reloadData()
+                    }
+                }
+            }
         }
+        
     }
     
     func invitationWasReceived(fromPeer: String) {
@@ -115,6 +144,13 @@ class CommunicationManager: CommunicationDelegate {
             for user in foundUser {
                 if user.userID == peerID.displayName {
                     string = user.userName
+                }
+            }
+            if conversationViewController != nil {
+                if peerID.displayName == conversationViewController.title{
+                    DispatchQueue.main.async {
+                        self.conversationViewController.sendButton.isEnabled = true
+                    }
                 }
             }
             conversationsPresenter.choseModel(model: MessageModel(name: string, message: nil, date: nil, online: true, hasUnreadMessages: false))
