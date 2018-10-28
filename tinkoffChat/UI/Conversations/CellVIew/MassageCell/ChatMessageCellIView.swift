@@ -1,5 +1,5 @@
 //
-//  ChatMassageCellIView.swift
+//  ChatMessageCellIView.swift
 //  tinkoffChat
 //
 //  Created by Anton on 05/10/2018.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class ChatMassageCellIView: UITableViewCell, MassageCellConfiguration {
+class ChatMessageCellIView: UITableViewCell, MessageCellConfiguration {
     
-    var textMassage: String?
+    var textMessage: String?
 
-    @IBOutlet weak var myMassage: UILabel!
-    @IBOutlet weak var friendMassage: UILabel!
+    @IBOutlet weak var myMessage: UILabel!
+    @IBOutlet weak var friendMessage: UILabel!
     
     func setupUI() {
-        textMassage = ""
+        textMessage = ""
     }
     override func awakeFromNib() {
         super.awakeFromNib()

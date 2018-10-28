@@ -32,7 +32,8 @@ class ProfileViewController: UIViewController {
     var rightItemBack: UIBarButtonItem!
     
     var presenter: ProfilePresenter!
-    var operationManager: SaveOperation!
+    var operationManager: ProfileDataSaveManager!
+    var operationQueue = OperationQueue()
     
     @IBAction func selectProfileImage(_ sender: Any) {
         print("Выбери изображение профиля")
@@ -68,14 +69,14 @@ class ProfileViewController: UIViewController {
                 }
             })
         }
-        self.operationManager = GCDDataManager(name: reductNameTextField.text, about: reductTextView.text, image: reductImageView.image, completionBlock: completion)
+        self.operationManager = GCDDataManager(completionBlock: completion)
         activityView.isHidden = false
         activityView.startAnimating()
         self.reductGCDBtn.isEnabled = false
         self.reductOperationBtn.isEnabled = false
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         self.tapOnView(sender: self)
-        self.operationManager.saveData()
+        self.operationManager.saveData(name: reductNameTextField.text, about: reductTextView.text, image: reductImageView.image)
     }
     
     
@@ -110,7 +111,8 @@ class ProfileViewController: UIViewController {
             })
         }
         self.operationManager = OperationDataManager(image: reductImageView.image, name: self.reductNameTextField.text, about: self.reductTextView.text,completionBlock: completion, opration: OperationDataManager.OperationType.write)
-        let operationQueue = OperationQueue()
+        
+        self.operationManager.saveData(name: self.reductNameTextField.text, about: self.reductTextView.text, image: reductImageView.image)
         activityView.isHidden = false
         activityView.startAnimating()
         self.reductGCDBtn.isEnabled = false
@@ -118,6 +120,7 @@ class ProfileViewController: UIViewController {
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         self.tapOnView(sender: self)
         if let operation = operationManager as? OperationDataManager {
+            operationQueue.maxConcurrentOperationCount = 1
             operationQueue.addOperation(operation)
         }
     }
@@ -185,6 +188,7 @@ class ProfileViewController: UIViewController {
         reductNameTextField.delegate = self
         reductTextView.delegate = self
         
+        self.operationQueue.maxConcurrentOperationCount = 1
         self.presenter.loadReductData()
         let closeNavigationVCItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(backButton))
         self.navigationItem.leftBarButtonItem = closeNavigationVCItem
@@ -280,9 +284,8 @@ extension ProfileViewController: ProfileSaveView {
             }
         }
         self.operationManager = OperationDataManager(image: nil, name: nil, about: nil, completionBlock: completion, opration: .get)
-        let operationQueue = OperationQueue()
         if let operation = operationManager as? OperationDataManager {
-            operationQueue.addOperation(operation)
+            self.operationQueue.addOperation(operation)
         }
     }
     
@@ -301,10 +304,9 @@ extension ProfileViewController: ProfileSaveView {
             }
         }
         self.operationManager = OperationDataManager(image: nil, name: nil, about: nil, completionBlock: completion, opration: .get)
-        let operationQueue = OperationQueue()
         
         if let operation = operationManager as? OperationDataManager {
-            operationQueue.addOperation(operation)
+            self.operationQueue.addOperation(operation)
         }
     }
 }

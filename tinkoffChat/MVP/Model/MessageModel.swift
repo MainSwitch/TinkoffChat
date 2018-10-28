@@ -1,5 +1,5 @@
 //
-//  MassageModel.swift
+//  MessageModel.swift
 //  tinkoffChat
 //
 //  Created by Anton on 04/10/2018.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct MassageModel {
+struct MessageModel {
     let name: String?
-    let massage: String?
+    let message: String?
     let date: Date?
     let online: Bool
-    let hasUnreadMassages: Bool
+    let hasUnreadMessages: Bool
 }

@@ -27,7 +27,6 @@ class ThemesViewController: UIViewController {
     var setThemeClosure = { (controller: ThemesViewController, color: UIColor, colorClosure: ()->()) in
         colorClosure()
         controller.view.backgroundColor = color
-        controller.conversationListView.logThemeChanging(selectedTheme: color)
         UINavigationBar.appearance().backgroundColor = color
         controller.navigationController?.navigationBar.backgroundColor = color
     }
@@ -46,6 +45,7 @@ class ThemesViewController: UIViewController {
             
         }
     }
+    
     @objc func darkThemeButton(_ sender: Any) {
         if let btnColor = themeDarckBtn.backgroundColor {
             setThemeClosure(self, btnColor) {
@@ -55,6 +55,7 @@ class ThemesViewController: UIViewController {
             }
         }
     }
+    
     @objc func shapayneThemeButtom(_ sender: Any) {
         if let btnColor = shampayneBtn.backgroundColor {
             setThemeClosure(self, btnColor) {
@@ -68,7 +69,6 @@ class ThemesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        self.conversationListView = ConversationsListViewController()
         self.view.backgroundColor = UIColor.getTheme()
     }
     

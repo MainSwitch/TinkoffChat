@@ -1,5 +1,5 @@
 //
-//  massageSingleton.swift
+//  MessageManager.swift
 //  tinkoffChat
 //
 //  Created by Anton on 05/10/2018.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class MassageManager {
+class MessageManager {
     let conversationsPresenter: ConversationsPresenter
     let profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
     
-    static let shared = MassageManager()
+    static let shared = MessageManager()
     
     private init() {
         self.conversationsPresenter = ConversationsPresenter()

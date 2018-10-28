@@ -1,5 +1,5 @@
 //
-//  MassageTextModel.swift
+//  MessageTextModel.swift
 //  tinkoffChat
 //
 //  Created by Anton on 07/10/2018.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct MassageTextModel {
+struct MessageTextModel {
     let text: String
 }

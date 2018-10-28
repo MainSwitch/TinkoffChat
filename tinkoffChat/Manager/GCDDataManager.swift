@@ -6,24 +6,20 @@
 //  Copyright © 2018 Switch. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class GCDDataManager: SaveOperation {
+class GCDDataManager: ProfileDataSaveManager {
     
     let fileManager = FileManager.default
     let userDefaults = UserDefaults.standard
-    var errors: [SaveError]
+    var errors: [SaveError] = []
     var userName: String?
     var image: UIImage?
     var about: String?
     var customCompletionBlock: (() -> Void)?
-    let saveQueue = DispatchQueue.global(qos: .utility)
+    let saveQueue = DispatchQueue(label: "com.tinkoffChat.queue", qos: .background, attributes: DispatchQueue.Attributes.concurrent)
     
-    init(name: String?, about: String?, image: UIImage?, completionBlock: (() -> Void)?) {
-        self.userName = name
-        self.about = about
-        self.image = image
-        self.errors = []
+    init(completionBlock: (() -> Void)?) {
         self.customCompletionBlock = completionBlock
     }
     
@@ -72,11 +68,12 @@ class GCDDataManager: SaveOperation {
             }
         }    }
     
-    func saveData() {
+    func saveData(name: String?, about: String?, image: UIImage?) {
         let workItem = DispatchWorkItem {
-            self.saveImage(image: self.image)
-            self.saveName(name: self.userName)
-            self.saveAbout(about: self.about)
+            self.saveImage(image: image)
+            self.saveName(name: name)
+            self.saveAbout(about: about)
+            self.userDefaults.synchronize()
         }
         saveQueue.async(execute: workItem)
         workItem.notify(queue: DispatchQueue.main) {

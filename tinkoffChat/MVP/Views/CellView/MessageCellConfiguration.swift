@@ -1,5 +1,5 @@
 //
-//  MassageCellConfiguration.swift
+//  MessageCellConfiguration.swift
 //  tinkoffChat
 //
 //  Created by Anton on 05/10/2018.
@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol MassageCellConfiguration: class {
-    var textMassage: String? {get set}
+protocol MessageCellConfiguration: class {
+    var textMessage: String? {get set}
 }

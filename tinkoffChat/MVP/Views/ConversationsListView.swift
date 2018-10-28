@@ -9,11 +9,11 @@
 import Foundation
 
 protocol ConversationsListView: class {
-    func updateData(model: [[MassageModel]]?)
+    func updateData(model: [[MessageModel]]?)
     func updateUI()
 }
 
 extension ConversationsListView {
-    func updateData(model: [[MassageModel]]?) {}
+    func updateData(model: [[MessageModel]]?) {}
     func updateUI() {}
 }

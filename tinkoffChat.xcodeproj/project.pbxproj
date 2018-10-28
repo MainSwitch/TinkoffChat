@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		3A2686BF215EC1250058D4DC /* UIViewController + Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2686BE215EC1250058D4DC /* UIViewController + Alerts.swift */; };
-		3A2A99FA216A28E600A2D934 /* MassageTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A99F9216A28E600A2D934 /* MassageTextModel.swift */; };
+		3A2A99FA216A28E600A2D934 /* MessageTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A99F9216A28E600A2D934 /* MessageTextModel.swift */; };
 		3A2A99FC216A2E2300A2D934 /* ConversationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A99FB216A2E2300A2D934 /* ConversationsListView.swift */; };
 		3A34044E216525A300D3FFB9 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A34044D216525A300D3FFB9 /* ConversationsListViewController.swift */; };
 		3A3404502165ECDC00D3FFB9 /* Conversations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A34044F2165ECDC00D3FFB9 /* Conversations.storyboard */; };
 		3A34045A2165F3ED00D3FFB9 /* MassageCellVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404592165F3ED00D3FFB9 /* MassageCellVIew.swift */; };
-		3A34045D2165F4EF00D3FFB9 /* MassageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A34045C2165F4EF00D3FFB9 /* MassageModel.swift */; };
+		3A34045D2165F4EF00D3FFB9 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A34045C2165F4EF00D3FFB9 /* MessageModel.swift */; };
 		3A3404612165F7EF00D3FFB9 /* ConversationCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404602165F7EF00D3FFB9 /* ConversationCellConfiguration.swift */; };
 		3A3404642165FA9C00D3FFB9 /* Date + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404632165FA9C00D3FFB9 /* Date + String.swift */; };
 		3A4070C32153ADAE00AA9583 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C22153ADAE00AA9583 /* AppDelegate.swift */; };
@@ -21,53 +21,25 @@
 		3A4070CA2153ADB000AA9583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070C92153ADB000AA9583 /* Assets.xcassets */; };
 		3A4070CD2153ADB000AA9583 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070CB2153ADB000AA9583 /* LaunchScreen.storyboard */; };
 		3A4070D82153ADB000AA9583 /* tinkoffChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */; };
-		3A4445CE217131590047B1DE /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4445CD217131580047B1DE /* Themes.m */; };
+		3AC220F22183043900D10281 /* JsonMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC220F12183043900D10281 /* JsonMessage.swift */; };
+		3AC220F42183186100D10281 /* CommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC220F32183186100D10281 /* CommunicationManager.swift */; };
 		3AC8C5F72178BC71007F59B3 /* ProfileSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8C5F62178BC71007F59B3 /* ProfileSaveView.swift */; };
 		3AC8C5F92178BD00007F59B3 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8C5F82178BD00007F59B3 /* GCDDataManager.swift */; };
 		3AC8C5FB2178BD0D007F59B3 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8C5FA2178BD0D007F59B3 /* OperationDataManager.swift */; };
-		3ADD6A4D216FCA2200759687 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD6A48216FCA2200759687 /* ThemesViewController.m */; };
 		3AE33B462166443D00B3264F /* ConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE33B452166443D00B3264F /* ConversationsView.swift */; };
 		3AE33B4921664A2900B3264F /* ConversationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE33B4821664A2900B3264F /* ConversationsPresenter.swift */; };
-		3AF20C232167C9A10072AFA1 /* MassageCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF20C222167C9A10072AFA1 /* MassageCellConfiguration.swift */; };
-		3AF2CB97217C75C200B24FF7 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8C5FA2178BD0D007F59B3 /* OperationDataManager.swift */; };
-		3AF2CB98217C75FF00B24FF7 /* SaveOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5F526217BAEF50033C43D /* SaveOperation.swift */; };
-		3AF2CB99217C760A00B24FF7 /* ProfileSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8C5F62178BC71007F59B3 /* ProfileSaveView.swift */; };
-		3AF2CB9A217C761E00B24FF7 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3CC5E217A13E20028231B /* ProfilePresenter.swift */; };
-		3AF2CB9B217C803300B24FF7 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8C5F82178BD00007F59B3 /* GCDDataManager.swift */; };
-		3AF34C37217261520072BBD3 /* ChatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF7150D2168F00400473345 /* ChatLabel.swift */; };
-		3AF34C38217261520072BBD3 /* ConversationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A99FB216A2E2300A2D934 /* ConversationsListView.swift */; };
-		3AF34C39217261520072BBD3 /* ChatMassageCellIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565DD216745C80074BE3D /* ChatMassageCellIView.swift */; };
-		3AF34C3A217261520072BBD3 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565E121676B6A0074BE3D /* ConversationViewController.swift */; };
-		3AF34C3B217261520072BBD3 /* MassageCellVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404592165F3ED00D3FFB9 /* MassageCellVIew.swift */; };
-		3AF34C3C217261520072BBD3 /* NSMutableAttributedString + Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565DF216754D40074BE3D /* NSMutableAttributedString + Bold.swift */; };
-		3AF34C3D217261520072BBD3 /* MassageSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565E3216778270074BE3D /* MassageSingleton.swift */; };
-		3AF34C3E217261520072BBD3 /* UIColor + Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8AFF52171D55800E5B145 /* UIColor + Theme.swift */; };
-		3AF34C3F217261520072BBD3 /* Date + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404632165FA9C00D3FFB9 /* Date + String.swift */; };
-		3AF34C41217261520072BBD3 /* ConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE33B452166443D00B3264F /* ConversationsView.swift */; };
-		3AF34C42217261520072BBD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C22153ADAE00AA9583 /* AppDelegate.swift */; };
-		3AF34C43217261520072BBD3 /* ConversationCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3404602165F7EF00D3FFB9 /* ConversationCellConfiguration.swift */; };
-		3AF34C45217261520072BBD3 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8AFF22171BE6700E5B145 /* ThemesViewController.swift */; };
-		3AF34C46217261520072BBD3 /* MassageCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF20C222167C9A10072AFA1 /* MassageCellConfiguration.swift */; };
-		3AF34C47217261520072BBD3 /* MassageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A34045C2165F4EF00D3FFB9 /* MassageModel.swift */; };
-		3AF34C48217261520072BBD3 /* MassageTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A99F9216A28E600A2D934 /* MassageTextModel.swift */; };
-		3AF34C49217261520072BBD3 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A34044D216525A300D3FFB9 /* ConversationsListViewController.swift */; };
-		3AF34C4A217261520072BBD3 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4445CD217131580047B1DE /* Themes.m */; };
-		3AF34C4B217261520072BBD3 /* ConversationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE33B4821664A2900B3264F /* ConversationsPresenter.swift */; };
-		3AF34C4C217261520072BBD3 /* UIViewController + Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2686BE215EC1250058D4DC /* UIViewController + Alerts.swift */; };
-		3AF34C4F217261520072BBD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070CB2153ADB000AA9583 /* LaunchScreen.storyboard */; };
-		3AF34C50217261520072BBD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070C92153ADB000AA9583 /* Assets.xcassets */; };
-		3AF34C51217261520072BBD3 /* Conversations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A34044F2165ECDC00D3FFB9 /* Conversations.storyboard */; };
-		3AF34C53217261520072BBD3 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070C62153ADAE00AA9583 /* Profile.storyboard */; };
-		3AF34C59217285EB0072BBD3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C42153ADAE00AA9583 /* ProfileViewController.swift */; };
+		3AF20C232167C9A10072AFA1 /* MessageCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF20C222167C9A10072AFA1 /* MessageCellConfiguration.swift */; };
 		3AF34C5B21729B220072BBD3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C42153ADAE00AA9583 /* ProfileViewController.swift */; };
 		3AF3CC5F217A13E20028231B /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3CC5E217A13E20028231B /* ProfilePresenter.swift */; };
-		3AF565DE216745C80074BE3D /* ChatMassageCellIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565DD216745C80074BE3D /* ChatMassageCellIView.swift */; };
+		3AF565DE216745C80074BE3D /* ChatMessageCellIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565DD216745C80074BE3D /* ChatMessageCellIView.swift */; };
 		3AF565E0216754D40074BE3D /* NSMutableAttributedString + Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565DF216754D40074BE3D /* NSMutableAttributedString + Bold.swift */; };
 		3AF565E221676B6A0074BE3D /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565E121676B6A0074BE3D /* ConversationViewController.swift */; };
-		3AF565E4216778270074BE3D /* MassageSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565E3216778270074BE3D /* MassageSingleton.swift */; };
-		3AF5F527217BAEF50033C43D /* SaveOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5F526217BAEF50033C43D /* SaveOperation.swift */; };
+		3AF565E4216778270074BE3D /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF565E3216778270074BE3D /* MessageManager.swift */; };
+		3AF5F527217BAEF50033C43D /* ProfileDataSaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5F526217BAEF50033C43D /* ProfileDataSaveManager.swift */; };
 		3AF7150E2168F00400473345 /* ChatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF7150D2168F00400473345 /* ChatLabel.swift */; };
 		3AF8AFF62171D55800E5B145 /* UIColor + Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8AFF52171D55800E5B145 /* UIColor + Theme.swift */; };
+		3AF915732181D06A009A05B0 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8AFF22171BE6700E5B145 /* ThemesViewController.swift */; };
+		3AF9157621820220009A05B0 /* MultipeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9157521820220009A05B0 /* MultipeerCommunicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,12 +54,12 @@
 
 /* Begin PBXFileReference section */
 		3A2686BE215EC1250058D4DC /* UIViewController + Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Alerts.swift"; sourceTree = "<group>"; };
-		3A2A99F9216A28E600A2D934 /* MassageTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageTextModel.swift; sourceTree = "<group>"; };
+		3A2A99F9216A28E600A2D934 /* MessageTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTextModel.swift; sourceTree = "<group>"; };
 		3A2A99FB216A2E2300A2D934 /* ConversationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListView.swift; sourceTree = "<group>"; };
 		3A34044D216525A300D3FFB9 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		3A34044F2165ECDC00D3FFB9 /* Conversations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversations.storyboard; sourceTree = "<group>"; };
 		3A3404592165F3ED00D3FFB9 /* MassageCellVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageCellVIew.swift; sourceTree = "<group>"; };
-		3A34045C2165F4EF00D3FFB9 /* MassageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageModel.swift; sourceTree = "<group>"; };
+		3A34045C2165F4EF00D3FFB9 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		3A3404602165F7EF00D3FFB9 /* ConversationCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCellConfiguration.swift; sourceTree = "<group>"; };
 		3A3404632165FA9C00D3FFB9 /* Date + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + String.swift"; sourceTree = "<group>"; };
 		3A4070BF2153ADAE00AA9583 /* tinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,29 +72,25 @@
 		3A4070D32153ADB000AA9583 /* tinkoffChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tinkoffChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tinkoffChatTests.swift; sourceTree = "<group>"; };
 		3A4070D92153ADB000AA9583 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A4445CD217131580047B1DE /* Themes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Themes.m; path = tinkoffChat/Themes.m; sourceTree = SOURCE_ROOT; };
+		3AC220F12183043900D10281 /* JsonMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonMessage.swift; sourceTree = "<group>"; };
+		3AC220F32183186100D10281 /* CommunicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationManager.swift; sourceTree = "<group>"; };
 		3AC8C5F62178BC71007F59B3 /* ProfileSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSaveView.swift; sourceTree = "<group>"; };
 		3AC8C5F82178BD00007F59B3 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
 		3AC8C5FA2178BD0D007F59B3 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
-		3ADD6A47216FCA2200759687 /* ThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
-		3ADD6A48216FCA2200759687 /* ThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
-		3ADD6A49216FCA2200759687 /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
-		3ADD6A4A216FCA2200759687 /* tinkoffChat-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "tinkoffChat-Bridging-Header.h"; sourceTree = "<group>"; };
-		3ADD6A4B216FCA2200759687 /* Themes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Themes.h; sourceTree = "<group>"; };
 		3AE33B452166443D00B3264F /* ConversationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsView.swift; sourceTree = "<group>"; };
 		3AE33B4821664A2900B3264F /* ConversationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsPresenter.swift; sourceTree = "<group>"; };
-		3AF20C222167C9A10072AFA1 /* MassageCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageCellConfiguration.swift; sourceTree = "<group>"; };
-		3AF34C57217261520072BBD3 /* tinkoffChat Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tinkoffChat Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AF20C222167C9A10072AFA1 /* MessageCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellConfiguration.swift; sourceTree = "<group>"; };
 		3AF34C58217261520072BBD3 /* tinkoffChat Swift-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "tinkoffChat Swift-Info.plist"; path = "/Users/anton/Desktop/tinkoffChat/tinkoffChat Swift-Info.plist"; sourceTree = "<absolute>"; };
 		3AF3CC5E217A13E20028231B /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
-		3AF565DD216745C80074BE3D /* ChatMassageCellIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMassageCellIView.swift; sourceTree = "<group>"; };
+		3AF565DD216745C80074BE3D /* ChatMessageCellIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCellIView.swift; sourceTree = "<group>"; };
 		3AF565DF216754D40074BE3D /* NSMutableAttributedString + Bold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString + Bold.swift"; sourceTree = "<group>"; };
 		3AF565E121676B6A0074BE3D /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
-		3AF565E3216778270074BE3D /* MassageSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassageSingleton.swift; sourceTree = "<group>"; };
-		3AF5F526217BAEF50033C43D /* SaveOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOperation.swift; sourceTree = "<group>"; };
+		3AF565E3216778270074BE3D /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		3AF5F526217BAEF50033C43D /* ProfileDataSaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSaveManager.swift; sourceTree = "<group>"; };
 		3AF7150D2168F00400473345 /* ChatLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLabel.swift; sourceTree = "<group>"; };
 		3AF8AFF22171BE6700E5B145 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		3AF8AFF52171D55800E5B145 /* UIColor + Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Theme.swift"; sourceTree = "<group>"; };
+		3AF9157521820220009A05B0 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,13 +102,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3A4070D02153ADB000AA9583 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3AF34C4D217261520072BBD3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -210,7 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				3A3404592165F3ED00D3FFB9 /* MassageCellVIew.swift */,
-				3AF565DD216745C80074BE3D /* ChatMassageCellIView.swift */,
+				3AF565DD216745C80074BE3D /* ChatMessageCellIView.swift */,
 			);
 			path = MassageCell;
 			sourceTree = "<group>";
@@ -218,8 +179,9 @@
 		3A34045B2165F4E000D3FFB9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3A34045C2165F4EF00D3FFB9 /* MassageModel.swift */,
-				3A2A99F9216A28E600A2D934 /* MassageTextModel.swift */,
+				3A34045C2165F4EF00D3FFB9 /* MessageModel.swift */,
+				3A2A99F9216A28E600A2D934 /* MessageTextModel.swift */,
+				3AC220F12183043900D10281 /* JsonMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,7 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				3A3404602165F7EF00D3FFB9 /* ConversationCellConfiguration.swift */,
-				3AF20C222167C9A10072AFA1 /* MassageCellConfiguration.swift */,
+				3AF20C222167C9A10072AFA1 /* MessageCellConfiguration.swift */,
 			);
 			path = CellView;
 			sourceTree = "<group>";
@@ -257,7 +219,6 @@
 			children = (
 				3A4070BF2153ADAE00AA9583 /* tinkoffChat.app */,
 				3A4070D32153ADB000AA9583 /* tinkoffChatTests.xctest */,
-				3AF34C57217261520072BBD3 /* tinkoffChat Swift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -265,8 +226,7 @@
 		3A4070C12153ADAE00AA9583 /* tinkoffChat */ = {
 			isa = PBXGroup;
 			children = (
-				3ADD6A4A216FCA2200759687 /* tinkoffChat-Bridging-Header.h */,
-				3ADD6A44216FCA2200759687 /* Obj-c */,
+				3AF9157421820058009A05B0 /* MultipeerConnectivity */,
 				3AF565E621677B710074BE3D /* Manager */,
 				3AE33B47216649FE00B3264F /* MVP */,
 				3A3404552165F39400D3FFB9 /* UI */,
@@ -298,26 +258,6 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		3ADD6A44216FCA2200759687 /* Obj-c */ = {
-			isa = PBXGroup;
-			children = (
-				3ADD6A46216FCA2200759687 /* ThemesViewController */,
-				3ADD6A49216FCA2200759687 /* ThemesViewControllerDelegate.h */,
-				3ADD6A4B216FCA2200759687 /* Themes.h */,
-				3A4445CD217131580047B1DE /* Themes.m */,
-			);
-			path = "Obj-c";
-			sourceTree = "<group>";
-		};
-		3ADD6A46216FCA2200759687 /* ThemesViewController */ = {
-			isa = PBXGroup;
-			children = (
-				3ADD6A47216FCA2200759687 /* ThemesViewController.h */,
-				3ADD6A48216FCA2200759687 /* ThemesViewController.m */,
-			);
-			path = ThemesViewController;
-			sourceTree = "<group>";
-		};
 		3AE33B442166441700B3264F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,7 +265,7 @@
 				3AE33B452166443D00B3264F /* ConversationsView.swift */,
 				3A2A99FB216A2E2300A2D934 /* ConversationsListView.swift */,
 				3AC8C5F62178BC71007F59B3 /* ProfileSaveView.swift */,
-				3AF5F526217BAEF50033C43D /* SaveOperation.swift */,
+				3AF5F526217BAEF50033C43D /* ProfileDataSaveManager.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,9 +291,10 @@
 		3AF565E621677B710074BE3D /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				3AF565E3216778270074BE3D /* MassageSingleton.swift */,
+				3AF565E3216778270074BE3D /* MessageManager.swift */,
 				3AC8C5F82178BD00007F59B3 /* GCDDataManager.swift */,
 				3AC8C5FA2178BD0D007F59B3 /* OperationDataManager.swift */,
+				3AC220F32183186100D10281 /* CommunicationManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -364,6 +305,14 @@
 				3AF8AFF22171BE6700E5B145 /* ThemesViewController.swift */,
 			);
 			path = Themes;
+			sourceTree = "<group>";
+		};
+		3AF9157421820058009A05B0 /* MultipeerConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				3AF9157521820220009A05B0 /* MultipeerCommunicator.swift */,
+			);
+			path = MultipeerConnectivity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -404,23 +353,6 @@
 			productReference = 3A4070D32153ADB000AA9583 /* tinkoffChatTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3AF34C35217261520072BBD3 /* tinkoffChat Swift */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3AF34C54217261520072BBD3 /* Build configuration list for PBXNativeTarget "tinkoffChat Swift" */;
-			buildPhases = (
-				3AF34C36217261520072BBD3 /* Sources */,
-				3AF34C4D217261520072BBD3 /* Frameworks */,
-				3AF34C4E217261520072BBD3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "tinkoffChat Swift";
-			productName = tinkoffChat;
-			productReference = 3AF34C57217261520072BBD3 /* tinkoffChat Swift.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -455,7 +387,6 @@
 			targets = (
 				3A4070BE2153ADAE00AA9583 /* tinkoffChat */,
 				3A4070D22153ADB000AA9583 /* tinkoffChatTests */,
-				3AF34C35217261520072BBD3 /* tinkoffChat Swift */,
 			);
 		};
 /* End PBXProject section */
@@ -479,17 +410,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3AF34C4E217261520072BBD3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3AF34C4F217261520072BBD3 /* LaunchScreen.storyboard in Resources */,
-				3AF34C50217261520072BBD3 /* Assets.xcassets in Resources */,
-				3AF34C51217261520072BBD3 /* Conversations.storyboard in Resources */,
-				3AF34C53217261520072BBD3 /* Profile.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -498,28 +418,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AC8C5F92178BD00007F59B3 /* GCDDataManager.swift in Sources */,
+				3AC220F22183043900D10281 /* JsonMessage.swift in Sources */,
 				3AF7150E2168F00400473345 /* ChatLabel.swift in Sources */,
 				3A2A99FC216A2E2300A2D934 /* ConversationsListView.swift in Sources */,
-				3AF565DE216745C80074BE3D /* ChatMassageCellIView.swift in Sources */,
+				3AF565DE216745C80074BE3D /* ChatMessageCellIView.swift in Sources */,
+				3AF915732181D06A009A05B0 /* ThemesViewController.swift in Sources */,
 				3AF565E221676B6A0074BE3D /* ConversationViewController.swift in Sources */,
 				3A34045A2165F3ED00D3FFB9 /* MassageCellVIew.swift in Sources */,
 				3AF565E0216754D40074BE3D /* NSMutableAttributedString + Bold.swift in Sources */,
-				3AF565E4216778270074BE3D /* MassageSingleton.swift in Sources */,
+				3AF565E4216778270074BE3D /* MessageManager.swift in Sources */,
 				3AF8AFF62171D55800E5B145 /* UIColor + Theme.swift in Sources */,
 				3A3404642165FA9C00D3FFB9 /* Date + String.swift in Sources */,
 				3AE33B462166443D00B3264F /* ConversationsView.swift in Sources */,
 				3AC8C5FB2178BD0D007F59B3 /* OperationDataManager.swift in Sources */,
 				3A4070C32153ADAE00AA9583 /* AppDelegate.swift in Sources */,
 				3A3404612165F7EF00D3FFB9 /* ConversationCellConfiguration.swift in Sources */,
-				3ADD6A4D216FCA2200759687 /* ThemesViewController.m in Sources */,
 				3AC8C5F72178BC71007F59B3 /* ProfileSaveView.swift in Sources */,
-				3AF20C232167C9A10072AFA1 /* MassageCellConfiguration.swift in Sources */,
-				3A34045D2165F4EF00D3FFB9 /* MassageModel.swift in Sources */,
+				3AF20C232167C9A10072AFA1 /* MessageCellConfiguration.swift in Sources */,
+				3AC220F42183186100D10281 /* CommunicationManager.swift in Sources */,
+				3A34045D2165F4EF00D3FFB9 /* MessageModel.swift in Sources */,
+				3AF9157621820220009A05B0 /* MultipeerCommunicator.swift in Sources */,
 				3AF3CC5F217A13E20028231B /* ProfilePresenter.swift in Sources */,
-				3A2A99FA216A28E600A2D934 /* MassageTextModel.swift in Sources */,
-				3AF5F527217BAEF50033C43D /* SaveOperation.swift in Sources */,
+				3A2A99FA216A28E600A2D934 /* MessageTextModel.swift in Sources */,
+				3AF5F527217BAEF50033C43D /* ProfileDataSaveManager.swift in Sources */,
 				3A34044E216525A300D3FFB9 /* ConversationsListViewController.swift in Sources */,
-				3A4445CE217131590047B1DE /* Themes.m in Sources */,
 				3AF34C5B21729B220072BBD3 /* ProfileViewController.swift in Sources */,
 				3AE33B4921664A2900B3264F /* ConversationsPresenter.swift in Sources */,
 				3A2686BF215EC1250058D4DC /* UIViewController + Alerts.swift in Sources */,
@@ -531,39 +453,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A4070D82153ADB000AA9583 /* tinkoffChatTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3AF34C36217261520072BBD3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3AF34C37217261520072BBD3 /* ChatLabel.swift in Sources */,
-				3AF34C38217261520072BBD3 /* ConversationsListView.swift in Sources */,
-				3AF34C39217261520072BBD3 /* ChatMassageCellIView.swift in Sources */,
-				3AF2CB99217C760A00B24FF7 /* ProfileSaveView.swift in Sources */,
-				3AF2CB97217C75C200B24FF7 /* OperationDataManager.swift in Sources */,
-				3AF34C3A217261520072BBD3 /* ConversationViewController.swift in Sources */,
-				3AF34C3B217261520072BBD3 /* MassageCellVIew.swift in Sources */,
-				3AF34C3C217261520072BBD3 /* NSMutableAttributedString + Bold.swift in Sources */,
-				3AF34C3D217261520072BBD3 /* MassageSingleton.swift in Sources */,
-				3AF34C3E217261520072BBD3 /* UIColor + Theme.swift in Sources */,
-				3AF34C3F217261520072BBD3 /* Date + String.swift in Sources */,
-				3AF34C41217261520072BBD3 /* ConversationsView.swift in Sources */,
-				3AF34C42217261520072BBD3 /* AppDelegate.swift in Sources */,
-				3AF34C43217261520072BBD3 /* ConversationCellConfiguration.swift in Sources */,
-				3AF34C45217261520072BBD3 /* ThemesViewController.swift in Sources */,
-				3AF34C46217261520072BBD3 /* MassageCellConfiguration.swift in Sources */,
-				3AF34C47217261520072BBD3 /* MassageModel.swift in Sources */,
-				3AF34C48217261520072BBD3 /* MassageTextModel.swift in Sources */,
-				3AF2CB9B217C803300B24FF7 /* GCDDataManager.swift in Sources */,
-				3AF2CB9A217C761E00B24FF7 /* ProfilePresenter.swift in Sources */,
-				3AF34C49217261520072BBD3 /* ConversationsListViewController.swift in Sources */,
-				3AF34C4A217261520072BBD3 /* Themes.m in Sources */,
-				3AF34C59217285EB0072BBD3 /* ProfileViewController.swift in Sources */,
-				3AF2CB98217C75FF00B24FF7 /* SaveOperation.swift in Sources */,
-				3AF34C4B217261520072BBD3 /* ConversationsPresenter.swift in Sources */,
-				3AF34C4C217261520072BBD3 /* UIViewController + Alerts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,7 +619,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.Switch.tinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = OBJ;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/tinkoffChat/tinkoffChat-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -752,7 +641,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.Switch.tinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/tinkoffChat/tinkoffChat-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -800,53 +689,6 @@
 			};
 			name = Release;
 		};
-		3AF34C55217261520072BBD3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = 2H932YHW79;
-				INFOPLIST_FILE = "tinkoffChat Swift-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				OTHER_SWIFT_FLAGS = "-DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = ru.Switch.tinkoffChatSwift;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/tinkoffChat/tinkoffChat-Bridging-Header.h";
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "tinkoffChat-Swift.h";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		3AF34C56217261520072BBD3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = 2H932YHW79;
-				INFOPLIST_FILE = "tinkoffChat Swift-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				OTHER_SWIFT_FLAGS = "-DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = ru.Switch.tinkoffChatSwift;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/tinkoffChat/tinkoffChat-Bridging-Header.h";
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "tinkoffChat-Swift.h";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -873,15 +715,6 @@
 			buildConfigurations = (
 				3A4070E02153ADB000AA9583 /* Debug */,
 				3A4070E12153ADB000AA9583 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3AF34C54217261520072BBD3 /* Build configuration list for PBXNativeTarget "tinkoffChat Swift" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3AF34C55217261520072BBD3 /* Debug */,
-				3AF34C56217261520072BBD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

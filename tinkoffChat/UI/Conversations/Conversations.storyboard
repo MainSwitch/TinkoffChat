@@ -38,7 +38,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MassageCellView" rowHeight="56" id="GeK-1U-hsz" customClass="MassageCellView" customModule="tinkoffChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCellView" rowHeight="56" id="GeK-1U-hsz" customClass="MessageCellView" customModule="tinkoffChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GeK-1U-hsz" id="WcN-GE-Ra8">
@@ -81,8 +81,7 @@
                                         <connections>
                                             <outlet property="chatDate" destination="94H-Z5-AgE" id="YZz-0f-Q4f"/>
                                             <outlet property="chatName" destination="ceq-jk-0jO" id="M6w-iN-COg"/>
-                                            <outlet property="lastMassage" destination="jFe-o2-gpH" id="cUe-rq-cEv"/>
-                                            <segue destination="JGl-ei-T0V" kind="show" id="6z5-gu-Qr6"/>
+                                            <outlet property="lastMessage" destination="jFe-o2-gpH" id="cUe-rq-cEv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -116,6 +115,7 @@
                     <connections>
                         <outlet property="profileButton" destination="4dt-nN-adi" id="Kep-AV-ha1"/>
                         <outlet property="tableView" destination="Dp9-fF-KVQ" id="gEU-2Z-Ilu"/>
+                        <segue destination="JGl-ei-T0V" kind="show" identifier="idSegueChat" id="uqr-tj-Tlm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V9o-Ob-xhs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -131,10 +131,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IPX-XV-evA">
-                                <rect key="frame" x="0.0" y="64" width="375" height="518"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="543"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyMassage" id="OWl-x7-qPc" customClass="ChatMassageCellIView" customModule="tinkoffChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyMessage" id="OWl-x7-qPc" customClass="ChatMessageCellIView" customModule="tinkoffChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OWl-x7-qPc" id="GJb-Rc-RDt">
@@ -148,6 +148,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isMyMassage" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isMyMessage" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
@@ -159,10 +160,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="myMassage" destination="Mw1-H2-e5B" id="KgL-gd-RD0"/>
+                                            <outlet property="myMessage" destination="Mw1-H2-e5B" id="KgL-gd-RD0"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendMassage" rowHeight="44" id="xqP-R0-WJx" customClass="ChatMassageCellIView" customModule="tinkoffChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendMessage" rowHeight="44" id="xqP-R0-WJx" customClass="ChatMessageCellIView" customModule="tinkoffChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xqP-R0-WJx" id="aIR-fL-FaK">
@@ -176,6 +177,7 @@
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isMyMassage" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isMyMessage" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
@@ -187,22 +189,44 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="friendMassage" destination="nAe-2m-CfZ" id="T0G-LH-26m"/>
+                                            <outlet property="friendMessage" destination="nAe-2m-CfZ" id="T0G-LH-26m"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pon-ax-NYe">
+                                <rect key="frame" x="15" y="622" width="294" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTX-u5-D0w">
+                                <rect key="frame" x="324" y="622" width="36" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DTX-u5-D0w" secondAttribute="height" multiplier="6:5" id="rES-8N-iJs"/>
+                                </constraints>
+                                <state key="normal" title="Send"/>
+                                <connections>
+                                    <action selector="sendAction:" destination="JGl-ei-T0V" eventType="touchUpInside" id="bpZ-XE-2wf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="IPX-XV-evA" firstAttribute="trailing" secondItem="N0s-BV-2G7" secondAttribute="trailing" id="4H2-ZQ-sO2"/>
+                            <constraint firstItem="N0s-BV-2G7" firstAttribute="bottom" secondItem="DTX-u5-D0w" secondAttribute="bottom" constant="15" id="HEc-Zf-zA8"/>
+                            <constraint firstItem="N0s-BV-2G7" firstAttribute="trailing" secondItem="DTX-u5-D0w" secondAttribute="trailing" constant="15" id="Jxe-fr-RYD"/>
                             <constraint firstItem="IPX-XV-evA" firstAttribute="top" secondItem="N0s-BV-2G7" secondAttribute="top" id="Muk-lT-FGX"/>
-                            <constraint firstItem="N0s-BV-2G7" firstAttribute="bottom" secondItem="IPX-XV-evA" secondAttribute="bottom" constant="85" id="gg5-Q9-wWU"/>
+                            <constraint firstItem="Pon-ax-NYe" firstAttribute="top" secondItem="IPX-XV-evA" secondAttribute="bottom" constant="15" id="QsS-rO-i7V"/>
+                            <constraint firstItem="Pon-ax-NYe" firstAttribute="leading" secondItem="N0s-BV-2G7" secondAttribute="leading" constant="15" id="SIO-Ms-R0O"/>
+                            <constraint firstItem="N0s-BV-2G7" firstAttribute="bottom" secondItem="Pon-ax-NYe" secondAttribute="bottom" constant="15" id="bm6-dM-Ib9"/>
+                            <constraint firstItem="DTX-u5-D0w" firstAttribute="leading" secondItem="Pon-ax-NYe" secondAttribute="trailing" constant="15" id="c9v-aU-DR1"/>
                             <constraint firstItem="IPX-XV-evA" firstAttribute="leading" secondItem="N0s-BV-2G7" secondAttribute="leading" id="rdT-Md-qSN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N0s-BV-2G7"/>
                     </view>
                     <connections>
+                        <outlet property="messageTextField" destination="Pon-ax-NYe" id="PC6-lJ-TGf"/>
                         <outlet property="tableView" destination="IPX-XV-evA" id="Pgq-F1-CLL"/>
                     </connections>
                 </viewController>

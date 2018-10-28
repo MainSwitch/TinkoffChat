@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: Alert with title and massage
+//MARK: Alert with title and message
 extension UIViewController {
     
     func showAlertWith(title: String, message: String?, completion: (()->())?) {

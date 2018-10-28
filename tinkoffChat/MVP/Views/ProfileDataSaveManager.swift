@@ -8,19 +8,13 @@
 
 import UIKit
 
-protocol SaveOperation {
+protocol ProfileDataSaveManager {
     var errors: [SaveError] {get set}
     var userName: String? {get set}
     var image: UIImage? {get set}
     var about: String? {get set}
     var customCompletionBlock: (() -> Void)? {get set}
     
-    func saveName(name: String?)
-    func saveAbout(about: String?)
-    func saveImage(image: UIImage?)
-    func getName() -> String?
-    func getAbout() -> String?
-    func getImage() -> Data?
-    func saveData()
+    func saveData(name: String?, about: String?, image: UIImage?)
     func getData()
 }

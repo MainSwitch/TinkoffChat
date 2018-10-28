@@ -13,7 +13,7 @@ enum SaveError: Error {
     case dontSave(reason: String)
 }
 
-class OperationDataManager: AsyncOperation, SaveOperation {
+class OperationDataManager: AsyncOperation, ProfileDataSaveManager {
     
     let fileManager = FileManager.default
     let userDefaults = UserDefaults.standard
@@ -133,17 +133,18 @@ class OperationDataManager: AsyncOperation, SaveOperation {
         self.about = getAbout()
     }
     
-    func saveData() {
-        saveImage(image: self.image)
-        saveName(name: self.userName)
-        saveAbout(about: self.about)
+    func saveData(name: String?, about: String?, image: UIImage?) {
+        saveImage(image: image)
+        saveName(name: name)
+        saveAbout(about: about)
+        self.userDefaults.synchronize()
     }
     
     override func execute() {
         self.completionBlock = customCompletionBlock
         switch operation {
         case .write:
-            saveData()
+            saveData(name: self.name, about: self.about, image: self.image)
         case .get:
             getData()
         case .none:

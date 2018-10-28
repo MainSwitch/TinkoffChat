@@ -1,5 +1,5 @@
 //
-//  MassageCell.swift
+//  MessageCell.swift
 //  tinkoffChat
 //
 //  Created by Anton on 04/10/2018.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class MassageCellView: UITableViewCell, ConversationCellConfiguration {
+class MessageCellView: UITableViewCell, ConversationCellConfiguration {
     
     @IBOutlet weak var chatName: UILabel!
-    @IBOutlet weak var lastMassage: UILabel!
+    @IBOutlet weak var lastMessage: UILabel!
     @IBOutlet weak var chatDate: UILabel!
     
     var name: String? {
@@ -20,15 +20,15 @@ class MassageCellView: UITableViewCell, ConversationCellConfiguration {
             chatName.text = name ?? "unknown"
         }
     }
-    var massage: String? {
+    var message: String? {
         didSet {
-            if massage == nil {
-                lastMassage.font = UIFont(name: "AvenirNext-Medium", size: 13)
-                lastMassage.text = "No messages yet"
-                massage = "No messages yet"
+            if message == nil {
+                lastMessage.font = UIFont(name: "AvenirNext-Medium", size: 13)
+                lastMessage.text = "No messages yet"
+                message = "No messages yet"
             } else {
-                lastMassage.font = UIFont.systemFont(ofSize: 17)
-                lastMassage.text = massage
+                lastMessage.font = UIFont.systemFont(ofSize: 17)
+                lastMessage.text = message
             }
         }
     }
@@ -43,7 +43,7 @@ class MassageCellView: UITableViewCell, ConversationCellConfiguration {
             setupUI()
         }
     }
-    var hasUnreadMassages: Bool = false {
+    var hasUnreadMessages: Bool = false {
         didSet {
             setupUI()
         }
@@ -56,13 +56,13 @@ class MassageCellView: UITableViewCell, ConversationCellConfiguration {
             self.backgroundColor = UIColor.white
         }
         
-        if hasUnreadMassages {
+        if hasUnreadMessages {
             let formattedString = NSMutableAttributedString()
             formattedString
-                .bold(massage ?? "")
-            self.lastMassage.attributedText = formattedString
+                .bold(message ?? "")
+            self.lastMessage.attributedText = formattedString
         } else {
-            self.lastMassage.text = massage
+            self.lastMessage.text = message
         }
     }
     

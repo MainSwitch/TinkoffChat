@@ -10,11 +10,11 @@ import Foundation
 
 
 protocol ConversationsView: class {
-    func loadMassage(massageText: [MassageTextModel])
+    func loadMessage(messageConversation: [[MessageTextModel]], messageForm: [[String]])
     func updateUI()
 }
 
 extension ConversationsView {
-    func loadMassage(massageText: [MassageTextModel]) {}
+    func loadMessage(messageConversation: [[MessageTextModel]], messageForm: [[String]]) {}
     func updateUI() {}
 }

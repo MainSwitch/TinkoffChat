@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class ConversationsListViewController: UIViewController {
     
-    var delegate: ThemesViewControllerDelegate!
-    var massageModel: [[MassageModel]]!
-    var conversationsPresenter =  MassageManager.shared.conversationsPresenter
+    var messageModel: [[MessageModel]]!
+    
+    var conversationsPresenter =  MessageManager.shared.conversationsPresenter
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profileButton: UIBarButtonItem!
+    
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBAction func themesAction(_ sender: Any) {
         let vc = ThemesViewController()
@@ -23,7 +26,7 @@ class ConversationsListViewController: UIViewController {
         self.present(navigationController, animated: true, completion: nil)
     }
     @IBAction func profileAction(_ sender: Any) {
-        let storyboard = MassageManager.shared.profileStoryboard
+        let storyboard = MessageManager.shared.profileStoryboard
         let vc = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as UIViewController
         let navigationVC = UINavigationController(rootViewController: vc)
         self.present(navigationVC, animated: true, completion: nil)
@@ -32,28 +35,26 @@ class ConversationsListViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
         self.conversationsPresenter.conversationListView = self
-        self.conversationsPresenter.updateConversationsList()
+        appDelegate.communicationManager = CommunicationManager(view: self)
+        appDelegate.communicationManager.startBrowsingAndAdvertising()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
 }
 
 extension ConversationsListViewController: ConversationsListView {
+    
     func updateUI() {
         self.tableView.reloadData()
     }
     
-    func updateData(model: [[MassageModel]]?) {
+    func updateData(model: [[MessageModel]]?) {
         if let modelArray = model {
-            self.massageModel = modelArray
-        }
-    }
-    func logThemeChanging(selectedTheme: UIColor) {
-        if selectedTheme == UIColor.yellow {
-            print("Yellow")
-        } else if selectedTheme == UIColor.darkGray {
-            print("DarkGray")
-        }else if selectedTheme == UIColor.purple {
-            print("Shampayne")
+            self.messageModel = modelArray
         }
     }
 }
@@ -61,27 +62,48 @@ extension ConversationsListViewController: ConversationsListView {
 extension ConversationsListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return massageModel[section].count
+        
+        return messageModel[section].count
+        //return appDelegate.mpcManager.foundPeers.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MassageCellView", for: indexPath) as? MassageCellView else {
-            return tableView.dequeueReusableCell(withIdentifier: "MassageCellView", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCellView", for: indexPath) as? MessageCellView else {
+            return tableView.dequeueReusableCell(withIdentifier: "MessageCellView", for: indexPath)
         }
-        let sectionMassageModel = massageModel[indexPath.section][indexPath.row]
-        
-        cell.name = sectionMassageModel.name
-        cell.online = sectionMassageModel.online
-        cell.date = sectionMassageModel.date
-        cell.hasUnreadMassages = sectionMassageModel.hasUnreadMassages
-        cell.massage = sectionMassageModel.massage
+        let sectionMessageModel = messageModel[indexPath.section][indexPath.row]
+
+        cell.name = sectionMessageModel.name
+        cell.online = sectionMessageModel.online
+        cell.date = sectionMessageModel.date
+        cell.hasUnreadMessages = sectionMessageModel.hasUnreadMessages
+        cell.message = sectionMessageModel.message
         cell.setupUI()
+        
+//        if communicationManager.conectedPeer.isEmpty {
+//
+//            cell.name = communicationManager.foundPeer[indexPath.row].values.first
+//            cell.online = true
+//            cell.date = nil
+//            cell.hasUnreadMessages = false
+//            cell.message = nil
+//            cell.setupUI()
+//        } else {
+//            cell.name = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
+//            cell.online = true
+//            cell.date = Date()
+//            cell.hasUnreadMessages = false
+//            cell.message = ""
+//            cell.setupUI()
+//        }
         
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return massageModel.count
+        //return messageModel.count
+        self.conversationsPresenter.updateConversationsList()
+        return 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -100,18 +122,26 @@ extension ConversationsListViewController: UITableViewDataSource {
 
 extension ConversationsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = massageModel[indexPath.section][indexPath.row]
+        let model = messageModel[indexPath.section][indexPath.row]
         self.conversationsPresenter.choseModel(model: model)
-        tableView.deselectRow(at: indexPath, animated: true)
+        var peerDontConnect = true
+        var connectedPeerIndex: Int!
+        for (index,conectedModel) in appDelegate.communicationManager.connectedPeer.enumerated() {
+            if conectedModel.peerID == appDelegate.communicationManager.mpcManager.foundPeers[indexPath.row] {
+                peerDontConnect = false
+                connectedPeerIndex = index
+            }
+        }
+        if peerDontConnect {
+            let newPeerSession = MCSession(peer: appDelegate.communicationManager.mpcManager.peer)
+            let conectedPeer = appDelegate.communicationManager.mpcManager.foundPeers[indexPath.row]
+            newPeerSession.delegate = appDelegate.communicationManager.mpcManager
+            appDelegate.communicationManager.connectedPeer.append(FoundPeer(peerID: conectedPeer, userName: appDelegate.communicationManager.foundUser[indexPath.row].userName, session: newPeerSession))
+            appDelegate.communicationManager.mpcManager.browser.invitePeer(conectedPeer, to: newPeerSession, withContext: nil, timeout: 10)
+        } else {
+            appDelegate.communicationManager.connectedWithPeer(peerID: appDelegate.communicationManager.connectedPeer[connectedPeerIndex].peerID, session: appDelegate.communicationManager.connectedPeer[connectedPeerIndex].session)
+        }
+        //tableView.deselectRow(at: indexPath, animated: true)
     }
-
 }
 
-#if OBJ
-extension ConversationsListViewController: ThemesViewControllerDelegate {
-    
-    func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
-        logThemeChanging(selectedTheme: selectedTheme)
-    }
-}
-#endif

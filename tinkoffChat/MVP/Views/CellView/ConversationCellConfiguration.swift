@@ -10,8 +10,8 @@ import UIKit
 
 protocol ConversationCellConfiguration: class {
     var name: String? {get set}
-    var massage: String? {get set}
+    var message: String? {get set}
     var date: Date? {get set}
     var online: Bool {get set}
-    var hasUnreadMassages: Bool {get set}
+    var hasUnreadMessages: Bool {get set}
 }
