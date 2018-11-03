@@ -27,12 +27,13 @@ class ProfileViewController: UIViewController {
     @IBOutlet var reductAboutLabel: UILabel!
     @IBOutlet var reductTextView: UITextView!
     @IBOutlet var reductGCDBtn: UIButton!
-    @IBOutlet var reductOperationBtn: UIButton!
+    //@IBOutlet var reductOperationBtn: UIButton!
     
     var rightItemBack: UIBarButtonItem!
     
     var presenter: ProfilePresenter!
     var operationManager: ProfileDataSaveManager!
+    let storageManager = (UIApplication.shared.delegate as! AppDelegate).storageManager ?? StorageManager()
     var operationQueue = OperationQueue()
     
     @IBAction func selectProfileImage(_ sender: Any) {
@@ -40,97 +41,121 @@ class ProfileViewController: UIViewController {
         guard let existingPicker = self.imagePicker else {
             return
         }
+        
         isEnabledSave(isEnabled: true)
         showPhotoAlert(imagePicker: existingPicker)
     }
     
     @IBAction func gcdAction(_ sender: Any) {
-        let completion = {
-            OperationQueue.main.addOperation({
-                if self.operationManager.errors.isEmpty {
-                    self.activityView.stopAnimating()
-                    self.showAlertWith(title: "Данные сохранены", message: nil, completion: {
-                        self.presenter.setSeveData()
-                        self.reductGCDBtn.isEnabled = true
-                        self.reductOperationBtn.isEnabled = true
-                        self.navigationItem.rightBarButtonItem?.isEnabled = true
-                        self.cancelButton()
-                    })
-                } else {
-                    self.showSaveAlertWith(title: "Ошибка", message: "Не удалось сохранить данные", completionOK: {
-                        self.activityView.stopAnimating()
-                        self.operationManager = nil
-                        self.reductGCDBtn.isEnabled = true
-                        self.reductOperationBtn.isEnabled = true
-                        self.navigationItem.rightBarButtonItem?.isEnabled = true
-                    }, completionRepeat: {
-                        self.operationAction(self.reductGCDBtn)
-                    })
+//        let completion = {
+//            OperationQueue.main.addOperation({
+//                if self.operationManager.errors.isEmpty {
+//                    self.activityView.stopAnimating()
+//                    self.showAlertWith(title: "Данные сохранены", message: nil, completion: {
+//                        self.presenter.setSeveData()
+//                        self.reductGCDBtn.isEnabled = true
+//                        self.reductOperationBtn.isEnabled = true
+//                        self.navigationItem.rightBarButtonItem?.isEnabled = true
+//                        self.cancelButton()
+//                    })
+//                } else {
+//                    self.showSaveAlertWith(title: "Ошибка", message: "Не удалось сохранить данные", completionOK: {
+//                        self.activityView.stopAnimating()
+//                        self.operationManager = nil
+//                        self.reductGCDBtn.isEnabled = true
+//                        self.reductOperationBtn.isEnabled = true
+//                        self.navigationItem.rightBarButtonItem?.isEnabled = true
+//                    }, completionRepeat: {
+//                        self.gcdAction(self.reductGCDBtn)
+//                    })
+//                }
+//            })
+//        }
+//        self.operationManager = GCDDataManager(completionBlock: completion)
+//        activityView.isHidden = false
+//        activityView.startAnimating()
+//        self.reductGCDBtn.isEnabled = false
+//        self.reductOperationBtn.isEnabled = false
+//        self.navigationItem.rightBarButtonItem?.isEnabled = false
+//        self.tapOnView(sender: self)
+//        self.operationManager.saveData(name: reductNameTextField.text, about: reductTextView.text, image: reductImageView.image)
+        if let name = reductNameTextField.text {
+            if let about = reductTextView.text {
+                if let image = reductImageView.image?.pngData() {
+                    storageManager.savePrifileData(name: name, about: about, image: image)
                 }
-            })
+            }
         }
-        self.operationManager = GCDDataManager(completionBlock: completion)
-        activityView.isHidden = false
-        activityView.startAnimating()
-        self.reductGCDBtn.isEnabled = false
-        self.reductOperationBtn.isEnabled = false
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
-        self.tapOnView(sender: self)
-        self.operationManager.saveData(name: reductNameTextField.text, about: reductTextView.text, image: reductImageView.image)
+        userName.text = reductNameTextField.text
+        userDescription.text = reductTextView.text
+        profileImage.image = reductImageView.image
+        cancelButton()
     }
     
+//    @IBAction func CoreData(_ sender: Any) {
+//        if let name = reductNameTextField.text {
+//            if let about = reductTextView.text {
+//                storageManager.savePrifileData(name: name, about: about)
+//            }
+//        }
+//
+//    }
+//
+//    @IBAction func fetch(_ sender: Any) {
+//        userName.text = storageManager.fetch()
+//    }
     
-    @IBAction func operationAction(_ sender: Any) {
-        let completion = {
-            OperationQueue.main.addOperation({
-                if self.operationManager.errors.isEmpty {
-                    self.activityView.stopAnimating()
-                    self.showAlertWith(title: "Данные сохранены", message: nil, completion: {
-                        self.presenter.setSeveData()
-                        self.reductGCDBtn.isEnabled = true
-                        self.reductOperationBtn.isEnabled = true
-                        self.navigationItem.rightBarButtonItem?.isEnabled = true
-                        self.cancelButton()
-                    })
-                } else {
-                    self.showSaveAlertWith(title: "Ошибка", message: "Не удалось сохранить данные",completionOK: {
-                        self.activityView.stopAnimating()
-                        self.operationManager = nil
-                        self.reductGCDBtn.isEnabled = true
-                        self.reductOperationBtn.isEnabled = true
-                        self.navigationItem.rightBarButtonItem?.isEnabled = true
-                    }, completionRepeat: {
-                        self.activityView.stopAnimating()
-                        self.operationManager = nil
-                        self.reductGCDBtn.isEnabled = true
-                        self.reductOperationBtn.isEnabled = true
-                        self.navigationItem.rightBarButtonItem?.isEnabled = true
-                        self.operationAction(self.reductOperationBtn)
-                    })
-                }
-            })
-        }
-        self.operationManager = OperationDataManager(image: reductImageView.image, name: self.reductNameTextField.text, about: self.reductTextView.text,completionBlock: completion, opration: OperationDataManager.OperationType.write)
-        
-        self.operationManager.saveData(name: self.reductNameTextField.text, about: self.reductTextView.text, image: reductImageView.image)
-        activityView.isHidden = false
-        activityView.startAnimating()
-        self.reductGCDBtn.isEnabled = false
-        self.reductOperationBtn.isEnabled = false
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
-        self.tapOnView(sender: self)
-        if let operation = operationManager as? OperationDataManager {
-            operationQueue.maxConcurrentOperationCount = 1
-            operationQueue.addOperation(operation)
-        }
-    }
+//    @IBAction func operationAction(_ sender: Any) {
+//        let completion = {
+//            OperationQueue.main.addOperation({
+//                if self.operationManager.errors.isEmpty {
+//                    self.activityView.stopAnimating()
+//                    self.showAlertWith(title: "Данные сохранены", message: nil, completion: {
+//                        self.presenter.setSeveData()
+//                        self.reductGCDBtn.isEnabled = true
+//                        self.reductOperationBtn.isEnabled = true
+//                        self.navigationItem.rightBarButtonItem?.isEnabled = true
+//                        self.cancelButton()
+//                    })
+//                } else {
+//                    self.showSaveAlertWith(title: "Ошибка", message: "Не удалось сохранить данные",completionOK: {
+//                        self.activityView.stopAnimating()
+//                        self.operationManager = nil
+//                        self.reductGCDBtn.isEnabled = true
+//                        self.reductOperationBtn.isEnabled = true
+//                        self.navigationItem.rightBarButtonItem?.isEnabled = true
+//                    }, completionRepeat: {
+//                        self.activityView.stopAnimating()
+//                        self.operationManager = nil
+//                        self.reductGCDBtn.isEnabled = true
+//                        self.reductOperationBtn.isEnabled = true
+//                        self.navigationItem.rightBarButtonItem?.isEnabled = true
+//                        self.operationAction(self.reductOperationBtn)
+//                    })
+//                }
+//            })
+//        }
+//        self.operationManager = OperationDataManager(image: reductImageView.image, name: self.reductNameTextField.text, about: self.reductTextView.text,completionBlock: completion, opration: OperationDataManager.OperationType.write)
+//        
+//        self.operationManager.saveData(name: self.reductNameTextField.text, about: self.reductTextView.text, image: reductImageView.image)
+//        activityView.isHidden = false
+//        activityView.startAnimating()
+//        self.reductGCDBtn.isEnabled = false
+//        self.reductOperationBtn.isEnabled = false
+//        self.navigationItem.rightBarButtonItem?.isEnabled = false
+//        self.tapOnView(sender: self)
+//        if let operation = operationManager as? OperationDataManager {
+//            operationQueue.maxConcurrentOperationCount = 1
+//            operationQueue.addOperation(operation)
+//        }
+//    }
     
     @IBAction func reduct(_ sender: Any) {
         navigationItem.leftBarButtonItem?.isEnabled = false
         isHiddenReductUI(isHidden: false)
         isHiddenMainUI(isHidden: true)
         self.reductGCDBtn.isEnabled = false
-        self.reductOperationBtn.isEnabled = false
+        //self.reductOperationBtn.isEnabled = false
         self.rightItemBack = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButton))
         navigationItem.rightBarButtonItem = self.rightItemBack
     }
@@ -201,7 +226,7 @@ class ProfileViewController: UIViewController {
         
         setupBtn(button: editButton)
         setupBtn(button: reductGCDBtn)
-        setupBtn(button: reductOperationBtn)
+        //setupBtn(button: reductOperationBtn)
         
         profileImage.clipsToBounds = true
         profileImage.layer.cornerRadius = selectImageButton.layer.cornerRadius
@@ -240,7 +265,7 @@ class ProfileViewController: UIViewController {
     private func isHiddenReductUI(isHidden: Bool) {
         reductUserNameLabel.isHidden = isHidden
         reductNameTextField.isHidden = isHidden
-        reductOperationBtn.isHidden = isHidden
+        //reductOperationBtn.isHidden = isHidden
         selectImageButton.isHidden = isHidden
         reductAboutLabel.isHidden = isHidden
         reductImageView.isHidden = isHidden
@@ -249,7 +274,7 @@ class ProfileViewController: UIViewController {
     }
     
     func isEnabledSave(isEnabled: Bool) {
-        reductOperationBtn.isEnabled = isEnabled
+        //reductOperationBtn.isEnabled = isEnabled
         reductGCDBtn.isEnabled = isEnabled
     }
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -270,23 +295,30 @@ extension ProfileViewController: ProfileSaveView {
     }
     
     func loadMainData() {
-        let completion = {
-            OperationQueue.main.addOperation {
-                if let name = self.operationManager.userName {
-                    self.userName.text = name
-                }
-                if let about = self.operationManager.about {
-                    self.userDescription.text = about
-                }
-                if let image = self.operationManager.image {
-                    self.profileImage.image = image
-                }
-            }
+//        let completion = {
+//            OperationQueue.main.addOperation {
+//                if let name = self.operationManager.userName {
+//                    self.userName.text = name
+//                }
+//                if let about = self.operationManager.about {
+//                    self.userDescription.text = about
+//                }
+//                if let image = self.operationManager.image {
+//                    self.profileImage.image = image
+//                }
+//            }
+//        }
+//        self.operationManager = OperationDataManager(image: nil, name: nil, about: nil, completionBlock: completion, opration: .get)
+//        if let operation = operationManager as? OperationDataManager {
+//            self.operationQueue.addOperation(operation)
+//        }
+        let dictionary = storageManager.fetch()
+        guard let name = dictionary["name"], let about = dictionary["about"], let image = dictionary["image"] else {
+            return
         }
-        self.operationManager = OperationDataManager(image: nil, name: nil, about: nil, completionBlock: completion, opration: .get)
-        if let operation = operationManager as? OperationDataManager {
-            self.operationQueue.addOperation(operation)
-        }
+        userName.text = String(data: name, encoding: .utf8)
+        userDescription.text = String(data: about, encoding: .utf8)
+        profileImage.image = UIImage(data: image)
     }
     
     func loadReductData() {
