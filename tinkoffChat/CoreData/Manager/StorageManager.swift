@@ -28,7 +28,7 @@ class StorageManager {
     
     typealias SaveCompletion = () -> Void
     
-    func savePrifileData(name: String, about: String, image: Data) {
+    func savePrifileData(name: String?, about: String?, image: Data?) {
 //        var context: [NSManagedObjectContext] = [coreDataStack.saveContext]
 //                if let parentContext = saveContext.parent {
 //                    context.append(parentContext)
@@ -70,12 +70,16 @@ class StorageManager {
             deleteAllRecords(with: context)
             let entity = NSEntityDescription.entity(forEntityName: "AppUser", in: context)!
             let person = NSManagedObject(entity: entity, insertInto: context)
-            person.setValue(name, forKeyPath: "name")
-            person.setValue(about, forKeyPath: "about")
-            person.setValue(image, forKey: "image")
+            if name != nil {
+                person.setValue(name, forKeyPath: "name")
+            }
+            if about != nil {
+                person.setValue(about, forKeyPath: "about")
+            }
+            if image != nil {
+                person.setValue(image, forKey: "image")
+            }
         }
-        
-        
         performSave(with: coreDataStack.saveContext)
     }
     
