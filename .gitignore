@@ -3,7 +3,7 @@
 build/
 DerivedData/
 xcuserdata/
-Podfile
+Pods/
 
 *.xccheckout
 *.xcscmblueprint
