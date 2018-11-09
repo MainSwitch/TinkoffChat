@@ -11,6 +11,7 @@ import CoreData
 
 class StorageManager {
     var coreDataStack: CoreDataStack!
+    var fetchRequest: FetchRequest!
 //    var managedObjectModel: NSManagedObjectModel!
 //    var persistentStoreCoordinator: NSPersistentStoreCoordinator!
 //    var masterContext: NSManagedObjectContext!
@@ -18,11 +19,8 @@ class StorageManager {
     var saveContext: NSManagedObjectContext!
     init() {
         coreDataStack = CoreDataStack()
-//        managedObjectModel = coreDataStack.managedObjectModel
-//        persistentStoreCoordinator = coreDataStack.persistentStoreCoordinator
-//        masterContext = coreDataStack.masterContext
-//        mainContext = coreDataStack.mainContext
         saveContext = coreDataStack.saveContext
+        fetchRequest = FetchRequest(managedObjectContext: coreDataStack.masterContext)
     }
     typealias SaveCompletion = () -> Void
     func savePrifileData(name: String?,
@@ -81,6 +79,21 @@ class StorageManager {
             }
         }
         performSave(with: coreDataStack.saveContext)
+    }
+    func saveDialog(from: String, message: String) {
+        var context: [NSManagedObjectContext] = [coreDataStack.saveContext]
+        if let parentContext = saveContext.parent {
+            context.append(parentContext)
+            if let parent = parentContext.parent {
+                context.append(parent)
+            }
+        }
+        for context in context {
+            let entity = NSEntityDescription.entity(forEntityName: "Conversation", in: context)!
+            let dialog = NSManagedObject(entity: entity, insertInto: context)
+            dialog.setValue(from, forKey: "from")
+            dialog.setValue(message, forKey: "message")
+        }
     }
     func terminateSave() {
         performSave(with: saveContext)

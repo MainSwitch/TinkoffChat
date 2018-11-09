@@ -81,6 +81,7 @@ class CommunicationManager: CommunicationDelegate {
                                                                   date: Date(),
                                                                   online: true,
                                                                   hasUnreadMessages: false)
+            conversationsPresenter.appDelegate?.storageManager.saveDialog(from: fromUser, message: text)
             DispatchQueue.main.async {
                 self.conversationViewController.tableView.reloadData()
             }

@@ -27,7 +27,10 @@ extension User {
         }
         return fetchRequest
     }
+}
+
+extension Conversation {
     func printUserName() {
-        print("User object with name: \(self.name!)")
+        print("User object with name: \(self.from!)")
     }
 }

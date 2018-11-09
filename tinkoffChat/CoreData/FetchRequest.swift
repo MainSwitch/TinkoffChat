@@ -11,12 +11,15 @@ import CoreData
 
 class FetchRequest {
     let context: NSManagedObjectContext
-    init(managedObjectContext: NSManagedObjectContext) {
-        self.context = managedObjectContext
+    var fetchedResultsController: NSFetchedResultsController<Conversation>
+    init(managedObjectContext: NSManagedObjectContext,
+         fetchedResultsController: NSFetchedResultsController<Conversation>) {
+        context = managedObjectContext
+        self.fetchedResultsController = fetchedResultsController
     }
-    func fetchRequestWithPredicateExample() {
+    func fetchRequestConversation(with userName: String) {
         print("Fetch request with predicate:")
-        let request: NSFetchRequest<User> = User.fetchRequest()
+        let request: NSFetchRequest<Conversation> = Conversation.fetchRequest()
         request.predicate = NSPredicate(format: "name == %@", "Alice")
         let result = try? context.fetch(request)
         if let result = result {

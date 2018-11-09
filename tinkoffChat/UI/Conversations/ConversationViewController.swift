@@ -14,7 +14,7 @@ class ConversationViewController: UIViewController {
     private var conversationsPresenter = MessageManager.shared.conversationsPresenter
     var tapMessageModel: MessageModel!
 
-    var isSelfSeend = false
+    var isSelfSend = false
     var session: MCSession!
     var peer: MCPeerID!
     var messageFrom = [String]()
@@ -84,13 +84,14 @@ class ConversationViewController: UIViewController {
 
     }
     @IBAction func sendAction(_ sender: Any) {
-        isSelfSeend = true
-        let messageText = messageTextField.text ?? "nil"
-        messageTextField.text = ""
+        isSelfSend = true
         guard let existAppDelegte = appDelegate else {
             return
         }
-        lastMessage = MessageModel(name: self.title,
+        let messageText = messageTextField.text ?? "nil"
+        messageTextField.text = ""
+        let userName = existAppDelegte.communicationManager.mpcManager.userName
+        lastMessage = MessageModel(name: userName,
                                    message: messageText,
                                    date: Date(), online: true,
                                    hasUnreadMessages: false)
@@ -100,6 +101,7 @@ class ConversationViewController: UIViewController {
             if succsess {
                 self.messageText.append(MessageTextModel(text: messageText))
                 self.messageFrom.append(existAppDelegte.communicationManager.mpcManager.userName)
+                existAppDelegte.storageManager.saveDialog(from: userName, message: messageText)
                 self.tableView.reloadData()
             }
             if error != nil {
@@ -137,6 +139,7 @@ extension ConversationViewController: UITextFieldDelegate {
 
 extension ConversationViewController: ConversationsView {
     func loadMessage(messageConversation: [[MessageTextModel]], messageForm: [[String]]) {
+        appDelegate?.storageManager.fetchRequest.fetchRequestConversation(with: tapMessageModel.name ?? "")
         lastMessage = self.conversationsPresenter.chosenModel
         for (index, model) in conversationsPresenter.messageModelArray.enumerated()
         where model.name == lastMessage.name {

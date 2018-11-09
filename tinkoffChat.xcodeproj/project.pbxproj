@@ -45,7 +45,8 @@
 		3AF9157621820220009A05B0 /* MultipeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9157521820220009A05B0 /* MultipeerCommunicator.swift */; };
 		51C19DAF77EADA7311FB8759 /* Pods_tinkoffChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FC6780ED959FC79EF1B5F4 /* Pods_tinkoffChat.framework */; };
 		6C03EFF121957FE100C837F5 /* FetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C03EFF021957FE100C837F5 /* FetchRequest.swift */; };
-		6C03EFF321958AEA00C837F5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C03EFF221958AEA00C837F5 /* User.swift */; };
+		6C03EFF321958AEA00C837F5 /* CoreDataEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C03EFF221958AEA00C837F5 /* CoreDataEntities.swift */; };
+		6C03EFF62195C7EA00C837F5 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C03EFF52195C7EA00C837F5 /* TableView.swift */; };
 		AFDCF7221C0B1B7768468482 /* Pods_tinkoffChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB3EADEF051D1D6980A2D15 /* Pods_tinkoffChatTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,7 +106,8 @@
 		3AF8AFF52171D55800E5B145 /* UIColor + Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Theme.swift"; sourceTree = "<group>"; };
 		3AF9157521820220009A05B0 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
 		6C03EFF021957FE100C837F5 /* FetchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequest.swift; sourceTree = "<group>"; };
-		6C03EFF221958AEA00C837F5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6C03EFF221958AEA00C837F5 /* CoreDataEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntities.swift; sourceTree = "<group>"; };
+		6C03EFF52195C7EA00C837F5 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		B2FC6780ED959FC79EF1B5F4 /* Pods_tinkoffChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tinkoffChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAB3EADEF051D1D6980A2D15 /* Pods_tinkoffChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tinkoffChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBF14B78ABB4B2F4753330F /* Pods-tinkoffChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tinkoffChatTests.release.xcconfig"; path = "Target Support Files/Pods-tinkoffChatTests/Pods-tinkoffChatTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -138,7 +140,7 @@
 				3A3404632165FA9C00D3FFB9 /* Date + String.swift */,
 				3AF565DF216754D40074BE3D /* NSMutableAttributedString + Bold.swift */,
 				3AF8AFF52171D55800E5B145 /* UIColor + Theme.swift */,
-				6C03EFF221958AEA00C837F5 /* User.swift */,
+				6C03EFF221958AEA00C837F5 /* CoreDataEntities.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -311,6 +313,7 @@
 				3AF4A0BB218B442800CDC489 /* Manager */,
 				3AF4A760218A1E4E00CBE95C /* CoreDataStack.swift */,
 				6C03EFF021957FE100C837F5 /* FetchRequest.swift */,
+				6C03EFF52195C7EA00C837F5 /* TableView.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -576,10 +579,11 @@
 				3A34044E216525A300D3FFB9 /* ConversationsListViewController.swift in Sources */,
 				3AF34C5B21729B220072BBD3 /* ProfileViewController.swift in Sources */,
 				3AE33B4921664A2900B3264F /* ConversationsPresenter.swift in Sources */,
+				6C03EFF62195C7EA00C837F5 /* TableView.swift in Sources */,
 				3A2686BF215EC1250058D4DC /* UIViewController + Alerts.swift in Sources */,
 				3AF4A761218A1E4E00CBE95C /* CoreDataStack.swift in Sources */,
 				3AF4A0C0218B51FE00CDC489 /* Profile.xcdatamodeld in Sources */,
-				6C03EFF321958AEA00C837F5 /* User.swift in Sources */,
+				6C03EFF321958AEA00C837F5 /* CoreDataEntities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
