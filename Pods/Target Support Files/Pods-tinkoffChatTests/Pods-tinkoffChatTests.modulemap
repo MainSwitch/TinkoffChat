@@ -1,0 +1,6 @@
+framework module Pods_tinkoffChatTests {
+  umbrella header "Pods-tinkoffChatTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

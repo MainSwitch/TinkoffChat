@@ -10,9 +10,7 @@ import UIKit
 import AVKit
 
 class ProfileViewController: UIViewController {
-    
     let imagePicker: UIImagePickerController? = UIImagePickerController()
-    
     @IBOutlet var activityView: UIActivityIndicatorView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var selectImageButton: UIButton!
@@ -20,7 +18,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var userName: UILabel!
     @IBOutlet var userDescription: UILabel!
-    
     @IBOutlet var reductImageView: UIImageView!
     @IBOutlet var reductUserNameLabel: UILabel!
     @IBOutlet var reductNameTextField: UITextField!
@@ -28,23 +25,18 @@ class ProfileViewController: UIViewController {
     @IBOutlet var reductTextView: UITextView!
     @IBOutlet var reductGCDBtn: UIButton!
     //@IBOutlet var reductOperationBtn: UIButton!
-    
     var rightItemBack: UIBarButtonItem!
-    
     var presenter: ProfilePresenter!
     var operationManager: ProfileDataSaveManager!
-    let storageManager = (UIApplication.shared.delegate as! AppDelegate).storageManager ?? StorageManager()
+    let storageManager = (UIApplication.shared.delegate as? AppDelegate)?.storageManager ?? StorageManager()
     var operationQueue = OperationQueue()
-    
     @IBAction func selectProfileImage(_ sender: Any) {
         print("Выбери изображение профиля")
         guard let existingPicker = self.imagePicker else {
             return
         }
-        
         showPhotoAlert(imagePicker: existingPicker)
     }
-    
     @IBAction func saveAction(_ sender: Any) {
 //        let completion = {
 //            OperationQueue.main.addOperation({
@@ -77,7 +69,8 @@ class ProfileViewController: UIViewController {
 //        self.reductOperationBtn.isEnabled = false
 //        self.navigationItem.rightBarButtonItem?.isEnabled = false
 //        self.tapOnView(sender: self)
-//        self.operationManager.saveData(name: reductNameTextField.text, about: reductTextView.text, image: reductImageView.image)
+//        self.operationManager.saveData(name: reductNameTextField.text,
+        //about: reductTextView.text, image: reductImageView.image)
         activityView.isHidden = false
         activityView.startAnimating()
         if let name = reductNameTextField.text {
@@ -92,7 +85,6 @@ class ProfileViewController: UIViewController {
         profileImage.image = reductImageView.image
         cancelButton()
     }
-    
 //    @IBAction func CoreData(_ sender: Any) {
 //        if let name = reductNameTextField.text {
 //            if let about = reductTextView.text {
@@ -105,7 +97,6 @@ class ProfileViewController: UIViewController {
 //    @IBAction func fetch(_ sender: Any) {
 //        userName.text = storageManager.fetch()
 //    }
-    
 //    @IBAction func operationAction(_ sender: Any) {
 //        let completion = {
 //            OperationQueue.main.addOperation({
@@ -136,9 +127,12 @@ class ProfileViewController: UIViewController {
 //                }
 //            })
 //        }
-//        self.operationManager = OperationDataManager(image: reductImageView.image, name: self.reductNameTextField.text, about: self.reductTextView.text,completionBlock: completion, opration: OperationDataManager.OperationType.write)
+//        self.operationManager = OperationDataManager(image: reductImageView.image,
+//        name: self.reductNameTextField.text, about: self.reductTextView.text,completionBlock: completion,
+//        opration: OperationDataManager.OperationType.write)
 //        
-//        self.operationManager.saveData(name: self.reductNameTextField.text, about: self.reductTextView.text, image: reductImageView.image)
+//        self.operationManager.saveData(name: self.reductNameTextField.text,
+//        about: self.reductTextView.text, image: reductImageView.image)
 //        activityView.isHidden = false
 //        activityView.startAnimating()
 //        self.reductGCDBtn.isEnabled = false
@@ -150,17 +144,17 @@ class ProfileViewController: UIViewController {
 //            operationQueue.addOperation(operation)
 //        }
 //    }
-    
     @IBAction func reduct(_ sender: Any) {
         navigationItem.leftBarButtonItem?.isEnabled = false
         isHiddenReductUI(isHidden: false)
         isHiddenMainUI(isHidden: true)
         self.reductGCDBtn.isEnabled = false
         //self.reductOperationBtn.isEnabled = false
-        self.rightItemBack = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButton))
+        self.rightItemBack = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                             target: self,
+                                             action: #selector(cancelButton))
         navigationItem.rightBarButtonItem = self.rightItemBack
     }
-    
     @objc func cancelButton() {
         isHiddenReductUI(isHidden: true)
         isHiddenMainUI(isHidden: false)
@@ -171,20 +165,17 @@ class ProfileViewController: UIViewController {
         navigationItem.leftBarButtonItem?.isEnabled = true
         navigationItem.rightBarButtonItem = nil
     }
-    
     @objc func backButton() {
         self.dismiss(animated: true, completion: nil)
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        if let _ = selectImageButton {
+        if selectImageButton != nil {
             print("Select button frame in 'init':\(self.editButton.frame)")
         } else {
             print("The Select button does not exist yet")
         }
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = ProfilePresenter()
@@ -194,46 +185,40 @@ class ProfileViewController: UIViewController {
         print("Select button frame in '\(#function)':\(self.editButton.frame)")
         setupUI()
     }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         selectImageButton.layer.cornerRadius = selectImageButton.frame.height / 2
     }
-    //MARK: viewDidAppear
-    /*
-    Во viewDidAppear представление контроллера было добавлено в иерархию представлений и в данном делегате мы работаем с фреймами того устройства, на котором запущено приложение, метод вызывается после завершения работы autolayout
-    Во viewDidLoad печатаются фреймы из нашего storyboard, там вёрстка на iPhone SE, но так как мы запускаем приложение на iPhone8Plus или X, то эти фреймы отличаются.
-    */
+    // MARK: viewDidAppear
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
             print("Select button frame in '\(#function)':\(self.editButton.frame)")
     }
-    
-    
-    private func setupUI(){
+    private func setupUI() {
         imagePicker?.delegate = self
         reductNameTextField.delegate = self
         reductTextView.delegate = self
-        
         self.operationQueue.maxConcurrentOperationCount = 1
         self.presenter.loadReductData()
-        let closeNavigationVCItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(backButton))
+        let closeNavigationVCItem = UIBarButtonItem(barButtonSystemItem: .stop,
+                                                    target: self,
+                                                    action: #selector(backButton))
         self.navigationItem.leftBarButtonItem = closeNavigationVCItem
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
         let tapOnView = UITapGestureRecognizer(target: self, action: #selector(self.tapOnView(sender:)))
         self.view.addGestureRecognizer(tapOnView)
-        
         setupBtn(button: editButton)
         setupBtn(button: reductGCDBtn)
         //setupBtn(button: reductOperationBtn)
-        
         profileImage.clipsToBounds = true
         profileImage.layer.cornerRadius = selectImageButton.layer.cornerRadius
     }
-    
     private func setupBtn(button: UIButton) {
         button.backgroundColor = .white
         button.layer.borderWidth = 1
@@ -241,29 +226,25 @@ class ProfileViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.setTitleColor(.black, for: .normal)
     }
-    
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize =
+            (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= keyboardSize.height
             }
         }
     }
-    
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
     }
-    
     @objc func tapOnView(sender: UIViewController) {
         self.view.endEditing(true)
     }
-    
     private func isHiddenMainUI(isHidden: Bool) {
         profileImage.isHidden = isHidden
         editButton.isHidden = isHidden
         stackView.isHidden = isHidden
     }
-    
     private func isHiddenReductUI(isHidden: Bool) {
         reductUserNameLabel.isHidden = isHidden
         reductNameTextField.isHidden = isHidden
@@ -274,24 +255,23 @@ class ProfileViewController: UIViewController {
         reductTextView.isHidden = isHidden
         reductGCDBtn.isHidden = isHidden
     }
-    
     func isEnabledSave(isEnabled: Bool) {
         //reductOperationBtn.isEnabled = isEnabled
         reductGCDBtn.isEnabled = isEnabled
     }
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    @objc func imagePickerController(_ picker: UIImagePickerController,
+                                     didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage]  as? UIImage else {
             return
         }
-        guard let fetchImageData = storageManager.fetch()["image"], let fetchImage = UIImage(data: fetchImageData) else {
+        guard let fetchImageData = storageManager.fetch()["image"],
+            let fetchImage = UIImage(data: fetchImageData) else {
             isEnabledSave(isEnabled: true)
             self.reductImageView.image = chosenImage
             dismiss(animated: true, completion: nil)
             return
         }
-        
         isEnabledSave(isEnabled: chosenImage == fetchImage)
-        
         self.reductImageView.image = chosenImage
         dismiss(animated: true, completion: nil)
     }
@@ -304,7 +284,6 @@ extension ProfileViewController: ProfileSaveView {
 //        self.userName.text = reductNameTextField.text
 //        self.userDescription.text = reductTextView.text
     }
-    
     func loadMainData() {
 //        let completion = {
 //            OperationQueue.main.addOperation {
@@ -319,7 +298,10 @@ extension ProfileViewController: ProfileSaveView {
 //                }
 //            }
 //        }
-//        self.operationManager = OperationDataManager(image: nil, name: nil, about: nil, completionBlock: completion, opration: .get)
+//        self.operationManager = OperationDataManager(image: nil,
+//                                                     name: nil, about: nil,
+//                                                     completionBlock: completion,
+//                                                     opration: .get)
 //        if let operation = operationManager as? OperationDataManager {
 //            self.operationQueue.addOperation(operation)
 //        }
@@ -331,7 +313,6 @@ extension ProfileViewController: ProfileSaveView {
         userDescription.text = String(data: about, encoding: .utf8)
         profileImage.image = UIImage(data: image)
     }
-    
     func loadReductData() {
         let dictionary = storageManager.fetch()
         guard let name = dictionary["name"], let about = dictionary["about"], let image = dictionary["image"] else {
@@ -353,8 +334,10 @@ extension ProfileViewController: ProfileSaveView {
 //                }
 //            }
 //        }
-//        self.operationManager = OperationDataManager(image: nil, name: nil, about: nil, completionBlock: completion, opration: .get)
-//
+//        self.operationManager = OperationDataManager(image: nil,
+//                                                     name: nil, about: nil,
+//                                                     completionBlock: completion,
+//                                                     opration: .get)
 //        if let operation = operationManager as? OperationDataManager {
 //            self.operationQueue.addOperation(operation)
 //        }
@@ -368,7 +351,7 @@ extension ProfileViewController: UITextViewDelegate {
                 isEnabledSave(isEnabled: true)
                 return true
             }
-            if text != String(data: name, encoding: .utf8)  {
+            if text != String(data: name, encoding: .utf8) {
                 isEnabledSave(isEnabled: true)
             } else {
                 isEnabledSave(isEnabled: false)
@@ -379,7 +362,9 @@ extension ProfileViewController: UITextViewDelegate {
 }
 
 extension ProfileViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
         var resultText: String?
         guard let about = storageManager.fetch()["about"] else {
             isEnabledSave(isEnabled: true)
@@ -405,7 +390,6 @@ extension ProfileViewController: UITextFieldDelegate {
         }
         return true
     }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         tapOnView(sender: self)
         return true

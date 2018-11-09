@@ -14,7 +14,6 @@ protocol ProfileDataSaveManager {
     var image: UIImage? {get set}
     var about: String? {get set}
     var customCompletionBlock: (() -> Void)? {get set}
-    
     func saveData(name: String?, about: String?, image: UIImage?)
     func getData()
 }

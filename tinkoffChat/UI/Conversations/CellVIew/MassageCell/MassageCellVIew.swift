@@ -9,11 +9,9 @@
 import UIKit
 
 class MessageCellView: UITableViewCell, ConversationCellConfiguration {
-    
     @IBOutlet weak var chatName: UILabel!
     @IBOutlet weak var lastMessage: UILabel!
     @IBOutlet weak var chatDate: UILabel!
-    
     var name: String? {
         didSet {
             self.chatName.textColor = name != nil ? UIColor.black : UIColor.red
@@ -48,14 +46,12 @@ class MessageCellView: UITableViewCell, ConversationCellConfiguration {
             setupUI()
         }
     }
-    
     func setupUI() {
         if online {
             self.backgroundColor = UIColor.yellow.withAlphaComponent(0.3)
         } else {
             self.backgroundColor = UIColor.white
         }
-        
         if hasUnreadMessages {
             let formattedString = NSMutableAttributedString()
             formattedString
@@ -65,15 +61,11 @@ class MessageCellView: UITableViewCell, ConversationCellConfiguration {
             self.lastMessage.text = message
         }
     }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
 }
-

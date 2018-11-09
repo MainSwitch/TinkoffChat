@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 protocol ConversationsView: class {
     func loadMessage(messageConversation: [[MessageTextModel]], messageForm: [[String]])
     func updateUI()

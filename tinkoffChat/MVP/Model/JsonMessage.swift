@@ -6,9 +6,9 @@
 //  Copyright © 2018 Switch. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-struct JsonMessage: Encodable,Decodable {
+struct JsonMessage: Encodable, Decodable {
     let eventType: String
     let messageId: String
     let text: String

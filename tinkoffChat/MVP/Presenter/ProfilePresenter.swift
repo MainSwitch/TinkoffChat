@@ -9,17 +9,13 @@
 import UIKit
 
 class ProfilePresenter {
-    
     weak var view: ProfileSaveView!
-    
     func setSeveData() {
         view.getSaveData()
     }
-    
     func loadMainData() {
         view.loadMainData()
     }
-    
     func loadReductData() {
         view.loadReductData()
     }

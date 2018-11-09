@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension UIColor {
     static func getTheme() -> UIColor {
         var themeColor = UIColor.white

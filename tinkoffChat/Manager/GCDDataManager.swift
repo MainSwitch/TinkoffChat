@@ -9,7 +9,6 @@
 import UIKit
 
 class GCDDataManager: ProfileDataSaveManager {
-    
     let fileManager = FileManager.default
     let userDefaults = UserDefaults.standard
     var errors: [SaveError] = []
@@ -17,12 +16,12 @@ class GCDDataManager: ProfileDataSaveManager {
     var image: UIImage?
     var about: String?
     var customCompletionBlock: (() -> Void)?
-    let saveQueue = DispatchQueue(label: "com.tinkoffChat.queue", qos: .background, attributes: DispatchQueue.Attributes.concurrent)
-    
+    let saveQueue = DispatchQueue(label: "com.tinkoffChat.queue",
+                                  qos: .background,
+                                  attributes: DispatchQueue.Attributes.concurrent)
     init(completionBlock: (() -> Void)?) {
         self.customCompletionBlock = completionBlock
     }
-    
     func saveName(name: String?) {
         guard let name = name else {
             return
@@ -30,12 +29,11 @@ class GCDDataManager: ProfileDataSaveManager {
         if name != self.getName() {
             self.userDefaults.set(name, forKey: "name")
         }
-        guard let _ = self.getName() else {
+        guard self.getName() != nil else {
             self.finish(withError: .dontSave(reason: "save Error"))
             return
         }
     }
-    
     func saveAbout(about: String?) {
         guard let about = about else {
             return
@@ -43,12 +41,11 @@ class GCDDataManager: ProfileDataSaveManager {
         if about != self.getAbout() {
             self.userDefaults.set(about, forKey: "about")
         }
-        guard let _ = self.getAbout() else {
+        guard self.getAbout() != nil else {
             self.finish(withError: .dontSave(reason: "save Error"))
             return
         }
     }
-    
     func saveImage(image: UIImage?) {
         let imageFromURL = getImage()
         guard let image = image else {
@@ -61,13 +58,12 @@ class GCDDataManager: ProfileDataSaveManager {
             } else if imageFromURL == nil {
                 let fileName = getDocumentsDirectory().appendingPathComponent("copy.png")
                 try? data.write(to: fileName)
-                guard let _ = getImage() else {
+                guard getImage() != nil else {
                     finish(withError: .dontSave(reason: "save Error"))
                     return
                 }
             }
         }    }
-    
     func saveData(name: String?, about: String?, image: UIImage?) {
         let workItem = DispatchWorkItem {
             self.saveImage(image: image)
@@ -80,16 +76,13 @@ class GCDDataManager: ProfileDataSaveManager {
             self.customCompletionBlock?()
         }
     }
-    
     func getDocumentsDirectory() -> URL {
         let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-    
     func finish(withError errors: SaveError) {
         self.errors = [errors]
     }
-    
     func getData() {
         let workItem = DispatchWorkItem {
             if let imageData = self.getImage() {
@@ -103,19 +96,17 @@ class GCDDataManager: ProfileDataSaveManager {
             self.customCompletionBlock?()
         }
     }
-    
     func getName() -> String? {
         return userDefaults.string(forKey: "name")
     }
-    
     func getAbout() -> String? {
         return userDefaults.string(forKey: "about")
     }
-    
     func getImage() -> Data? {
-        var imageFromURL: Data? = nil
+        var imageFromURL: Data?
         do {
-            let fileURLs = try fileManager.contentsOfDirectory(at: getDocumentsDirectory(), includingPropertiesForKeys: nil)
+            let fileURLs = try fileManager.contentsOfDirectory(at: getDocumentsDirectory(),
+                                                               includingPropertiesForKeys: nil)
             // process files
             if let path = fileURLs.first?.path {
                 let imageData = fileManager.contents(atPath: path)
@@ -132,6 +123,4 @@ class GCDDataManager: ProfileDataSaveManager {
         }
         return imageFromURL
     }
-    
-    
 }

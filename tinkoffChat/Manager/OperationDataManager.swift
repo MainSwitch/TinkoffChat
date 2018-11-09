@@ -14,7 +14,6 @@ enum SaveError: Error {
 }
 
 class OperationDataManager: AsyncOperation, ProfileDataSaveManager {
-    
     let fileManager = FileManager.default
     let userDefaults = UserDefaults.standard
     var errors: [SaveError] = []
@@ -23,57 +22,54 @@ class OperationDataManager: AsyncOperation, ProfileDataSaveManager {
     var about: String?
     let operation: OperationType
     var customCompletionBlock: (() -> Void)?
-    
     convenience override init() {
         self.init(image: nil, name: nil, about: nil, completionBlock: nil, opration: .none)
     }
-    
-    init(image: UIImage?,name: String?,about: String?,completionBlock: (() -> Void)?, opration: OperationType) {
+    init(image: UIImage?,
+         name: String?,
+         about: String?,
+         completionBlock: (() -> Void)?,
+         opration: OperationType) {
         self.userName = name
         self.image = image
         self.about = about
         self.operation = opration
         self.customCompletionBlock = completionBlock
     }
-    
     enum OperationType {
         case get
         case write
         case none
     }
-    
     func saveName(name: String?) {
         guard let name = name else {
             return
         }
         if name != getName() {
-            userDefaults.set(name, forKey: "name")
-            guard let _ = getName() else {
+            if getName() == nil {
                 finish(withError: .dontSave(reason: "save Error"))
                 return
             }
+            userDefaults.set(name, forKey: "name")
         }
     }
-    
     func saveAbout(about: String?) {
         guard let about = about else {
             return
         }
         if about != getAbout() {
-            userDefaults.set(about, forKey: "about")
-            guard let _ = getAbout() else {
+            if getName() == nil {
                 finish(withError: .dontSave(reason: "save Error"))
                 return
             }
+            userDefaults.set(about, forKey: "about")
         }
     }
-    
     func saveImage(image: UIImage?) {
         let imageFromURL = getImage()
         guard let image = image else {
             return
         }
-        
         if let data = image.pngData() {
             if let existImage = imageFromURL, existImage.count != data.count {
                 let fileName = getDocumentsDirectory().appendingPathComponent("copy.png")
@@ -81,7 +77,7 @@ class OperationDataManager: AsyncOperation, ProfileDataSaveManager {
             } else if imageFromURL == nil {
                 let fileName = getDocumentsDirectory().appendingPathComponent("copy.png")
                 try? data.write(to: fileName)
-                guard let _ = getImage() else {
+                if getName() == nil {
                     finish(withError: .dontSave(reason: "save Error"))
                     return
                 }
@@ -90,19 +86,17 @@ class OperationDataManager: AsyncOperation, ProfileDataSaveManager {
             finish(withError: .dontSave(reason: "save error"))
         }
     }
-    
     func getName() -> String? {
         return userDefaults.string(forKey: "name")
     }
-    
     func getAbout() -> String? {
         return userDefaults.string(forKey: "about")
     }
-    
     func getImage() -> Data? {
-        var imageFromURL: Data? = nil
+        var imageFromURL: Data?
         do {
-            let fileURLs = try fileManager.contentsOfDirectory(at: getDocumentsDirectory(), includingPropertiesForKeys: nil)
+            let fileURLs = try fileManager.contentsOfDirectory(at: getDocumentsDirectory(),
+                                                               includingPropertiesForKeys: nil)
             // process files
             if let path = fileURLs.first?.path {
                 let imageData = fileManager.contents(atPath: path)
@@ -119,12 +113,10 @@ class OperationDataManager: AsyncOperation, ProfileDataSaveManager {
         }
         return imageFromURL
     }
-    
     private func getDocumentsDirectory() -> URL {
         let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-    
     func getData() {
         if let imageData = getImage() {
             self.image = UIImage(data: imageData)
@@ -132,14 +124,12 @@ class OperationDataManager: AsyncOperation, ProfileDataSaveManager {
         self.userName = getName()
         self.about = getAbout()
     }
-    
     func saveData(name: String?, about: String?, image: UIImage?) {
         saveImage(image: image)
         saveName(name: name)
         saveAbout(about: about)
         self.userDefaults.synchronize()
     }
-    
     override func execute() {
         self.completionBlock = customCompletionBlock
         switch operation {
@@ -151,50 +141,39 @@ class OperationDataManager: AsyncOperation, ProfileDataSaveManager {
             break
         }
     }
-    
     func finish(withError errors: SaveError) {
         self.errors = [errors]
         isFinished = true
     }
 }
-
-
 class AsyncOperation: Operation {
     override var isAsynchronous: Bool {
         return true
     }
-    
-    var _isFinished: Bool = false
-    
+    var isFinishedOperation: Bool = false
     override var isFinished: Bool {
         set {
             willChangeValue(forKey: "isFinished")
-            _isFinished = newValue
+            isFinishedOperation = newValue
             didChangeValue(forKey: "isFinished")
         }
-        
         get {
-            return _isFinished
+            return isFinishedOperation
         }
     }
-    
-    var _isExecuting: Bool = false
-    
+    var isExecutingOeration: Bool = false
     override var isExecuting: Bool {
         set {
             willChangeValue(forKey: "isExecuting")
-            _isExecuting = newValue
+            isExecutingOeration = newValue
             didChangeValue(forKey: "isExecuting")
         }
-        
         get {
-            return _isExecuting
+            return isExecutingOeration
         }
     }
-    
     func execute() {
     }
-    
     override func start() {
         isExecuting = true
         execute()

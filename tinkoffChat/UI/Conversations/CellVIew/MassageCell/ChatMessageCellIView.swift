@@ -9,12 +9,10 @@
 import UIKit
 
 class ChatMessageCellIView: UITableViewCell, MessageCellConfiguration {
-    
     var textMessage: String?
 
     @IBOutlet weak var myMessage: UILabel!
     @IBOutlet weak var friendMessage: UILabel!
-    
     func setupUI() {
         textMessage = ""
     }

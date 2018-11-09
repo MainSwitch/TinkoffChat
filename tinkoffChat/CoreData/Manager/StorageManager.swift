@@ -16,7 +16,6 @@ class StorageManager {
 //    var masterContext: NSManagedObjectContext!
 //    var mainContext: NSManagedObjectContext!
     var saveContext: NSManagedObjectContext!
-    
     init() {
         coreDataStack = CoreDataStack()
 //        managedObjectModel = coreDataStack.managedObjectModel
@@ -25,10 +24,10 @@ class StorageManager {
 //        mainContext = coreDataStack.mainContext
         saveContext = coreDataStack.saveContext
     }
-    
     typealias SaveCompletion = () -> Void
-    
-    func savePrifileData(name: String?, about: String?, image: Data?) {
+    func savePrifileData(name: String?,
+                         about: String?,
+                         image: Data?) {
 //        var context: [NSManagedObjectContext] = [coreDataStack.saveContext]
 //                if let parentContext = saveContext.parent {
 //                    context.append(parentContext)
@@ -43,7 +42,8 @@ class StorageManager {
 //            if results.count > 0 {
 //                for person in results as! [NSManagedObject] {
 //                    if let userName = person.value(forKey: "name") {
-//                        if userName as? String == StorageManager.findOrInsertAppUser(in: coreDataStack.mainContext)?.name {
+//                        if userName as? String ==
+//                            StorageManager.findOrInsertAppUser(in: coreDataStack.mainContext)?.name {
 //                            person.setValue(name, forKeyPath: "name")
 //                            person.setValue(about, forKeyPath: "about")
 //                        }
@@ -82,16 +82,12 @@ class StorageManager {
         }
         performSave(with: coreDataStack.saveContext)
     }
-    
     func terminateSave() {
         performSave(with: saveContext)
     }
-    
     private func deleteAllRecords(with context: NSManagedObjectContext) {
-        
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "AppUser")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-        
         do {
             try context.execute(deleteRequest)
             try context.save()
@@ -102,7 +98,6 @@ class StorageManager {
             deleteAllRecords(with: parentContext)
         }
     }
-    
     private func performSave(with context: NSManagedObjectContext, completion: SaveCompletion? = nil) {
         guard context.hasChanges else {
             completion?()
@@ -121,16 +116,19 @@ class StorageManager {
             completion?()
         }
     }
-    
-    func fetch() -> [String:Data] {
+    func fetch() -> [String: Data] {
         let managedContext = coreDataStack.masterContext
         let appUser = StorageManager.findOrInsertAppUser(in: managedContext)
-        guard let name = (appUser?.name?.data(using: .utf8)), let about = (appUser?.about?.data(using: .utf8)), let image = appUser?.image else {
-            return ["name": UIDevice.current.name.data(using: .utf8)!,"about":"about you".data(using: .utf8)!]
+        guard let name = (appUser?.name?.data(using: .utf8)),
+            let about = (appUser?.about?.data(using: .utf8)),
+            let image = appUser?.image else {
+            return ["name": UIDevice.current.name.data(using: .utf8)!,
+                    "about": "about you".data(using: .utf8)!]
         }
-        return ["name": name,"about":about, "image": image]
+        return ["name": name,
+                "about": about,
+                "image": image]
     }
-    
     static func findOrInsertAppUser(in context: NSManagedObjectContext) -> AppUser? {
         guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
             print("model is not available in context!")
@@ -159,14 +157,14 @@ class StorageManager {
 
 extension AppUser {
     static func insertAppUser(in context: NSManagedObjectContext) -> AppUser? {
-        guard let appUser = NSEntityDescription.insertNewObject(forEntityName: "AppUser", into: context) as? AppUser else {
+        guard let appUser =
+            NSEntityDescription.insertNewObject(forEntityName: "AppUser", into: context) as? AppUser else {
             return nil
         }
         appUser.name = UIDevice.current.name
         appUser.about = ""
         return appUser
     }
-    
     static func fetchRequestAppUser(model: NSManagedObjectModel) -> NSFetchRequest<AppUser>? {
         let templateName = "AppUser"
         guard let fetchRequest = model.fetchRequestTemplate(forName: templateName) as? NSFetchRequest<AppUser> else {

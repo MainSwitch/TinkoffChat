@@ -11,9 +11,7 @@ import UIKit
 class MessageManager {
     let conversationsPresenter: ConversationsPresenter
     let profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
-    
     static let shared = MessageManager()
-    
     private init() {
         self.conversationsPresenter = ConversationsPresenter()
     }

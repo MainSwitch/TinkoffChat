@@ -10,17 +10,16 @@ import UIKit
 
 @IBDesignable
 class ChatLabel: UILabel {
-    
     @IBInspectable var isMyMessage: Bool = true {
         didSet {
             setUI()
         }
     }
-    
     func setUI() {
         self.clipsToBounds = true
         self.layer.cornerRadius = self.frame.height / 4
-        self.backgroundColor = isMyMessage ? UIColor.blue.withAlphaComponent(0.3) : UIColor.green.withAlphaComponent(0.3)
+        self.backgroundColor = isMyMessage ?
+            UIColor.blue.withAlphaComponent(0.3) : UIColor.green.withAlphaComponent(0.3)
     }
     /*
     // Only override draw() if you perform custom drawing.
@@ -29,6 +28,4 @@ class ChatLabel: UILabel {
         // Drawing code
     }
     */
- 
-
 }

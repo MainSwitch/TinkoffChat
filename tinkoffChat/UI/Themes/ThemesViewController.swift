@@ -9,32 +9,26 @@
 import UIKit
 
 class ThemesViewController: UIViewController {
-    
     var conversationListView: ConversationsListViewController!
     private let userDefaults = UserDefaults.standard
-    
     var themeLightBtn: UIButton!
     var themeDarckBtn: UIButton!
     var shampayneBtn: UIButton!
     let saveQueue = DispatchQueue.global(qos: .utility)
-    
     enum Position: Int {
         case first = 3
         case second
         case third
     }
-    
-    var setThemeClosure = { (controller: ThemesViewController, color: UIColor, colorClosure: ()->()) in
+    var setThemeClosure = {(controller: ThemesViewController, color: UIColor, colorClosure: () -> Void) in
         colorClosure()
         controller.view.backgroundColor = color
         UINavigationBar.appearance().backgroundColor = color
         controller.navigationController?.navigationBar.backgroundColor = color
     }
-    
     @objc func dissmisVC() {
         self.dismiss(animated: true, completion: nil)
     }
-    
     @objc func lightThemeButton(_ sender: Any) {
         if let btnColor = themeLightBtn.backgroundColor {
             setThemeClosure(self, btnColor) {
@@ -42,10 +36,8 @@ class ThemesViewController: UIViewController {
                     self.userDefaults.set(1, forKey: "themeColor")
                 }
             }
-            
         }
     }
-    
     @objc func darkThemeButton(_ sender: Any) {
         if let btnColor = themeDarckBtn.backgroundColor {
             setThemeClosure(self, btnColor) {
@@ -55,7 +47,6 @@ class ThemesViewController: UIViewController {
             }
         }
     }
-    
     @objc func shapayneThemeButtom(_ sender: Any) {
         if let btnColor = shampayneBtn.backgroundColor {
             setThemeClosure(self, btnColor) {
@@ -65,31 +56,25 @@ class ThemesViewController: UIViewController {
             }
         }
     }
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         self.view.backgroundColor = UIColor.getTheme()
     }
-    
     func setupUI() {
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dissmisVC))
         self.navigationItem.rightBarButtonItem = barButtonItem
-        
         themeLightBtn = UIButton()
         themeLightBtn.addTarget(self, action: #selector(lightThemeButton(_:)), for: .touchUpInside)
         setButton(button: themeLightBtn, title: "Светлая", position: .first, bgColor: .yellow)
-        
         themeDarckBtn = UIButton()
         themeDarckBtn.addTarget(self, action: #selector(darkThemeButton(_:)), for: .touchUpInside)
         setButton(button: themeDarckBtn, title: "Тёмная", position: .second, bgColor: .darkGray)
-        
         shampayneBtn = UIButton()
         shampayneBtn.addTarget(self, action: #selector(shapayneThemeButtom(_:)), for: .touchUpInside)
         setButton(button: shampayneBtn, title: "Шампейн", position: .third, bgColor: .purple)
-        
     }
-    func setButton(button: UIButton,title: String, position: Position, bgColor: UIColor) {
+    func setButton(button: UIButton, title: String, position: Position, bgColor: UIColor) {
         let multiplayPosition = CGFloat(position.rawValue)
         if let view = self.view {
             button.setTitleColor(.black, for: .normal)
@@ -100,5 +85,4 @@ class ThemesViewController: UIViewController {
             self.view.addSubview(button)
         }
     }
-    
 }
