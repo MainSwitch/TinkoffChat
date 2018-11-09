@@ -68,7 +68,7 @@ class StorageManager {
         }
         for context in context {
             deleteAllRecords(with: context)
-            let entity = NSEntityDescription.entity(forEntityName: "AppUser", in: context)!
+            let entity = NSEntityDescription.entity(forEntityName: "User", in: context)!
             let person = NSManagedObject(entity: entity, insertInto: context)
             if name != nil {
                 person.setValue(name, forKeyPath: "name")
@@ -86,7 +86,7 @@ class StorageManager {
         performSave(with: saveContext)
     }
     private func deleteAllRecords(with context: NSManagedObjectContext) {
-        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "AppUser")
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
         do {
             try context.execute(deleteRequest)
@@ -118,10 +118,10 @@ class StorageManager {
     }
     func fetch() -> [String: Data] {
         let managedContext = coreDataStack.masterContext
-        let appUser = StorageManager.findOrInsertAppUser(in: managedContext)
-        guard let name = (appUser?.name?.data(using: .utf8)),
-            let about = (appUser?.about?.data(using: .utf8)),
-            let image = appUser?.image else {
+        let user = StorageManager.findOrInsertUser(in: managedContext)
+        guard let name = (user?.name?.data(using: .utf8)),
+            let about = (user?.about?.data(using: .utf8)),
+            let image = user?.image else {
             return ["name": UIDevice.current.name.data(using: .utf8)!,
                     "about": "about you".data(using: .utf8)!]
         }
@@ -129,48 +129,28 @@ class StorageManager {
                 "about": about,
                 "image": image]
     }
-    static func findOrInsertAppUser(in context: NSManagedObjectContext) -> AppUser? {
+    static func findOrInsertUser(in context: NSManagedObjectContext) -> User? {
         guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
             print("model is not available in context!")
             assert(false)
             return nil
         }
-        var appUser: AppUser?
-        guard let fetchRequest = AppUser.fetchRequestAppUser(model: model) else {
+        var user: User?
+        guard let fetchRequest = User.fetchRequestUser(model: model) else {
             return nil
         }
         do {
             let results = try context.fetch(fetchRequest)
             //assert(results.count < 2, "Multiple AppUser found!")
             if let foundUser = results.last {
-                appUser = foundUser
+                user = foundUser
             }
         } catch {
-            print("Failed to fetch AppUser \(error)")
+            print("Failed to fetch User \(error)")
         }
-        if appUser == nil {
-            appUser = AppUser.insertAppUser(in: context)
+        if user == nil {
+            user = User.insertUser(in: context)
         }
-        return appUser
-    }
-}
-
-extension AppUser {
-    static func insertAppUser(in context: NSManagedObjectContext) -> AppUser? {
-        guard let appUser =
-            NSEntityDescription.insertNewObject(forEntityName: "AppUser", into: context) as? AppUser else {
-            return nil
-        }
-        appUser.name = UIDevice.current.name
-        appUser.about = ""
-        return appUser
-    }
-    static func fetchRequestAppUser(model: NSManagedObjectModel) -> NSFetchRequest<AppUser>? {
-        let templateName = "AppUser"
-        guard let fetchRequest = model.fetchRequestTemplate(forName: templateName) as? NSFetchRequest<AppUser> else {
-            assert(false, "No template with name \(templateName)")
-            return nil
-        }
-        return fetchRequest
+        return user
     }
 }

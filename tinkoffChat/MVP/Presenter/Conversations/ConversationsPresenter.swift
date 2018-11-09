@@ -20,12 +20,11 @@ class ConversationsPresenter {
     weak var conversationListView: ConversationsListView!
     weak var conversationView: ConversationsView!
     weak var appDelegate = UIApplication.shared.delegate as? AppDelegate
-    //этот метод я не выпилил так как не успеваю
     func loadDialog() {
         guard let existAppDelegate = appDelegate else {
             return
         }
-        if  existAppDelegate.communicationManager.foundUser.isEmpty {
+        if existAppDelegate.communicationManager.foundUser.isEmpty {
             messageModelArray = []
         }
     }
