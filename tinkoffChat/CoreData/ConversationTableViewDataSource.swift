@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TableViewDataSource: NSObject, UITableViewDataSource {
+class ConversationTableViewDataSource: NSObject, UITableViewDataSource {
     let fetchedResultsController: NSFetchedResultsController<Conversation>
     private var cellIdentifier = "MyMessage"
 
@@ -32,22 +32,29 @@ class TableViewDataSource: NSObject, UITableViewDataSource {
         -> UITableViewCell {
         let dialog = self.fetchedResultsController.object(at: indexPath)
         let userName = UserDefaults.standard.string(forKey: "name") ?? UIDevice.current.name
-        let cell: UITableViewCell = UITableViewCell(frame: .zero)
+            var cell: ChatMessageCellIView = ChatMessageCellIView(frame: .zero)
         if userName == dialog.from {
             cellIdentifier = "MyMessage"
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier) else {
+            if let newCell =
+                tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier) as? ChatMessageCellIView {
+                newCell.myMessage.text = dialog.message
+                cell = newCell
+            } else {
                 assertionFailure("Cell with id \(self.cellIdentifier) not exists")
                 return UITableViewCell()
             }
         } else {
             cellIdentifier = "FriendMessage"
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier) else {
+            if let newCell =
+                tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier) as? ChatMessageCellIView {
+                newCell.friendMessage.text = dialog.message
+                cell = newCell
+            } else {
                 assertionFailure("Cell with id \(self.cellIdentifier) not exists")
                 return UITableViewCell()
             }
         }
         // Configure the cell with data from the managed object.
-        cell.textLabel?.text = dialog.message
         return cell
     }
 }

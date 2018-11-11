@@ -7,19 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 class ConversationsPresenter {
     var messageModelArray: [MessageModel] = [MessageModel]()
     var messageConversation: [[MessageTextModel]] = [[MessageTextModel]()]
     var messageConversationFrom: [[String]] = [[String]()]
-    var lastMessageArray = [MessageModel]()
+    weak var appDelegate = UIApplication.shared.delegate as? AppDelegate
 
     var chosenModel: MessageModel!
     //var message: [MessageModel]!
 
     weak var conversationListView: ConversationsListView!
     weak var conversationView: ConversationsView!
-    weak var appDelegate = UIApplication.shared.delegate as? AppDelegate
     func loadDialog() {
         guard let existAppDelegate = appDelegate else {
             return
@@ -38,11 +38,17 @@ class ConversationsPresenter {
                 messageModelArray.remove(at: index)
                 break
             }
-            messageModelArray.append(MessageModel(name: user.userName,
-                                                  message: nil,
-                                                  date: nil,
-                                                  online: true,
-                                                  hasUnreadMessages: false))
+            let message = FetchRequest(managedObjectContext: existAppDelegate.storageManager.coreDataStack.mainContext)
+            .fetchRequestMessage(with: user.userName)
+            let messageModel = MessageModel(conversationID: user.userName,
+                                            name: message?.name ?? user.userName,
+                                            message: message?.message ?? nil,
+                                            date: message?.date ?? nil,
+                                            online: message?.online ?? true,
+                                            hasUnreadMessages: message?.hasUnreadMessages ?? false)
+            existAppDelegate.storageManager.saveMessageModel(messageModel: messageModel)
+            messageModelArray.append(messageModel)
+//            print(message.forEach({$0.name}))
         }
     }
     func loadMessage() {
@@ -58,7 +64,12 @@ class ConversationsPresenter {
         if let existModel = self.chosenModel {
             return existModel
         } else {
-            return MessageModel(name: nil, message: nil, date: nil, online: false, hasUnreadMessages: false)
+            return MessageModel(conversationID: "",
+                                name: nil,
+                                message: nil,
+                                date: nil,
+                                online: true,
+                                hasUnreadMessages: false)
         }
     }
     func updateConversationsList() {

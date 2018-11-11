@@ -4,6 +4,8 @@
         <relationship name="currentUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="appUser" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Conversation" representedClassName="Conversation" syncable="YES" codeGenerationType="class">
+        <attribute name="conversationID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="from" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="dialog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="conversation" inverseEntity="Message" syncable="YES"/>
@@ -23,11 +25,13 @@
         <relationship name="appUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppUser" inverseName="currentUser" inverseEntity="AppUser" syncable="YES"/>
     </entity>
     <fetchRequest name="AppUserRequest" entity="AppUser"/>
+    <fetchRequest name="ConversationRequest" entity="Conversation"/>
+    <fetchRequest name="Message" entity="Message" predicateString="online == 0"/>
     <fetchRequest name="User" entity="User"/>
     <elements>
-        <element name="User" positionX="-278.09765625" positionY="-39.16796875" width="126.78515625" height="105"/>
         <element name="AppUser" positionX="-63" positionY="9" width="128" height="60"/>
+        <element name="Conversation" positionX="-34.5" positionY="240.50390625" width="128" height="118"/>
         <element name="Message" positionX="374.05859375" positionY="59.95703125" width="128" height="133"/>
-        <element name="Conversation" positionX="-34.5" positionY="240.50390625" width="128" height="88"/>
+        <element name="User" positionX="-278.09765625" positionY="-39.16796875" width="126.78515625" height="105"/>
     </elements>
 </model>

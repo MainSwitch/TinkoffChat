@@ -76,7 +76,7 @@ class ProfileViewController: UIViewController {
         if let name = reductNameTextField.text {
             if let about = reductTextView.text {
                 if let image = reductImageView.image?.pngData() {
-                    storageManager.savePrifileData(name: name, about: about, image: image)
+                    storageManager.saveProfileData(name: name, about: about, image: image)
                 }
             }
         }

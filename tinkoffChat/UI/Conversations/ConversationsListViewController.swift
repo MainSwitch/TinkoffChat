@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreData
 import MultipeerConnectivity
 
-class ConversationsListViewController: UIViewController {
+class ConversationsListViewController: UIViewController, NSFetchedResultsControllerDelegate {
     var messageModel: [[MessageModel]]!
     var conversationsPresenter =  MessageManager.shared.conversationsPresenter
 
@@ -27,6 +28,20 @@ class ConversationsListViewController: UIViewController {
         let navigationVC = UINavigationController(rootViewController: profileVC)
         self.present(navigationVC, animated: true, completion: nil)
     }
+    private lazy var tableViewDataSource: UITableViewDataSource = {
+        let context = appDelegate?.storageManager.coreDataStack.mainContext
+            ?? NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        let request: NSFetchRequest<Message> =
+            FetchRequest(managedObjectContext: context).fetchRequestOnile()
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
+                                                                  managedObjectContext: context,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+        fetchedResultsController.delegate = self
+        return MessageTableViewDataSource(fetchedResultsController: fetchedResultsController)
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -37,6 +52,9 @@ class ConversationsListViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        if let mainContext = conversationsPresenter.appDelegate?.storageManager.coreDataStack.mainContext {
+//            print(FetchRequest(managedObjectContext: mainContext).fetchNoEmtyMessage())
+//        }
         self.tableView.reloadData()
     }
 }

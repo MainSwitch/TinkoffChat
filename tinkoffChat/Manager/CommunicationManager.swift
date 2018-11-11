@@ -76,14 +76,22 @@ class CommunicationManager: CommunicationDelegate {
         if conversationViewController != nil {
             conversationViewController.messageFrom.append(fromUser)
             conversationViewController.messageText.append(MessageTextModel(text: text))
-            conversationViewController.lastMessage = MessageModel(name: fromUser,
-                                                                  message: text,
-                                                                  date: Date(),
-                                                                  online: true,
-                                                                  hasUnreadMessages: false)
-            conversationsPresenter.appDelegate?.storageManager.saveDialog(from: fromUser, message: text)
+            let messageModel = MessageModel(conversationID: fromUser,
+                                            name: fromUser,
+                                            message: text,
+                                            date: Date(),
+                                            online: true,
+                                            hasUnreadMessages: false)
+            conversationViewController.lastMessage = messageModel
+            conversationsPresenter.appDelegate?.storageManager.saveDialog(conversationID: fromUser,
+                                                                          from: fromUser,
+                                                                          message: text)
+            conversationsPresenter.appDelegate?.storageManager.saveMessageModel(messageModel: messageModel)
             DispatchQueue.main.async {
-                self.conversationViewController.tableView.reloadData()
+                let tableView = self.conversationViewController.tableView
+                self.conversationsPresenter.appDelegate?.storageManager.saveMessageModel(messageModel: messageModel)
+                tableView?.scrollToNearestSelectedRow(at: UITableView.ScrollPosition.bottom, animated: true)
+                tableView?.reloadData()
             }
         } else {
             var countAdd = 0
@@ -95,15 +103,16 @@ class CommunicationManager: CommunicationDelegate {
                         if from == conversationsPresenter.chosenModel.name && countAdd == 0 {
                         conversationsPresenter.messageConversationFrom[index].append(fromUser)
                         conversationsPresenter.messageConversation[index].append(MessageTextModel(text: text))
-                        conversationsPresenter.lastMessageArray.append(MessageModel(name: from,
-                                                                                    message: text,
-                                                                                    date: Date(),
-                                                                                    online: true,
-                                                                                    hasUnreadMessages: true))
+//                        conversationsPresenter.lastMessageArray.append(MessageModel(name: from,
+//                                                                                    message: text,
+//                                                                                    date: Date(),
+//                                                                                    online: true,
+//                                                                                    hasUnreadMessages: true))
                             countAdd = 1
                         }
                     }
-                    conversationsPresenter.messageModelArray.insert(MessageModel(name: fromUser,
+                    conversationsPresenter.messageModelArray.insert(MessageModel(conversationID: fromUser,
+                                                                                 name: fromUser,
                                                                                  message: text,
                                                                                  date: Date(),
                                                                                  online: true,
@@ -150,7 +159,8 @@ class CommunicationManager: CommunicationDelegate {
                     }
                 }
             }
-            conversationsPresenter.choseModel(model: MessageModel(name: string,
+            conversationsPresenter.choseModel(model: MessageModel(conversationID: string,
+                                                                  name: string,
                                                                   message: nil,
                                                                   date: nil,
                                                                   online: true,

@@ -31,6 +31,6 @@ extension User {
 
 extension Conversation {
     func printUserName() {
-        print("User object with name: \(self.from!)")
+        print("from: \(String(describing: self.from)) message: \(self.message!)")
     }
 }

@@ -11,7 +11,6 @@ import CoreData
 
 class StorageManager {
     var coreDataStack: CoreDataStack!
-    var fetchRequest: FetchRequest!
 //    var managedObjectModel: NSManagedObjectModel!
 //    var persistentStoreCoordinator: NSPersistentStoreCoordinator!
 //    var masterContext: NSManagedObjectContext!
@@ -20,10 +19,9 @@ class StorageManager {
     init() {
         coreDataStack = CoreDataStack()
         saveContext = coreDataStack.saveContext
-        fetchRequest = FetchRequest(managedObjectContext: coreDataStack.masterContext)
     }
     typealias SaveCompletion = () -> Void
-    func savePrifileData(name: String?,
+    func saveProfileData(name: String?,
                          about: String?,
                          image: Data?) {
 //        var context: [NSManagedObjectContext] = [coreDataStack.saveContext]
@@ -80,7 +78,8 @@ class StorageManager {
         }
         performSave(with: coreDataStack.saveContext)
     }
-    func saveDialog(from: String, message: String) {
+    func saveMessageModel(messageModel: MessageModel) {
+        deleteMessage(with: coreDataStack.saveContext, name: messageModel.name ?? "")
         var context: [NSManagedObjectContext] = [coreDataStack.saveContext]
         if let parentContext = saveContext.parent {
             context.append(parentContext)
@@ -89,14 +88,50 @@ class StorageManager {
             }
         }
         for context in context {
+            let entity = NSEntityDescription.entity(forEntityName: "Message", in: context)!
+            let message = NSManagedObject(entity: entity, insertInto: context)
+            message.setValue(messageModel.date, forKey: "date")
+            message.setValue(messageModel.hasUnreadMessages, forKey: "hasUnreadMessages")
+            message.setValue(messageModel.message, forKey: "message")
+            message.setValue(messageModel.name, forKey: "name")
+            message.setValue(messageModel.online, forKey: "online")
+        }
+        performSave(with: coreDataStack.saveContext)
+    }
+    func saveDialog(conversationID: String, from: String, message: String) {
+        let context: [NSManagedObjectContext] = [coreDataStack.saveContext]
+//        if let parentContext = saveContext.parent {
+//            context.append(parentContext)
+//            if let parent = parentContext.parent {
+//                context.append(parent)
+//            }
+//        }
+        for context in context {
             let entity = NSEntityDescription.entity(forEntityName: "Conversation", in: context)!
             let dialog = NSManagedObject(entity: entity, insertInto: context)
             dialog.setValue(from, forKey: "from")
             dialog.setValue(message, forKey: "message")
+            dialog.setValue(Date(), forKey: "date")
+            dialog.setValue(conversationID, forKey: "conversationID")
         }
+        performSave(with: coreDataStack.saveContext)
     }
     func terminateSave() {
         performSave(with: saveContext)
+    }
+    private func deleteMessage(with context: NSManagedObjectContext, name: String) {
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Message")
+        deleteFetch.predicate = NSPredicate(format: "name == %@", name)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print ("There was an error")
+        }
+        if let parentContext = context.parent {
+            deleteAllRecords(with: parentContext)
+        }
     }
     private func deleteAllRecords(with context: NSManagedObjectContext) {
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "User")

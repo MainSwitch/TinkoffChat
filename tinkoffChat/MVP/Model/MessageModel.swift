@@ -9,6 +9,7 @@
 import Foundation
 
 struct MessageModel {
+    let conversationID: String!
     let name: String?
     let message: String?
     let date: Date?
