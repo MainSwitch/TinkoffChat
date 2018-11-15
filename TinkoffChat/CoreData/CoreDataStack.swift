@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CoreDataStack {
+class CoreDataStack: ICoreDataStack {
     let dataModelName = "Profile"
     let dataModelExtension = "momd"
     lazy var managedObjectModel: NSManagedObjectModel = {
