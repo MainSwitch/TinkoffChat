@@ -7,16 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class CoreDataDiskStorage: IProfileStorage {
-    var coreDataStack: ICoreDataStack?
-    
+    var coreDataStack: ICoreDataStack
     init(coreDataStack: ICoreDataStack) {
         self.coreDataStack = coreDataStack
     }
-    
     func save(name: String?, about: String?, image: Data?) {
-        var context: [NSManagedObjectContext] = [coreDataStack.saveContext]
+        let saveContext = coreDataStack.saveContext
+        var context: [NSManagedObjectContext] = [saveContext]
         if let parentContext = saveContext.parent {
             context.append(parentContext)
             if let parent = parentContext.parent {
@@ -39,7 +39,6 @@ class CoreDataDiskStorage: IProfileStorage {
         }
         performSave(with: coreDataStack.saveContext)
     }
-    
     func fetchProfile(key: String) -> UIImage? {
         <#code#>
     }

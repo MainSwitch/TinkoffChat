@@ -9,7 +9,7 @@
 import UIKit
 
 protocol IProfileStorage {
-    var coreDataStack: ICoreDataStack? { get }
+    var coreDataStack: ICoreDataStack { get }
     func save(name: String?, about: String?, image: Data?)
     func fetchProfile(key: String) -> UIImage?
 }
