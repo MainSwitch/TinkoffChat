@@ -12,14 +12,16 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static let rootAssembly = RootAssembly()
+    
     var window: UIWindow?
     var communicationManager: CommunicationManager!
-    var storageManager: StorageManager!
+    var storageManager: IProfileStorage?
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIColor.setThemeStyle()
-        storageManager = StorageManager()
+        storageManager = CoreDataDiskStorage(coreDataStack: <#ICoreDataStack#>)
         return true
     }
     func application(_ application: UIApplication,

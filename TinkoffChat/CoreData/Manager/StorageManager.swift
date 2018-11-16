@@ -164,7 +164,7 @@ class StorageManager {
             completion?()
         }
     }
-    func fetch() -> [String: Data] {
+    func fetchProfile() -> [String: Data] {
         let managedContext = coreDataStack.masterContext
         let user = StorageManager.findOrInsertUser(in: managedContext)
         guard let name = (user?.name?.data(using: .utf8)),

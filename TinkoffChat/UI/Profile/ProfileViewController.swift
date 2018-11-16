@@ -264,7 +264,7 @@ class ProfileViewController: UIViewController {
         guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage]  as? UIImage else {
             return
         }
-        guard let fetchImageData = storageManager.fetch()["image"],
+        guard let fetchImageData = storageManager.fetchProfile()["image"],
             let fetchImage = UIImage(data: fetchImageData) else {
             isEnabledSave(isEnabled: true)
             self.reductImageView.image = chosenImage
@@ -305,7 +305,7 @@ extension ProfileViewController: ProfileSaveView {
 //        if let operation = operationManager as? OperationDataManager {
 //            self.operationQueue.addOperation(operation)
 //        }
-        let dictionary = storageManager.fetch()
+        let dictionary = storageManager.fetchProfile()
         guard let name = dictionary["name"], let about = dictionary["about"], let image = dictionary["image"] else {
             return
         }
@@ -314,7 +314,7 @@ extension ProfileViewController: ProfileSaveView {
         profileImage.image = UIImage(data: image)
     }
     func loadReductData() {
-        let dictionary = storageManager.fetch()
+        let dictionary = storageManager.fetchProfile()
         guard let name = dictionary["name"], let about = dictionary["about"], let image = dictionary["image"] else {
             return
         }
@@ -347,7 +347,7 @@ extension ProfileViewController: ProfileSaveView {
 extension ProfileViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if let text = textView.text {
-            guard let name = storageManager.fetch()["name"] else {
+            guard let name = storageManager.fetchProfile()["name"] else {
                 isEnabledSave(isEnabled: true)
                 return true
             }
@@ -366,7 +366,7 @@ extension ProfileViewController: UITextFieldDelegate {
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         var resultText: String?
-        guard let about = storageManager.fetch()["about"] else {
+        guard let about = storageManager.fetchProfile()["about"] else {
             isEnabledSave(isEnabled: true)
             return true
         }
