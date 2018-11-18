@@ -13,15 +13,13 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     static let rootAssembly = RootAssembly()
-    
     var window: UIWindow?
-    var communicationManager: CommunicationManager!
-    var storageManager: IProfileStorage?
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        UIColor.setThemeStyle()
-        storageManager = CoreDataDiskStorage(coreDataStack: <#ICoreDataStack#>)
+        //storageManager = CoreDataDiskStorage(coreDataStack: <#ICoreDataStack#>)
+        AppDelegate.rootAssembly.presentationAssembly.communicationFacade.start()
+        AppDelegate.rootAssembly.presentationAssembly.themeFacade.retriveAndApplyTheme()
         return true
     }
     func application(_ application: UIApplication,
@@ -46,6 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        storageManager.terminateSave()
+        //storageManager.terminateSave()
     }
 }

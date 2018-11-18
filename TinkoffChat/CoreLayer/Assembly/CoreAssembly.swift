@@ -9,19 +9,14 @@
 import Foundation
 
 protocol ICoreAssembly {
-    var diskProfileStorage: IProfileStorage { get }
     var coreDataStack: ICoreDataStack {get}
     var multipeerCommuncator: ICommunicator {get}
     var communicatorStorageService: ICommunicatorStorageService {get}
-    var requestSender: IRequestSender { get }
 }
 
 class CoreAssembly: ICoreAssembly {
-    var coreDataStack: ICoreDataStack
-    
-    var multipeerCommuncator: ICommunicator
-    
-    var communicatorStorageService: ICommunicatorStorageService
-    
-    lazy var diskProfileStorage: IProfileStorage = CoreDataDiskStorage(coreDataStack: CoreDataStack())
+    lazy var coreDataStack: ICoreDataStack = CoreDataStack()
+    lazy var multipeerCommuncator: ICommunicator = NewMultipeerCommunicator()
+    lazy var communicatorStorageService: ICommunicatorStorageService =
+        CommunicatorStorageService(dataStack: self.coreDataStack, communicator: self.multipeerCommuncator)
 }
