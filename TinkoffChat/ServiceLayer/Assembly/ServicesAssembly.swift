@@ -12,6 +12,7 @@ protocol IServicesAssembly {
     var themeService: IThemeService {get}
     var communicationManager: ICommunicationManager {get}
     var userStorageService: IUserStorageService {get}
+    var photosService: IPhotosService {get}
     var coreDataService: ICoreDataService {get}
 }
 
@@ -26,4 +27,5 @@ class ServicesAssembly: IServicesAssembly {
                                 communicator: self.coreAssembly.multipeerCommuncator)
     lazy var userStorageService: IUserStorageService = UserCoreDataStorage(dataStack: self.coreAssembly.coreDataStack)
     lazy var coreDataService: ICoreDataService = CoreDataService(coreData: self.coreAssembly.coreDataStack)
+    lazy var photosService: IPhotosService = PhotosService(requestSender: self.coreAssembly.requestSender)
 }

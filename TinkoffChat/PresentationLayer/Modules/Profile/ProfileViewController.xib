@@ -18,7 +18,7 @@
                 <outlet property="editProfileButton" destination="jCt-PF-GQr" id="8RF-Th-5Qw"/>
                 <outlet property="profileButton" destination="1i0-pF-17z" id="3fR-es-LNy"/>
                 <outlet property="profileImageView" destination="rCp-kD-f5K" id="hPr-HO-98i"/>
-                <outlet property="usernameField" destination="thI-4C-IgV" id="IG6-xI-WHx"/>
+                <outlet property="userNameField" destination="thI-4C-IgV" id="IG6-xI-WHx"/>
                 <outlet property="view" destination="nrl-wc-Hpd" id="YKO-7a-MKy"/>
             </connections>
         </placeholder>
@@ -39,7 +39,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <action selector="usernameEditingChanged:" destination="-1" eventType="editingDidEnd" id="u8C-aQ-uUN"/>
+                        <action selector="userNameEditingChange:" destination="-1" eventType="editingChanged" id="tGa-5f-xZO"/>
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCt-PF-GQr">

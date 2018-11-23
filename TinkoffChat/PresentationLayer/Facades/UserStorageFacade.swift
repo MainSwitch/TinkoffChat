@@ -40,11 +40,9 @@ class UserStorageFacade: IUserStorageFacade {
     }
     func updateUser(user: ProfileUser,
                     completionClosure: @escaping (_ withError: Bool) -> Void) {
-        // need convert to display model
         self.userStorageService.saveUser(user: user, completionClosure: completionClosure)
     }
     func getUser(completionClosure: @escaping (_ user: ProfileUser?) -> Void) {
-        // need convert to display model
         self.userStorageService.loadUser(completionClosure: completionClosure)
     }
 }

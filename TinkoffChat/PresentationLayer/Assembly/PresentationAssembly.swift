@@ -13,6 +13,7 @@ protocol IPresentationAssembly {
     var userStorageFacade: IUserStorageFacade {get}
     var communicationFacade: ICommunicationFacade {get}
     var coreDataFacade: ICoreDataFacade {get}
+    func photosViewController() -> PhotosViewController
     func profileViewController() -> ProfileViewController
 }
 class PresentationAssembly: IPresentationAssembly {
@@ -32,5 +33,11 @@ class PresentationAssembly: IPresentationAssembly {
     // MARK: - ViewControllers
     func profileViewController() -> ProfileViewController {
         return ProfileViewController(userStorageFacade: self.userStorageFacade, assembly: self)
+    }
+    func photosViewController() -> PhotosViewController {
+        let photoFacade: IPhotosFacade = PhotosFacade(photosService: self.serviceAssembly.photosService)
+        let photosViewController = PhotosViewController(photosFacade: photoFacade)
+        photoFacade.delegate = photosViewController
+        return photosViewController
     }
 }

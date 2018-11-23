@@ -3,7 +3,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileButton: UIButton!
-    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var detailTextView: UITextView!
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -39,6 +39,8 @@ class ProfileViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .cancel,
                                                                      target: self,
                                                                      action: #selector(close))
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.stopAnimating()
         self.detailTextView.delegate = self
         self.imagePickerController.delegate = self
         self.imagePickerController.allowsEditing = false
@@ -61,7 +63,7 @@ class ProfileViewController: UIViewController {
         self.loadUser()
         self.detailTextView.text = "Нет данных"
         self.detailTextView.textColor = UIColor.lightGray
-        self.user = ProfileUser(username: self.usernameField.text,
+        self.user = ProfileUser(username: self.userNameField.text,
                                 description: self.detailTextView.text,
                                 avatar: self.profileImageView.image)
     }
@@ -83,7 +85,7 @@ class ProfileViewController: UIViewController {
     @objc func close() {
         self.dismiss(animated: true, completion: nil)
     }
-    @IBAction func usernameEditingChanged(_ sender: UITextField) {
+    @IBAction func userNameEditingChange(_ sender: UITextField) {
         if let usernameText = sender.text {
             self.user!.usernameWasEdited = usernameText != self.user!.username ?? ""
             self.setEnabledButton(isEnabled: self.profileWasEdited)
@@ -95,13 +97,13 @@ class ProfileViewController: UIViewController {
         self.setEnabledButton(isEnabled: false)
     }
     @IBAction func saveButtonTouch(_ sender: UIButton) {
-        self.usernameField.resignFirstResponder()
+        self.userNameField.resignFirstResponder()
         self.detailTextView.resignFirstResponder()
         self.repeatSaveBlock = {
             self.activityIndicator.startAnimating()
             self.setEnabledButton(isEnabled: false)
-            UserDefaults.standard.set(self.usernameField.text, forKey: "userName")
-            self.user!.username = self.usernameField.text
+            UserDefaults.standard.set(self.userNameField.text, forKey: "userName")
+            self.user!.username = self.userNameField.text
             self.user!.description = self.detailTextView.text
             self.user!.avatar = self.profileImageView.image
             if sender.tag == 0 {
@@ -136,6 +138,7 @@ class ProfileViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Установить из галлереи",
                                                 style: .default, handler: self.chooseFromGallery))
         alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: self.makePhoto))
+        alertController.addAction(UIAlertAction(title: "Загрузить фото", style: .default, handler: self.loadPhotos))
         alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
@@ -160,13 +163,13 @@ class ProfileViewController: UIViewController {
                 self.detailTextView.textColor = UIColor.black
             }
             self.profileImageView.image = user?.avatar ?? UIImage.init(named: "im_user_placeholder")
-            self.usernameField.text = user?.username ?? ""
+            self.userNameField.text = user?.username ?? ""
         })
     }
     private func setEditingMode(isEditing: Bool) {
-        self.usernameField.borderStyle = isEditing ? .roundedRect : .none
+        self.userNameField.borderStyle = isEditing ? .roundedRect : .none
         self.editProfileButton.isHidden = isEditing
-        self.usernameField.isEnabled = isEditing
+        self.userNameField.isEnabled = isEditing
         self.detailTextView.isEditable = isEditing
         //self.gcdButton.isHidden = !isEditing
         self.coreDataButton.isHidden = !isEditing
@@ -186,6 +189,11 @@ class ProfileViewController: UIViewController {
 
 // MARK: - UIAlerController
 extension ProfileViewController {
+    private func loadPhotos(action: UIAlertAction) {
+        let photosViewController = self.assembly.photosViewController()
+        photosViewController.collectionPickerDelegate = self
+        self.present(UINavigationController(rootViewController: photosViewController), animated: true, completion: nil)
+    }
     private func chooseFromGallery(action: UIAlertAction) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             self.imagePickerController.sourceType = .photoLibrary
@@ -243,7 +251,20 @@ extension ProfileViewController {
         picker.dismiss(animated: true, completion: nil)
     }
 }
-
+// MARK: - IPhotosViewControllerDelegate
+extension ProfileViewController: IPhotosViewControllerDelegate {
+    func collectionPickerController(_ picker: PhotosViewController, didFinishPickingImage image: UIImage) {
+        self.profileImageView.image = image
+        if let previousImage = self.user!.avatar {
+            let newImage = image.pngData()!
+            let oldImage = previousImage.pngData()!
+            self.user!.avatarWasEdited = !newImage.elementsEqual(oldImage)
+        } else {
+            self.user!.avatarWasEdited = true
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
 // MARK: - Text View Delegate
 extension ProfileViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
