@@ -262,6 +262,7 @@ extension ProfileViewController: IPhotosViewControllerDelegate {
         } else {
             self.user!.avatarWasEdited = true
         }
+        self.setEnabledButton(isEnabled: self.profileWasEdited)
         picker.dismiss(animated: true, completion: nil)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 protocol IPhotosService {
     func loadYellowFlowersPhoto(completion: @escaping ([PhotoModel]?, String?) -> Void)
-    func loadImage(urlString: String, completion: @escaping (ImageModel?, String?) -> Void)
+    func loadImage(urlString: String, completion: @escaping (ImageModel?, String?, String?) -> Void)
 }
 
 class PhotosService: IPhotosService {
@@ -29,14 +29,14 @@ class PhotosService: IPhotosService {
             }
         }
     }
-    func loadImage(urlString: String, completion: @escaping (ImageModel?, String?) -> Void) {
+    func loadImage(urlString: String, completion: @escaping (ImageModel?, String?, String?) -> Void) {
         let requestConfig = RequestsFactory.ImagesRequests.generateImageConfig(urlString: urlString)
         self.requestSender.send(requestConfig: requestConfig) { (result: Result<ImageModel>) in
             switch result {
             case .success(let photos):
-                completion(photos, nil)
+                completion(photos, urlString, nil)
             case .error(let error):
-                completion(nil, error)
+                completion(nil, nil, error)
             }
         }
     }

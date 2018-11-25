@@ -43,7 +43,7 @@ class PhotosViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.activityIndicatorView.startAnimating()
-        self.photosFacade.fetchYellowFlowers()
+        self.photosFacade.fetchChosenImage()
     }
 }
 
@@ -73,20 +73,32 @@ extension PhotosViewController: UICollectionViewDataSource {
         if let cell: PhotoCollectionViewCell =
             collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.idenfitifier,
                                                for: indexPath) as? PhotoCollectionViewCell {
-            cell.imageView.image = #imageLiteral(resourceName: "placeholder_user.png")
+            cell.imageView.image = UIImage(named: "placeholder")
             let photoDisplayModel = self.dataSource[indexPath.item]
-            if let cashedimage = imageCache.object(forKey: photoDisplayModel.imageUrl as NSString) {
-                let existImage = cashedimage as? UIImage
-                cell.configure(image: existImage!, photoDisplayModel: photoDisplayModel)
+            if let cashedimage = imageCache.object(forKey: photoDisplayModel.imageUrl as NSString),
+                let existImage = cashedimage as? UIImage {
+                cell.configure(image: existImage, photoDisplayModel: photoDisplayModel)
                 return cell
             } else {
                 DispatchQueue.global(qos: .userInitiated).async {
-                    self.photosFacade.fetchImage(urlString: photoDisplayModel.webformatUrl) { (image) in
-                        if let image = image {
-                            self.imageCache.setObject(image, forKey: photoDisplayModel.imageUrl as NSString)
+                    // swiftlint:disable all
+                    self.photosFacade.fetchImage(urlString: photoDisplayModel.webformatUrl) { (image,loadedURL) in
+                        // swiftlint:enable all
+                        if let image = image, let url = loadedURL {
                             DispatchQueue.main.async {
-                                cell.configure(image: image, photoDisplayModel: photoDisplayModel)
+                                guard self.imageCache.object(forKey: url as NSString) != nil else {
+                                    if cell.imageView.image == UIImage(named: "placeholder") {
+                                        if url == photoDisplayModel.webformatUrl {
+                                            cell.configure(image: image, photoDisplayModel: photoDisplayModel)
+                                        }
+                                    } else if cell.imageView.image != UIImage(named: "placeholder") {
+                                        return
+                                    }
+                                    return
+                                }
+                                //cell.configure(image: existImage, photoDisplayModel: photoDisplayModel)
                             }
+                            self.imageCache.setObject(image, forKey: photoDisplayModel.imageUrl as NSString)
                         }
                     }
                 }
@@ -104,13 +116,6 @@ extension PhotosViewController: UICollectionViewDataSource {
         }
     }
 }
-extension PhotosViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView,
-                        didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print(indexPath.row)
-    }
-}
-
 // MARK: - UICollectionViewDelegateFlowLayout
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,

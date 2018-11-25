@@ -23,27 +23,16 @@ class PhotoParser: IParser {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         do {
-            let docde = try decoder.decode(JSONPhotoModel.self, from: data)
-            print(docde)
-            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else {
-                return nil
-            }
-            guard let hits = json["hits"] as? [[String: Any]] else {
-                return nil
-            }
+            let decode = try decoder.decode(JSONPhotoModel.self, from: data)
             var photos: [PhotoModel] = []
-            for hit in hits {
-                guard let photoPreviewURL = hit["previewURL"] as? String,
-                    let photoLargeImageURL = hit["largeImageURL"] as? String,
-                    let webformatURL = hit["webformatURL"] as? String
-                    else { continue }
-                photos.append(PhotoModel(previewURL: photoPreviewURL,
-                                         largeImageURL: photoLargeImageURL,
-                                         webformatURL: webformatURL))
+            for hit in decode.hits {
+                photos.append(PhotoModel(previewURL: hit.previewURL,
+                                         largeImageURL: hit.largeImageURL,
+                                         webformatURL: hit.webformatURL))
             }
             return photos
         } catch {
-            print("error trying to convert data to JSON")
+            print("parse error")
             return nil
         }
     }

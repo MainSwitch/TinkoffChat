@@ -21,8 +21,8 @@ protocol IPhotoModelDelegate: class {
 
 protocol IPhotosFacade: class {
     var delegate: IPhotoModelDelegate? { get set }
-    func fetchYellowFlowers()
-    func fetchImage(urlString: String, completionHandler: @escaping (UIImage?) -> Void)
+    func fetchChosenImage()
+    func fetchImage(urlString: String, completionHandler: @escaping (UIImage?, String?) -> Void)
 }
 
 class PhotosFacade: IPhotosFacade {
@@ -31,22 +31,26 @@ class PhotosFacade: IPhotosFacade {
     init(photosService: IPhotosService) {
         self.photosService = photosService
     }
-    func fetchYellowFlowers() {
+    func fetchChosenImage() {
         self.photosService.loadYellowFlowersPhoto { (photos: [PhotoModel]?, error) in
             if let photosUnwrapped = photos {
-                let cell = photosUnwrapped.map({PhotoDisplayModel(imageUrl: $0.largeImageURL, previewImageUrl: $0.previewURL, webformatUrl: $0.webformatURL) })
+                let cell = photosUnwrapped.map({PhotoDisplayModel(imageUrl: $0.largeImageURL,
+                                                                  previewImageUrl: $0.previewURL,
+                                                                  webformatUrl: $0.webformatURL) })
                 self.delegate?.setup(dataSource: cell)
             } else {
                 self.delegate?.show(error: error ?? "error")
             }
         }
     }
-    func fetchImage(urlString: String, completionHandler: @escaping (UIImage?) -> Void) {
-        self.photosService.loadImage(urlString: urlString) { (imageModel: ImageModel?, error) in
+    func fetchImage(urlString: String, completionHandler: @escaping (UIImage?, String?) -> Void) {
+        // swiftlint:disable all
+        self.photosService.loadImage(urlString: urlString) { (imageModel: ImageModel?, loadedURL: String?, _) in
+            // swiftlint:enable all
             if let imageUnwrapped = imageModel {
-                completionHandler(imageUnwrapped.image)
+                completionHandler(imageUnwrapped.image, loadedURL)
             } else {
-                completionHandler(nil)
+                completionHandler(nil, nil)
             }
         }
     }
