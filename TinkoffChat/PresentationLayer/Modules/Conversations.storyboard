@@ -214,18 +214,22 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="IPX-XV-evA" firstAttribute="trailing" secondItem="N0s-BV-2G7" secondAttribute="trailing" id="4H2-ZQ-sO2"/>
-                            <constraint firstItem="N0s-BV-2G7" firstAttribute="bottom" secondItem="DTX-u5-D0w" secondAttribute="bottom" constant="15" id="HEc-Zf-zA8"/>
                             <constraint firstItem="N0s-BV-2G7" firstAttribute="trailing" secondItem="DTX-u5-D0w" secondAttribute="trailing" constant="15" id="Jxe-fr-RYD"/>
                             <constraint firstItem="IPX-XV-evA" firstAttribute="top" secondItem="N0s-BV-2G7" secondAttribute="top" id="Muk-lT-FGX"/>
                             <constraint firstItem="Pon-ax-NYe" firstAttribute="top" secondItem="IPX-XV-evA" secondAttribute="bottom" constant="15" id="QsS-rO-i7V"/>
                             <constraint firstItem="Pon-ax-NYe" firstAttribute="leading" secondItem="N0s-BV-2G7" secondAttribute="leading" constant="15" id="SIO-Ms-R0O"/>
                             <constraint firstItem="N0s-BV-2G7" firstAttribute="bottom" secondItem="Pon-ax-NYe" secondAttribute="bottom" constant="15" id="bm6-dM-Ib9"/>
                             <constraint firstItem="DTX-u5-D0w" firstAttribute="leading" secondItem="Pon-ax-NYe" secondAttribute="trailing" constant="15" id="c9v-aU-DR1"/>
+                            <constraint firstItem="DTX-u5-D0w" firstAttribute="centerY" secondItem="Pon-ax-NYe" secondAttribute="centerY" id="k09-g5-Gn4"/>
                             <constraint firstItem="IPX-XV-evA" firstAttribute="leading" secondItem="N0s-BV-2G7" secondAttribute="leading" id="rdT-Md-qSN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N0s-BV-2G7"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="C7h-sA-Iml" appends="YES" id="RBR-h4-4Ka"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="nTJ-1e-ynu">
                         <nil key="title"/>
@@ -258,6 +262,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PVE-q6-QpB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="C7h-sA-Iml">
+                    <connections>
+                        <action selector="tapOnView:" destination="JGl-ei-T0V" id="YaX-Jz-JcA"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1820" y="104.7976011994003"/>
         </scene>

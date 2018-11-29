@@ -1,6 +1,6 @@
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: CommonViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var userNameField: UITextField!

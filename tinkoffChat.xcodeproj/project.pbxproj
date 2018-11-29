@@ -59,6 +59,9 @@
 		6C0211A8219D6A7800F36F1B /* IProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0211A7219D6A7800F36F1B /* IProfileStorage.swift */; };
 		6C0211AB219D6E6500F36F1B /* CoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0211AA219D6E6500F36F1B /* CoreAssembly.swift */; };
 		6C0211AF219D773D00F36F1B /* IDiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0211AE219D773D00F36F1B /* IDiskStorage.swift */; };
+		6C03419C21B01EDD00CC0C11 /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C03419B21B01EDD00CC0C11 /* CommonViewController.swift */; };
+		6C03419E21B01F7200CC0C11 /* EmitterLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C03419D21B01F7200CC0C11 /* EmitterLayer.swift */; };
+		6C0341A021B0278700CC0C11 /* UIImage + resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C03419F21B0278700CC0C11 /* UIImage + resize.swift */; };
 		6C03EFF321958AEA00C837F5 /* CoreDataEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C03EFF221958AEA00C837F5 /* CoreDataEntities.swift */; };
 		6C044B1021A802BA008ACE87 /* IPhotosViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C044B0F21A802BA008ACE87 /* IPhotosViewControllerDelegate.swift */; };
 		6C044B1221A802E2008ACE87 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C044B1121A802E2008ACE87 /* PhotoCollectionViewCell.swift */; };
@@ -155,6 +158,9 @@
 		6C0211A7219D6A7800F36F1B /* IProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IProfileStorage.swift; sourceTree = "<group>"; };
 		6C0211AA219D6E6500F36F1B /* CoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAssembly.swift; sourceTree = "<group>"; };
 		6C0211AE219D773D00F36F1B /* IDiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDiskStorage.swift; sourceTree = "<group>"; };
+		6C03419B21B01EDD00CC0C11 /* CommonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
+		6C03419D21B01F7200CC0C11 /* EmitterLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmitterLayer.swift; sourceTree = "<group>"; };
+		6C03419F21B0278700CC0C11 /* UIImage + resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + resize.swift"; sourceTree = "<group>"; };
 		6C03EFF221958AEA00C837F5 /* CoreDataEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntities.swift; sourceTree = "<group>"; };
 		6C044B0F21A802BA008ACE87 /* IPhotosViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPhotosViewControllerDelegate.swift; sourceTree = "<group>"; };
 		6C044B1121A802E2008ACE87 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -217,6 +223,7 @@
 				3AF4152F2198278B0028CA39 /* TableVIew + Scroll.swift */,
 				6C04FA6A219EC8DE00628B30 /* RootAssembly.swift */,
 				6C044B3521A8280A008ACE87 /* NSCashe.swift */,
+				6C03419F21B0278700CC0C11 /* UIImage + resize.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -323,6 +330,7 @@
 		3AF6DD1E219F4C6B00BB0F50 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				6C03419A21B01EBC00CC0C11 /* Common */,
 				3AF6DD30219F527400BB0F50 /* Assembly */,
 				3AF6DD27219F4F3900BB0F50 /* Facades */,
 				3AF6DD23219F4E8400BB0F50 /* Modules */,
@@ -460,6 +468,15 @@
 				6C0211AA219D6E6500F36F1B /* CoreAssembly.swift */,
 			);
 			path = Assembly;
+			sourceTree = "<group>";
+		};
+		6C03419A21B01EBC00CC0C11 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6C03419B21B01EDD00CC0C11 /* CommonViewController.swift */,
+				6C03419D21B01F7200CC0C11 /* EmitterLayer.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		6C044B0E21A8028B008ACE87 /* PhotosVC */ = {
@@ -750,6 +767,7 @@
 				3AF6DD3C219F684500BB0F50 /* ConversationsTableViewCell.swift in Sources */,
 				3AF6DD3A219F684500BB0F50 /* ConversationCellConfiguration.swift in Sources */,
 				3AF6DD3D219F684500BB0F50 /* ConversationsDataProvider.swift in Sources */,
+				6C03419C21B01EDD00CC0C11 /* CommonViewController.swift in Sources */,
 				3AF7150E2168F00400473345 /* ChatLabel.swift in Sources */,
 				3AF6DD20219F4C9600BB0F50 /* UserDefaults+Extension.swift in Sources */,
 				3AF6DD4D21A0031000BB0F50 /* ThemeVC.swift in Sources */,
@@ -767,6 +785,7 @@
 				6C044B2721A8073B008ACE87 /* RequestSender.swift in Sources */,
 				3A4070C32153ADAE00AA9583 /* AppDelegate.swift in Sources */,
 				3AF6DD32219F527400BB0F50 /* PresentationAssembly.swift in Sources */,
+				6C03419E21B01F7200CC0C11 /* EmitterLayer.swift in Sources */,
 				6C044B2321A806E0008ACE87 /* RequestFactory.swift in Sources */,
 				6C044B2D21A8081A008ACE87 /* ImageRequest.swift in Sources */,
 				3AF6DD3B219F684500BB0F50 /* ConversationWrapper.swift in Sources */,
@@ -782,6 +801,7 @@
 				3AF6DD10219F475900BB0F50 /* ServicesAssembly.swift in Sources */,
 				6C044B2921A807B0008ACE87 /* IRequest.swift in Sources */,
 				3AF6DD19219F49E700BB0F50 /* CoreDataService.swift in Sources */,
+				6C0341A021B0278700CC0C11 /* UIImage + resize.swift in Sources */,
 				6C044B2521A80713008ACE87 /* IRequestSender.swift in Sources */,
 				3AF6DD4F21A004A000BB0F50 /* ThemeViewControllerDelegate.swift in Sources */,
 				3AF6DD17219F494800BB0F50 /* UserFileStorage.swift in Sources */,

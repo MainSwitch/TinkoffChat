@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class ConversationViewController: UIViewController {
+class ConversationViewController: CommonViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
@@ -25,13 +25,25 @@ class ConversationViewController: UIViewController {
     var userName: String?
     var buttonEnabled: Bool = false {
         didSet {
+            // swiftlint:disable all
             UIView.animate(withDuration: 0.5, animations: {
                 self.sendButton.isEnabled = self.buttonEnabled
-                self.sendButton.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)})
+                self.sendButton.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+            }) { (_) in
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.sendButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+                })
+            }
+            // swiftlint:enable all
         }
     }
     var userOnline: Bool? {
         didSet {
+            guard let online = userOnline else { return }
+            let size: CGFloat = online ? 1.1 : 1
+            UIView.animate(withDuration: 1) {
+                self.titleLabel.transform = CGAffineTransform(scaleX: size, y: size)
+            }
             self.titleLabel.textColor = self.userOnline == true ? UIColor.green : UIColor.black
         }
     }
@@ -93,17 +105,20 @@ class ConversationViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         AppDelegate.rootAssembly.presentationAssembly.coreDataFacade.updateConversation(conversationId: conversationId)
     }
+    @IBAction func tapOnView(_ sender: Any) {
+        messageTextField.endEditing(true)
+    }
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize =
             (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            self.bottomConstraint.constant = -keyboardSize.height
+            self.bottomConstraint.constant += keyboardSize.height
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
             }
         }
     }
     @objc func keyboardWillHide(notification: NSNotification) {
-        self.bottomConstraint.constant = 0
+        self.bottomConstraint.constant = 15
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }

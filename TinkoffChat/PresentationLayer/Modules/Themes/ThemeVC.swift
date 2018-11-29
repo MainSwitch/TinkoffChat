@@ -13,9 +13,9 @@ class Themes {
     var theme2: UIColor
     var theme3: UIColor
     init() {
-        self.theme1 = .yellow
-        self.theme2 = .darkGray
-        self.theme3 = .purple
+        self.theme1 = UIColor.orange.withAlphaComponent(0.6)
+        self.theme2 = UIColor.gray.withAlphaComponent(0.6)
+        self.theme3 = UIColor.purple.withAlphaComponent(0.6)
     }
     func setTheme1(theme1: UIColor) {
         self.theme1 = theme1
@@ -59,11 +59,12 @@ class ThemeVC: UIViewController {
             model = Themes()
         }
         var selectedColor: UIColor?
-        if themeButton?.tag == 1 {
+        switch themeButton?.tag {
+        case 1:
             selectedColor = model?.theme1
-        } else if themeButton?.tag == 2 {
+        case 2:
             selectedColor = model?.theme2
-        } else {
+        default:
             selectedColor = model?.theme3
         }
         view.backgroundColor = selectedColor

@@ -34,12 +34,5 @@ class MessageTableViewCell: UITableViewCell {
 //            self.bubbleView.backgroundColor = UIColor.init(red: 0.45, green: 0.73, blue: 1.0, alpha: 1.0)
 //            self.changeImage(name: "bubble_sent")
         }
-        //self.bubbleImageView.tintColor = self.bubbleView.backgroundColor
     }
-//    func changeImage(name: String) {
-//        guard let image = UIImage(named: name) else { return }
-////        self.bubbleImageView.image =
-////            image.resizableImage(withCapInsets: UIEdgeInsets(top: 14, left: 14, bottom: 14, right: 14),
-////                                 resizingMode: .stretch).withRenderingMode(.alwaysTemplate)
-//    }
 }
