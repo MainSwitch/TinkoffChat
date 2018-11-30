@@ -28,7 +28,7 @@ class Themes {
     }
 }
 
-class ThemeVC: UIViewController {
+class ThemeVC: CommonViewController {
     weak var delegate: ThemesViewControllerDelegate?
     var model: Themes?
     func setDeleagete(delegate: ThemesViewControllerDelegate) {

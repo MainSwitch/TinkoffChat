@@ -12,7 +12,7 @@ class CommonViewController: UIViewController {
     var layer: EmitterLayer?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        layer = EmitterLayer(view: view)
+        layer = EmitterLayer(view: self.view)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
