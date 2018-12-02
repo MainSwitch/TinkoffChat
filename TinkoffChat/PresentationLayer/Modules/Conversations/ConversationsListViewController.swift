@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ConversationsListViewController: CommonViewController  {
+class ConversationsListViewController: CommonViewController {
     @IBOutlet weak var tableView: UITableView!
     var fetchedResultsController: NSFetchedResultsController<Conversation>?
     var conversationsProvider: ConversationsDataProvider?
