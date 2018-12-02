@@ -10,13 +10,7 @@ import UIKit
 
 class EmitterLayer {
     var emitterLayer = CAEmitterLayer()
-    var tapView: UIView
-    init(view: UIView) {
-        self.tapView = view
-        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.panSlide))
-        tapView.addGestureRecognizer(panRecognizer)
-    }
-    private func setEmitterLayer(point: CGPoint, parentView: UIView) {
+    func setEmitterLayer(point: CGPoint, parentView: UIView) {
         let sizeLayer = CGSize(width: 50, height: 50)
         let rect = CGRect(x: point.x, y: point.y, width: sizeLayer.width, height: sizeLayer.height)
         emitterLayer.frame = rect
@@ -33,19 +27,5 @@ class EmitterLayer {
         emitterCell.velocityRange = 90
         emitterCell.emissionRange = CGFloat.pi * 2
         emitterLayer.emitterCells = [emitterCell]
-    }
-    @objc private func panSlide(_ sender: UIPanGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            let point = sender.translation(in: tapView)
-            setEmitterLayer(point: point, parentView: tapView)
-        case .changed:
-            let point = sender.location(in: tapView)
-            emitterLayer.emitterPosition = point
-        case .ended:
-            emitterLayer.removeFromSuperlayer()
-        default:
-            emitterLayer.removeFromSuperlayer()
-        }
     }
 }
