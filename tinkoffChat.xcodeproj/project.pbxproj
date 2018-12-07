@@ -14,6 +14,7 @@
 		3A4070CA2153ADB000AA9583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070C92153ADB000AA9583 /* Assets.xcassets */; };
 		3A4070CD2153ADB000AA9583 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4070CB2153ADB000AA9583 /* LaunchScreen.storyboard */; };
 		3A4070D82153ADB000AA9583 /* tinkoffChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */; };
+		3ADEC7F421BAED2400A4E5B5 /* ThemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEC7F321BAED2400A4E5B5 /* ThemeTest.swift */; };
 		3AF34C5B21729B220072BBD3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4070C42153ADAE00AA9583 /* ProfileViewController.swift */; };
 		3AF415302198278B0028CA39 /* TableVIew + Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF4152F2198278B0028CA39 /* TableVIew + Scroll.swift */; };
 		3AF4A761218A1E4E00CBE95C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF4A760218A1E4E00CBE95C /* CoreDataStack.swift */; };
@@ -114,6 +115,7 @@
 		3A4070D32153ADB000AA9583 /* tinkoffChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tinkoffChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tinkoffChatTests.swift; sourceTree = "<group>"; };
 		3A4070D92153ADB000AA9583 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3ADEC7F321BAED2400A4E5B5 /* ThemeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTest.swift; sourceTree = "<group>"; };
 		3AF4152F2198278B0028CA39 /* TableVIew + Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableVIew + Scroll.swift"; sourceTree = "<group>"; };
 		3AF4A760218A1E4E00CBE95C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		3AF565DF216754D40074BE3D /* NSMutableAttributedString + Bold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString + Bold.swift"; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			children = (
 				3A4070D72153ADB000AA9583 /* tinkoffChatTests.swift */,
 				3A4070D92153ADB000AA9583 /* Info.plist */,
+				3ADEC7F321BAED2400A4E5B5 /* ThemeTest.swift */,
 			);
 			path = tinkoffChatTests;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A4070D82153ADB000AA9583 /* tinkoffChatTests.swift in Sources */,
+				3ADEC7F421BAED2400A4E5B5 /* ThemeTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

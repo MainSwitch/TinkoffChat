@@ -1,16 +1,15 @@
 //
-//  tinkoffChatTests.swift
+//  ThemeTest.swift
 //  tinkoffChatTests
 //
-//  Created by Anton on 20.09.2018.
+//  Created by Anton on 07/12/2018.
 //  Copyright © 2018 Switch. All rights reserved.
 //
 
 import XCTest
 @testable import tinkoffChat
 
-class TinkoffChatTests: XCTestCase {
-
+class ThemeTest: XCTestCase {
     var themeFacade: ThemeFacade!
     var themeServiceMock: ThemeServiceMock!
     override func setUp() {
@@ -44,7 +43,7 @@ class TinkoffChatTests: XCTestCase {
         XCTAssertEqual(expectedResult, self.themeServiceMock.performSaveThemeColorParameter)
         XCTAssertEqual(expectedResult, self.themeServiceMock.performApplyThemeColorParameter)
     }
-    // MARK: - Mock
+    // swiftlint:disable all
     class ThemeServiceMock: IThemeService {
         var performGetSavedThemeColorStub: UIColor = UIColor.black
         var performSaveThemeColorParameter: UIColor!
@@ -56,16 +55,17 @@ class TinkoffChatTests: XCTestCase {
             self.performSaveThemeCalled = true
             self.performSaveThemeColorParameter = color
         }
-        // swiftlint:disable all
+    // swiftlint:enable all
         func getSavedTheme() -> UIColor {
             self.performGetSavedThemeCalled = true
             return self.performGetSavedThemeColorStub
         }
-        // swiftlint:enable all
         func applyTheme(color: UIColor) {
             self.performApplyThemeCalled = true
             self.performApplyThemeColorParameter = color
         }
-        func removeSavedTheme() { }
+        func removeSavedTheme() {
+            // without implementation
+        }
     }
 }
